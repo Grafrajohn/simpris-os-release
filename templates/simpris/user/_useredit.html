@@ -1,0 +1,28 @@
+        <div class="form-group row mb-3">
+            <label for="frmFirstName" class="form-label col-sm-2">First Name:</label>
+            <div class="col-sm-10"><input id="frmFirstName" type="text" name="frmFirstName" class="form-control" size="50" maxlength="50" placeholder="First name" value="{{ user.first_name }}"/></div>
+        </div>
+        <div class="form-group row mb-3">
+            <label for="frmLastName" class="form-label col-sm-2">Last Name:</label>
+            <div class="col-sm-10"><input id="frmLastName" type="text" name="frmLastName" class="form-control" size="50" maxlength="50" placeholder="Last name" value="{{ user.last_name }}"/></div>
+        </div>
+        <div class="form-group row mb-3">
+            <label for="frmEmail" class="form-label col-sm-2">Email:</label>
+            <div class="col-sm-10"><input id="frmEmail" class="form-control" type="text" name="frmEmail" size="50" maxlength="50" placeholder="Email" value="{{ user.email }}"/></div>
+        </div>
+        <div class="form-group row mb-3">
+            <label for="frmPhone" class="form-label col-sm-2">Phone:</label>
+            <div class="col-sm-10"><input id="frmPhone" class="form-control" type="text" name="frmPhone" size="50" maxlength="50" placeholder="Phone" value="{{ user.phone }}"/></div>
+        </div>
+        <div class="form-group row mb-3">
+            <label for="frmOrganisation" class="form-label col-sm-2">Organisation:</label>
+            <div class="col-sm-10">
+                <select id="frmOrganisation" name="frmOrganisation">
+                    <option selected value="">Please select</option>
+                    {% for organisation in organisations %}
+                        <option value="{{ organisation.organisationid }}" {% if organisation.organisationid == user.organisationid %} selected {% endif %}>{{ organisation.organisationname }}</option>
+                    {% endfor %}
+                </select>
+                <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="left" title="Company or organisation which the user works for or represents."></i>
+            </div>
+        </div>

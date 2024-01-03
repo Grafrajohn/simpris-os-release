@@ -1,0 +1,113 @@
+Summary
+-------
+Task changes for phase and taskname
+Phase date changes
+User team membership changes
+
+==============================================================================================
+Functionality to test
+---------------------
+Can place task in phase
+Can add user to team
+Can view members of team
+Can view tasks in phase
+Can add date to phase
+Can add name to task
+
+==============================================================================================
+>>DJANGO<<
+----------
+
+Files
+-----
+api/phase/views.py
+api/phase/serializers.py
+models/models.py
+templates/simpris/phase/*.*
+templates/simpris/task/*.*
+templates/simpris/topmenu.html
+urls.py
+apps/phase/views.py
+apps/task/views.py
+static/js/simpris/project/toggle-tk.js
+static/js/simpris/task/task.js
+
+=============================================================================================
+>>MYSQL<<
+---------
+task table
+task_archive table
+phase table
+v_task_detail
+
+VIEW `v_task_detail` AS
+    SELECT
+        `tsk`.`taskID` AS `taskID`,
+        `tsk`.`name` AS `name`,
+        `tsk`.`taskDescription` AS `taskDescription`,
+        `tsk`.`taskTypeID` AS `taskTypeID`,
+        `lkpr`.`lookupValueChar` AS `taskPriority`,
+        `lkst`.`lookupValueChar` AS `taskStatus`,
+        `lkpr`.`lookupValueNum` AS `taskPriorityID`,
+        `lkst`.`lookupValueNum` AS `taskStatusID`,
+        `tsk`.`assignedTo` AS `assignedTo`,
+        CONCAT(`usr`.`first_name`,
+                ' ',
+                `usr`.`last_name`) AS `assignedToName`,
+        DATE_FORMAT(`tsk`.`taskStartDate`, '%Y/%m/%d') AS `taskStartDate`,
+        `tsk`.`taskTimeEstimate` AS `taskTimeEstimate`,
+        `tsk`.`taskPercentComplete` AS `taskPercentComplete`,
+        `tsk`.`taskLinkID` AS `taskLinkID`,
+        `tsk2`.`taskID` AS `linkedTaskID`,
+        `tsk2`.`taskDescription` AS `linkedTaskDescription`,
+        `upr`.`userID` AS `userID`,
+        `prj`.`projectName` AS `projectName`,
+        `tkl`.`taskListName` AS `tasklistName`,
+        `tkl`.`taskListID` AS `taskListID`,
+        DATE_FORMAT(`tsk`.`completionDate`, '%Y/%m/%d') AS `completionDate`,
+        `tsk`.`phaseID` AS `phaseID`,
+        `phs`.`phaseName` AS `phaseName`,
+        `tsk`.`taskID` AS `id`
+    FROM
+        ((((((((`task` `tsk`
+        JOIN `tasklist` `tkl` ON ((`tkl`.`taskListID` = `tsk`.`taskListID`)))
+        JOIN `project` `prj` ON ((`prj`.`projectID` = `tkl`.`projectID`)))
+        JOIN `userproject` `upr` ON ((`upr`.`projectID` = `prj`.`projectID`)))
+        LEFT JOIN `lookup` `lkpr` ON (((`tsk`.`taskPriorityID` = `lkpr`.`lookupValueNum`)
+            AND (`lkpr`.`lookupTypeID` = 4))))
+        LEFT JOIN `lookup` `lkst` ON (((`tsk`.`taskStatusID` = `lkst`.`lookupValueNum`)
+            AND (`lkst`.`lookupTypeID` = 21))))
+        LEFT JOIN `users` `usr` ON ((`tsk`.`assignedTo` = `usr`.`id`)))
+        LEFT JOIN `task` `tsk2` ON ((`tsk`.`taskLinkID` = `tsk2`.`taskID`)))
+        LEFT JOIN `phase` `phs` ON ((`tsk`.`phaseID` = `phs`.`phaseID`)))
+
+VIEW `v_schedule` AS
+    SELECT
+        `phs`.`phaseID` AS `phaseID`,
+        `phs`.`phaseName` AS `phaseName`,
+        `phs`.`phaseDescription` AS `phaseDescription`,
+        `tsk`.`name` AS `name`,
+        `tsk`.`taskID` AS `taskID`,
+        `tsk`.`assignedTo` AS `assignedTo`,
+        phs.phaseID as id
+    FROM
+        (`phase` `phs`
+        JOIN `task` `tsk` ON ((`phs`.`phaseID` = `tsk`.`phaseID`)))
+
+=============================================================================================
+>>STATIC<<
+----------
+
+Javascript
+----------
+
+HTML
+----
+
+============================================================================================
+Notes
+-----
+xxxxxx
+
+PHP
+---

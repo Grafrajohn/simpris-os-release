@@ -1,0 +1,78 @@
+            <div class="form-group row mb-3">
+                <label for="frmProblemHeader" class="form-label col-sm-2">Problem Summary:</label>
+                <div class="col-sm-10"><input class="form-control" type="text" maxlength="50" id="frmProblemHeader" name="frmProblemHeader" placeholder="A very short summary of your problem" value="{{ problem.problemheader }}" required /></div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmProblemDescription" class="form-label col-sm-2">Problem Description:</label>
+                <div class="col-sm-10"><textarea class="form-control" rows="10" cols="50" id="frmProblemDescription" name="frmProblemDescription" placeholder="A more detailed description of your problem" required>{{ problem.problemdescription | safe }}</textarea></div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmProblemType" class="form-label col-sm-2">Problem Type:</label>
+                <div class="col-sm-10">
+                    <select id="frmProblemType" name="frmProblemType" class="form-control">
+                        <option selected value="">Please select</option>
+                        {% for type in problem_types %}
+                             <option value="{{ type.lookupvaluenum }}" {% if type.lookupvaluenum == problem.problemtypeid %} selected {% endif %}>{{ type.lookupvaluechar }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmProblemSubType" class="form-label col-sm-2">Problem Sub Type:</label>
+                <div class="col-sm-10">
+                    <select id="frmProblemSubType" name="frmProblemSubType" class="form-control">
+                        <option selected value="">Please select</option>
+                        {% for subtype in problem_subtypes %}
+                             <option value="{{ subtype.lookupvaluenum }}" {% if subtype.lookupvaluenum == problem.problemsubtypeid %} selected {% endif %}>{{ subtype.lookupvaluechar }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmNoofPeopleAffected" class="form-label col-sm-2">No of People Affected by problem:</label>
+                <div class="col-sm-10"><input size="10" type="text" class="form-control" id="frmNoofPeopleAffected" name="frmNoofPeopleAffected" value="{{ problem.noofpeopleaffected }}"/></div>
+            </div>         
+            <div class="form-group row mb-3">
+                <label for="frmProblemScope" class="form-label col-sm-2">Scope:</label>
+                <div class="col-sm-10">
+                    <select id="frmProblemScope" name="frmProblemScope" class="form-control">
+                        <option selected value="">Please select</option>
+                        {% for scope in problem_scopes %}
+                             <option value="{{ scope.lookupvaluenum }}" {% if scope.lookupvaluenum == problem.problemscopeid %} selected {% endif %}>{{ scope.lookupvaluechar }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div> 
+            <div class="form-group row mb-3">
+                <label for="frmProblemStatus" class="form-label col-sm-2">Problem Status:</label>
+                <div class="col-sm-10">
+                    <select id="frmProblemStatus" name="frmProblemStatus" required class="form-control">
+                        <option selected value="">Please select</option>
+                        {% for status in problem_statuses %}
+                             <option value="{{ status.lookupvaluenum }}" {% if status.lookupvaluenum == problem.problemstatusid %} selected {% endif %}>{{ status.lookupvaluechar }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmProblemPriority" class="form-label col-sm-2">Problem Priority:</label>
+                <div class="col-sm-10">
+                    <select id="frmProblemPriority" name="frmProblemPriority" required class="form-control">
+                        <option selected value="">Please select</option>
+                        {% for priority in problem_priorities %}
+                             <option value="{{ priority.lookupvaluenum }}" {% if priority.lookupvaluenum == problem.problempriorityid %} selected {% endif %}>{{ priority.lookupvaluechar }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmProblemQueue" class="form-label col-sm-2">Problem Queue:</label>
+                <div class="col-sm-10">
+                    <select id="frmProblemQueue" name="frmProblemQueue" required class="form-control">
+                        <option selected value="">Please select</option>
+                        {% for queue in queues %}
+                             <option value="{{ queue.queueid }}" {% if queue.queueid == problem.queueid %} selected {% endif %}>{{ queue.queuename }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>

@@ -1,0 +1,36 @@
+    <div class="col-md-12">
+        <div class="report">
+            <h2>
+            <?php 
+            switch ($reportID)
+            {
+                case "vipsum":     
+                    echo "VIP summary";
+                    break; 
+                case "overproj":     
+                    echo "Overdue projects";
+                    break;    
+                case "overtaskproj":     
+                    echo "Overdue tasks by project";
+                    break;   
+                case "projprob":     
+                    echo "Problems per project";
+                    break;    
+                case "myproj":     
+                    echo "My overdue projects";
+                    break; 
+                case "mytask":     
+                    echo "My overdue tasks";
+                    break;    
+                case "mytaskcom":     
+                    echo "My tasks completed";
+                    break;   
+                case "myovertaskproj":     
+                    echo "My overdue tasks by project";
+                    break;                   
+            }
+            ?>
+            </h2>
+            <table id="tbReportIndex" class="dtable"></table>
+        </div>
+    </div>

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content' %}
+    <div class="col-md-12">
+        <h3 id="h3AddQueue">Add New Queue</h3>
+            {% include "simpris/common/_error.html" %}
+        <form id="frmQueueAdd" name="frmQueueAdd" class="form-horizontal">
+        {% csrf_token %}
+            {% include "simpris/queue/_queue.html" %}
+            <input id="btn-queue-create" type="submit" value="Create queue" class="btn btn-sm btn-primary"/>
+        </form>
+    </div>
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+    {% load static %}
+	<script src="{% static "js/jquery/jquery-1.12.0.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery-ui.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/bootstrap/bootstrap.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/jquery-components/jquery.nanoscroller.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery.ui.touch-punch.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/common/common.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+
+	<!-- theme scripts -->
+	<script src="{% static "js/jquery-components/scripts.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/pace.min.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific inline scripts -->
+
+    <script type="text/javascript" src="/static/js/simpris/queue/queue.js"></script>
+{% endblock %}

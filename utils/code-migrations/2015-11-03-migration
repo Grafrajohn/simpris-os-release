@@ -1,0 +1,85 @@
+Summary
+-------
+User organisation fixes. Problem validation fixes.
+
+DJANGO
+------
+api\organisation\views.py
+api\problem\views.py
+templates\simpris\problem\*.*
+library\activity_log.py
+app\system\view.py
+templates\simpris\system\*.*
+templates\simpris\topmenu.html
+
+Files
+-----
+static\js\simpris\problem\problem.js
+
+dB
+--
+userorganisation add id and change PK and change deletedid to deletedby
+v_organisation_users add id add clientid and change where clause
+>>
+VIEW `v_organisation_users` AS
+    SELECT
+        `org`.`organisationID` AS `organisationID`,
+        `org`.`organisationName` AS `organisationName`,
+        `usr`.`first_name` AS `first_name`,
+        `usr`.`last_name` AS `last_name`,
+        `usr`.`id` AS `id`,
+        `org`.`clientID` AS `clientid`,
+        `usr`.`company` AS `company`,
+        `org`.`createdBy` AS `createdby`,
+        `usr`.`id` AS `userid`,
+        'y' AS `orgu`
+    FROM
+        (((`organisation` `org`
+        JOIN `userorganisation` `uorg` ON ((`org`.`organisationID` = `uorg`.`organisationID`)))
+        JOIN `users` `usr` ON ((`uorg`.`userID` = `usr`.`id`)))
+        JOIN `auth_user` `ausr` ON ((`usr`.`id` = `ausr`.`id`)))
+    WHERE
+        (ISNULL(`uorg`.`deletedDate`)
+            AND ISNULL(`org`.`deletedDate`)
+            AND (`ausr`.`is_active` = 1))
+    UNION SELECT
+        `org`.`organisationID` AS `organisationID`,
+        `org`.`organisationName` AS `organisationName`,
+        `ausr`.`first_name` AS `first_name`,
+        `ausr`.`last_name` AS `last_name`,
+        `ausr`.`id` AS `id`,
+        `org`.`clientID` AS `clientid`,
+        `usr`.`company` AS `company`,
+        `org`.`createdBy` AS `createdby`,
+        `ausr`.`id` AS `userid`,
+        'n' AS `orgu`
+    FROM
+        ((`organisation` `org`
+        JOIN `users` `usr` ON (((`usr`.`company` = `org`.`organisationID`)
+            OR (`usr`.`id` = `org`.`createdBy`))))
+        JOIN `auth_user` `ausr` ON ((`ausr`.`id` = `usr`.`id`)))
+    WHERE
+        ((`org`.`createdBy` = `usr`.`id`)
+            AND ISNULL(`org`.`deletedDate`)
+            AND (`ausr`.`is_active` = 1))
+<<
+v_organisation_potential_users add view
+useractivity table change
+>>
+CREATE TABLE `useractivity` (
+  `activityID` int(11) NOT NULL AUTO_INCREMENT,
+  `userID` mediumint(11) NOT NULL,
+  `activityTypeID` mediumint(11) NOT NULL,
+  `activityData` varchar(100) DEFAULT NULL,
+  `activity_module_id` int(11) DEFAULT NULL,
+  `client_id` int(11) DEFAULT NULL,
+  `activityDate` datetime NOT NULL,
+  PRIMARY KEY (`activityID`)
+<<
+
+Notes
+-----
+xxxxxx
+
+PHP
+---

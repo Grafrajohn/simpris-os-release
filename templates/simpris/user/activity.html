@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+	<link rel="stylesheet" href="/static/css/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="/static/css/datatables/dataTables.tableTools.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content-heading' %}
+    <ul class="nav nav-tabs mb-3" role="tablist">
+        <li class="nav-item active"><a class="nav-link" href="/user/list">Users</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#">User Activity</a></li>
+    </ul>
+{% endblock %}
+{% block 'content' %}
+    <div id="div_error" style="display: none">
+    {% include "simpris/common/_opstatus.html" %}
+    </div>
+    {% if sidebar %}
+        {% for user in sidebar %}
+            {% if user.column2 and user.column2 == "" or user.userid == "" %}
+                <div><h4>{{ user.username }}</h4></div>
+            {% else %}
+            <div>
+                <a href="{{ BASE_URL_DJ }}/user/detail/{{ user.userid }}">{{ user.username }}</a>
+                {{ user.column2 }}
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <span>There is no recent user activity</span>
+    {% endif %}
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+    {% load static %}
+	<script src="{% static "js/jquery/jquery-1.12.0.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery-ui.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/bootstrap/bootstrap.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/jquery-components/jquery.nanoscroller.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery.ui.touch-punch.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/common/common.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+
+	<!-- theme scripts -->
+	<script src="{% static "js/jquery-components/scripts.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/pace.min.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific inline scripts -->
+
+	<script src="/static/js/jquery-components/jquery.dataTables.min.js" type="text/javascript" language="javascript"></script>
+	<script src="/static/js/jquery-components/ZeroClipboard.js" type="text/javascript" language="javascript"></script>
+	<script src="/static/js/jquery-components/dataTables.tableTools.min.js" type="text/javascript" language="javascript"></script>
+	<script type="text/javascript" charset="utf-8">	   
+        $(document).ready(function() {
+            $('#tbUserIndex').dataTable( {
+                "language": {
+                    "zeroRecords": "No records to display"
+                    },
+                "pageLength": 20,                
+                "ajax": "/api/user/users",
+                "sAjaxDataProp": "",
+                "data_id": "user_id",  
+                "columns": [
+                    { "className": "hidden-xs","render": function ( data, type, row ) {
+                    return '<a id="lnk-user-delete-' + row.user_id + '" href="#" onclick="simpris.project.user_delete(' + row.user_id + ')" class="lnk-user-delete" title="Delete"><i class="fas fa-trash" style="color: red;"></a>';
+                    } },
+                    { "className": "hidden-xs","render": function ( data, type, row ) {
+                    return '<a href="{{ BASE_URL_DJ }}/user/edit/' + row.user_id +'" title="Edit"><i class="fa fa-edit" style="color: scarlet;"></a>';
+                    } }, 
+                    { "render": function ( data, type, row ) {
+                    return '<a href="{{ BASE_URL_DJ }}/user/detail/' + row.user_id +'" title="View"><i class="fa fa-eye" style="color: green;"></a>';
+                    } },                   
+                    { "title": "Organisation Name", "mDataProp": "organisationname"},  
+                    { "title": "First Name", "mDataProp": "first_name" },
+                    { "title": "Last Name", "mDataProp": "last_name" },
+                    { "className": "hidden-xs","title": "Active?", "mDataProp": "activedesc" }
+                ]
+            } );	
+        } );
+	</script>
+    <script type="text/javascript" charset="utf-8">
+        // delete existing task via ajax api
+        simpris.project.user_delete = function (userID) {
+            var confirm_delete = confirm("Are you sure you want to delete?");
+            if (confirm_delete == false) {
+                return;
+            }
+            $.ajax({
+                url: '/api/user/delete/' + userID,
+                type: 'GET',
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            }).error(function(r){
+                //$('#spnError').text("There has been an error: " + r.statusText);
+                $('#div_error').css("display","block");
+                $('#div-notification').html(r.responseJSON[0]);
+                $('#div-notification').addClass("alert-danger");
+            })
+            .success(function(r){
+                $('#spnError').text("User successfully deleted");
+                window.location.replace("/user/list/");
+            });
+        };
+  	</script>
+{% endblock %}            

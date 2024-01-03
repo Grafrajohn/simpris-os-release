@@ -1,0 +1,106 @@
+Summary
+-------
+Timesheet fixes for task name.
+
+==============================================================================================
+Functionality to test
+---------------------
+
+==============================================================================================
+>>DJANGO<<
+----------
+apps\time\views.py
+models\models.py
+templates\time\timesheet.html
+templates\time\detail.html
+templates\time\edit.html
+templates\time\create.html
+
+Files
+-----
+xxxxxxxx
+
+=============================================================================================
+>>MYSQL<<
+---------
+VIEW `v_my_timesheet` AS
+    SELECT
+        `time`.`timeID` AS `timeID`,
+        `time`.`timeDay` AS `timeday`,
+        DATE_FORMAT(`time`.`timeDay`, '%e %b %Y') AS `timeDayF`,
+        `task`.`taskName` AS `taskName`,
+        `task`.`taskDescription` AS `taskDescription`,
+        SUM(`time`.`hours`) AS `hours`,
+        `users`.`id` AS `userID`,
+        `time`.`timeTypeID` AS `timetypeID`,
+        `lookup`.`lookupTypeID` AS `lookupTypeID`,
+        `time`.`timeID` AS `id`
+    FROM
+        (((`time`
+        JOIN `users` ON ((`time`.`userID` = `users`.`id`)))
+        JOIN `task` ON ((`time`.`taskID` = `task`.`taskID`)))
+        JOIN `lookup` ON (((`time`.`timeTypeID` = `lookup`.`lookupValueNum`)
+            AND (`lookup`.`lookupTypeID` = 13))))
+    GROUP BY `users`.`id` , DATE_FORMAT(`time`.`timeDay`, '%Y %b %e') , `task`.`taskName`
+
+VIEW `v_time_detail` AS
+    SELECT
+        `time`.`timeID` AS `timeID`,
+        DATE_FORMAT(`time`.`timeDay`, '%d %b %Y') AS `timeDay`,
+        `time`.`hours` AS `hours`,
+        `time`.`taskID` AS `taskID`,
+        `time`.`timeTypeID` AS `timeTypeID`,
+        `time`.`userID` AS `userID`,
+        `task`.`taskName` AS `taskName`,
+        `lookup`.`lookupValueChar` AS `lookupValueChar`,
+        `users`.`first_name` AS `first_name`,
+        `users`.`last_name` AS `last_name`,
+        `time`.`comments` AS `comments`,
+        `time`.`timeID` AS `id`
+    FROM
+        (((`time`
+        JOIN `task` ON ((`time`.`taskID` = `task`.`taskID`)))
+        JOIN `lookup` ON ((`time`.`timeTypeID` = `lookup`.`lookupValueNum`)))
+        JOIN `users` ON ((`time`.`userID` = `users`.`id`)))
+    WHERE
+        (`lookup`.`lookupTypeID` = 13)
+
+VIEW `v_my_org_tasks` AS
+    SELECT DISTINCT
+        `upr`.`userID` AS `userID`,
+        CONCAT(`prj`.`projectName`,
+                ' - ',
+                `tsk`.`taskName`) AS `taskName`,
+        `tsk`.`taskID` AS `taskID`,
+        `tsk`.`deletedDate` AS `deletedDate`,
+        `tsk`.`taskID` AS `id`
+    FROM
+        (((`task` `tsk`
+        JOIN `tasklist` `tkl`)
+        JOIN `project` `prj`)
+        JOIN `userproject` `upr`)
+    WHERE
+        ((`upr`.`projectID` = `prj`.`projectID`)
+            AND (`prj`.`projectID` = `tkl`.`projectID`)
+            AND (`tsk`.`taskListID` = `tkl`.`taskListID`))
+
+=============================================================================================
+>>STATIC<<
+----------
+
+Javascript
+----------
+
+HTML
+----
+
+============================================================================================
+Notes
+-----
+xxxxxx
+
+Checklist
+---------
+1. Changes to urls.py?
+2. Changes to archive tables?
+3. Changes to models.py?

@@ -1,0 +1,140 @@
+Summary
+-------
+Add programme management
+Double check list security
+
+==============================================================================================
+Functionality to test
+---------------------
+Programmes
+Lists especially problem
+
+==============================================================================================
+>>DJANGO<<
+----------
+API
+programme\*.*
+
+APPS
+programme\*.*
+
+MODELS
+models.py
+
+TEMPLATES
+topmenu.html
+programme\*.*
+
+Files
+-----
+xxxxxxxx
+
+=============================================================================================
+>>MYSQL<<
+---------
+VIEW `vw_select_programme_index_sidebar` AS
+    SELECT
+        'New problems' AS `problemName`,
+        '' AS `column2`,
+        '' AS `id`,
+        0 AS `column4`,
+        '' AS `userID`
+
+    UNION SELECT DISTINCT
+        `prob`.`problemHeader` AS `problemHeader`,
+        DATE_FORMAT(`prob`.`createdDate`, '%d %b %Y') AS `createdDate`,
+        `prob`.`problemID` AS `problemID`,
+        3 AS `3`,
+        `uorg`.`userID` AS `userID`
+    FROM
+        (`problem` `prob`
+        JOIN `userorganisation` `uorg` ON ((`prob`.`organisationID` = `uorg`.`organisationID`)))
+    WHERE
+        (`prob`.`createdDate` > FN_PAST_DATE(-(10)))
+    UNION SELECT
+        'Changed problems' AS `Changed problems`,
+        '' AS `column2`,
+        '' AS `id`,
+        5 AS `5`,
+        '' AS `userID`
+
+    UNION SELECT
+        `prob`.`problemHeader` AS `problemHeader`,
+        DATE_FORMAT(`prob`.`updatedDate`, '%d %b %Y') AS `updatedDate`,
+        `prob`.`problemID` AS `problemID`,
+        7 AS `7`,
+        `uorg`.`userID` AS `userID`
+    FROM
+        (`problem` `prob`
+        JOIN `userorganisation` `uorg` ON ((`prob`.`organisationID` = `uorg`.`organisationID`)))
+    WHERE
+        (`prob`.`updatedDate` > FN_PAST_DATE(-(20)))
+    ORDER BY 4 , 1 , 2
+    LIMIT 40
+
+VIEW `v_my_programmes` AS
+    SELECT
+        `pg`.`programmeID` AS `programmeID`,
+        `pg`.`programmeName` AS `programmeName`,
+        `pg`.`clientID` AS `clientID`,
+        `pg`.`programmeID` AS `id`
+    FROM
+        `programme` `pg`
+
+VIEW `vw_select_programme_history` AS
+    SELECT
+        'Created:' AS `description`,
+        DATE_FORMAT(`prog`.`createdDate`, '%d %b %Y') AS `column2`,
+        '' AS `id`,
+        0 AS `column4`,
+        `prog`.`programmeID` AS `programmeID`
+    FROM
+        `programme` `prog`
+    UNION SELECT
+        'Last changed:' AS `description`,
+        DATE_FORMAT(`prog`.`createdDate`, '%d %b %Y') AS `column2`,
+        '' AS `id`,
+        3 AS `column4`,
+        `prog`.`programmeID` AS `programmeID`
+    FROM
+        `programme` `prog`
+    ORDER BY `column4`
+
+>> check this it might be OK live - clientID was missing
+VIEW `v_time_task` AS
+    SELECT
+        `pr`.`projectName` AS `project`,
+        `pr`.`projectID` AS `projectid`,
+        `tl`.`taskListName` AS `tasklist`,
+        `tl`.`taskListID` AS `tasklistid`,
+        LEFT(`tk`.`taskDescription`, 50) AS `task`,
+        `tk`.`taskID` AS `taskid`,
+        `tk`.`assignedTo` AS `assignedTo`,
+        `tk`.`taskID` AS `id`,
+        tk.clientID as clientID
+    FROM
+        ((`task` `tk`
+        JOIN `tasklist` `tl` ON ((`tl`.`taskListID` = `tk`.`taskListID`)))
+        JOIN `project` `pr` ON ((`pr`.`projectID` = `tl`.`projectID`)))
+
+=============================================================================================
+>>STATIC<<
+----------
+
+Javascript
+----------
+simpris\programme\programme.js
+
+HTML
+----
+
+============================================================================================
+Notes
+-----
+xxxxxx
+
+Checklist
+---------
+1. Changes to urls.py?
+2. Changes to archive tables?
+3. Changes to models.py?

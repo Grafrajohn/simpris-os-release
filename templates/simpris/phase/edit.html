@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+    <link rel="stylesheet" type="text/css" href="/static/css/jqueryui/jquery-ui.min.css" />
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content' %}
+    <div class="col-md-12">
+        <ul class="nav nav-tabs mb-3" role="tablist">
+          <li class="nav-item"><a class="nav-link" id="tab_phase_overview" href="{{ BASE_URL_DJ }}/phase/detail/{{ id }}">Phase Overview</a></li>
+          <li class="nav-itemactive"><a class="nav-link" href="#">Edit Phase</a></li>
+        </ul>
+        {% include "simpris/common/_error.html" %}
+        <form id="frmPhaseEdit" name="frmPhaseEdit" class="form-horizontal">
+        {% csrf_token %}
+            {% include "simpris/phase/_phase.html" %}
+            <input id="btn-phase-edit" type="submit" value="Update phase" class="btn btn-sm btn-primary"/>
+            <input type="hidden" name="hidPhaseID" value="{{ id }}"/>
+        </form>
+    </div>
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+    {% load static %}
+	<script src="{% static "js/jquery/jquery-1.12.0.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery-ui.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/bootstrap/bootstrap.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/jquery-components/jquery.nanoscroller.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery.ui.touch-punch.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/common/common.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+
+	<!-- theme scripts -->
+	<script src="{% static "js/jquery-components/scripts.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/pace.min.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific inline scripts -->
+
+    <script type="text/javascript">
+        $(function(){
+            // Datepicker
+            $('#frmDatePicker').datepicker({
+                    inline: true,
+                    dateFormat: 'yy/mm/dd'
+            });
+            $('#frmDatePicker2').datepicker({
+                    inline: true,
+                    dateFormat: 'yy/mm/dd'
+            });
+        });
+    </script>
+    <script type="text/javascript" src="/static/js/simpris/phase/phase.js"></script>
+{% endblock %}

@@ -1,0 +1,47 @@
+    <div class="col-md-12">
+        <ul class="nav nav-tabs mb-3" role="tablist">
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/tasklist/detail">TaskList Overview</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/tasklist/edit/{{ tasklistid }}">Edit TaskList</a></li>
+          <li class="nav-itemactive"><a class="nav-link" href="{{ BASE_URL_DJ }}/tasklist/move/{{ tasklistid }}">Move TaskList</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/tasklist/history/{{ tasklistid }}">TaskList History</a></li>
+        </ul> 
+        <form id="form-tasklist-move" class="form-horizontal">
+            <table>
+                <tr>
+                    <td><label>TaskList ID</label></td><td><?php echo $taskListID . set_value($taskListID) ?></td>
+                </tr>
+                <tr>
+                    <td><label>TaskList Name&nbsp;&nbsp;</label></td><td><?php echo $taskListName . set_value($taskListName) ?></td>
+                </tr>
+                <tr>
+                    <td><label>Current TaskList Project / Tasklist&nbsp;&nbsp;</label></td><td><?php echo $projectName . set_value($projectName) ?> / <?php echo $taskListName . set_value($taskListName) ?></td>
+                </tr>
+                <tr>
+                    <td><label>Move task to this Project / Tasklist&nbsp;</label></td>
+                    <td>
+                        <select name="selProject">
+                            <option selected value="">Please select</option>
+                            <?php
+                            foreach ($project as $row) {
+                                echo '<option value="';
+                                echo $row->projectID;
+                                echo '"';
+                                if ($projectID == $row->projectID) echo " selected";
+                                echo '>';
+                                echo $row->projectName;
+                                echo '</option>';
+                            }
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+                <?php if ($taskListID != NULL)
+                {
+                    echo '<tr><td><input type="submit" value="Move tasklist" class="btn btn-sm btn-primary"/></td></tr>';
+                }
+                ?>
+            </table>
+            <input type="hidden" name="hidTaskListID" value="{{ tasklistid }}"/>
+            <input type="hidden" name="hidTaskListName" value="{{ tasklistname }}"/>
+        </form>
+    </div>

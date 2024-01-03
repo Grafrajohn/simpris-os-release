@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content-heading' %}
+    <ul class="nav nav-tabs mb-3" role="tablist">
+        <li class="nav-item"><a class="nav-link" href="/task/list/">My Tasks</a></li>
+        <li class="nav-item active"><a class="nav-link active" href="#">Task Activity</a></li>
+    </ul>
+{% endblock %}
+{% block 'content' %}
+    <a href="/report/generic/task" target=_new>Task Charts</a><br><br>
+    {% if sidebar %}
+        {% for task in sidebar %}
+            <div>
+            {% if task.column2 == "" %}
+                <h4>{{ task.taskname }}</h4>
+            {% else %}
+                <a href="/task/detail/{{ task.id }}">{{ task.taskname }}</a>
+                {{ task.columnn2 }}
+            {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <span>There is no recent task activity</span>
+    {% endif %}
+{% endblock %}
+{% block 'end-js' %}
+{% endblock %}

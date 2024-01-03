@@ -1,0 +1,12 @@
+        <div class="card card mb-3">
+            <div id="addComment" class="newComment">
+                <form action="{{ BASE_URL_DJ }}/comment/insert/{{ id }}/" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <textarea id="frmTextComment" name="frmTextComment" rows="4" placeholder="Add a comment to this task here...." cols="100"></textarea><br />
+                    <input type="submit" id="frmButAddComment" name="frmButAddComment" value="Add new comment" class="btn btn-sm btn-primary" />
+                    <input name="hidUploadSource" type="hidden" value="task_comment">
+                    <input name="hidParentID" type="hidden" value="{{ id }}">
+                    <input name="hidParentType" type="hidden" value="{{ parent_type }}">
+                </form>
+            </div>
+        </div>

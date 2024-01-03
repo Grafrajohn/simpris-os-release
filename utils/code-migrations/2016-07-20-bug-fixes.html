@@ -1,0 +1,96 @@
+Summary
+-------
+user edit and add projects for user.
+
+==============================================================================================
+Functionality to test
+---------------------
+edit user
+in edit user add project
+edit project
+in edit project add user
+add project budget with decimal places
+
+==============================================================================================
+>>DJANGO<<
+----------
+API
+project\views.py
+
+APPS
+user\views.py
+
+MODELS
+
+TEMPLATES
+user\edit.html
+project\_projectusers.html
+
+
+Files
+-----
+xxxxxxxx
+
+=============================================================================================
+>>MYSQL<<
+---------
+VIEW `v_user_projects` AS
+    SELECT
+        `uorg`.`userID` AS `userID`,
+        `uorg`.`organisationID` AS `organisationID`,
+        `proj`.`projectID` AS `projectID`,
+        `proj`.`projectName` AS `projectName`,
+        `uorg`.`userID` AS `id`
+    FROM
+        (`userorganisation` `uorg`
+        JOIN `project` `proj` ON ((`uorg`.`organisationID` = `proj`.`organisationID`)))
+    WHERE
+        (ISNULL(`uorg`.`deletedDate`)
+            AND ISNULL(`proj`.`deletedDate`))
+
+    SELECT DISTINCT
+        `org`.`organisationID` AS `organisationID`,
+        `org`.`organisationName` AS `organisationName`,
+        `usr`.`id` AS `userID`,
+        `usr`.`first_name` AS `first_name`,
+        `usr`.`last_name` AS `last_name`,
+        `proj`.`projectID` AS `projectID`,
+        `proj`.`projectName` AS `projectName`,
+        `usr`.`id` AS `id`
+    FROM
+        (((`userorganisation` `uorg`
+        JOIN `users` `usr` ON ((`uorg`.`organisationID` = `usr`.`company`)))
+        JOIN `organisation` `org` ON ((`org`.`organisationID` = `uorg`.`organisationID`)))
+        JOIN `project` `proj` ON ((`org`.`organisationID` = `proj`.`organisationID`)))
+    WHERE
+        (ISNULL(`uorg`.`deletedDate`)
+            AND ISNULL(`org`.`deletedDate`)
+            AND (NOT (`usr`.`id` IN (SELECT
+                `upr`.`userID`
+            FROM
+                `userproject` `upr`
+            WHERE
+                (`upr`.`projectID` = `proj`.`projectID`))))
+            AND ISNULL(`proj`.`deletedDate`))
+
+=============================================================================================
+>>STATIC<<
+----------
+
+Javascript
+----------
+simpris\js\project.js
+
+HTML
+----
+
+============================================================================================
+Notes
+-----
+xxxxxx
+
+Checklist
+---------
+1. Changes to urls.py?
+2. Changes to archive tables?
+3. Changes to models.py?

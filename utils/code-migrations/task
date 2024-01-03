@@ -1,0 +1,32 @@
+Summary
+-------
+Convert tasks to python
+
+DJANGO
+------
+app\task\views.py
+settings.py add MEDIA_ROOT and MEDIA_URL
+urls.py - watch out for url at bottom for media
+app\comment\views.py
+templates\simpris\comment\*.html
+templates\simpris\task\*.html
+templates\simpris\document\*.html
+
+Files
+-----
+xxxxxxxx
+
+dB
+--
+v_comments_parent add id
+v_task_documents add id
+v_task_links ass id
+v_project_tasklists add id
+v_task_detail add id
+
+Notes
+-----
+xxxxxx
+
+PHP
+---

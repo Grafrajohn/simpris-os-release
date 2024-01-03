@@ -1,0 +1,155 @@
+Summary
+-------
+Linked tasks
+Task list - completed tasks not shown
+
+==============================================================================================
+Functionality to test
+---------------------
+Task links
+
+==============================================================================================
+>>DJANGO<<
+----------
+api\task\views.py
+apps\task\views.py
+models\models.py
+templates\project\_task_edit_project.html
+templates\task\tasklist.html
+templates\task\detail.html
+urls.py
+
+Files
+-----
+xxxxxxxx
+
+=============================================================================================
+>>MYSQL<<
+---------
+
+VIEW `vw_select_task_index_sidebar` AS
+    SELECT
+        'New tasks' AS `taskName`,
+        '' AS `column2`,
+        '' AS `id`,
+        0 AS `column4`,
+        '' AS `userID`
+
+    UNION SELECT DISTINCT
+        `task`.`taskName` AS `taskName`,
+        DATE_FORMAT(`task`.`createdDate`, '%d %b %Y') AS `createdDate`,
+        `task`.`taskID` AS `taskID`,
+        3 AS `3`,
+        `upr`.`userID` AS `userID`
+    FROM
+        ((`task`
+        JOIN `tasklist` `tkl` ON ((`task`.`taskListID` = `tkl`.`taskListID`)))
+        JOIN `userproject` `upr` ON ((`upr`.`projectID` = `tkl`.`projectID`)))
+    WHERE
+        (`task`.`createdDate` > FN_PAST_DATE(-(10)))
+    UNION SELECT
+        'Changed tasks' AS `Changed tasks`,
+        '' AS `column2`,
+        '' AS `id`,
+        5 AS `5`,
+        '' AS `userID`
+
+    UNION SELECT
+        `task`.`taskName` AS `taskName`,
+        DATE_FORMAT(`task`.`updatedDate`, '%d %b %Y') AS `updatedDate`,
+        `task`.`taskID` AS `taskID`,
+        7 AS `7`,
+        `upr`.`userID` AS `userID`
+    FROM
+        ((`task`
+        JOIN `tasklist` `tkl` ON ((`task`.`taskListID` = `tkl`.`taskListID`)))
+        JOIN `userproject` `upr` ON ((`upr`.`projectID` = `tkl`.`projectID`)))
+    WHERE
+        (`task`.`updatedDate` > FN_PAST_DATE(-(10)))
+    UNION SELECT
+        'New comments' AS `New comments`,
+        '' AS `column2`,
+        '' AS `id`,
+        9 AS `9`,
+        '' AS `userID`
+
+    UNION SELECT
+        'Comment' AS `Comment`,
+        CONCAT(`users`.`first_name`,
+                ' ',
+                `users`.`last_name`) AS `createdBy`,
+        `task`.`taskID` AS `taskID`,
+        11 AS `11`,
+        `upr`.`userID` AS `userID`
+    FROM
+        ((((`task`
+        JOIN `tasklist` `tkl` ON ((`task`.`taskListID` = `tkl`.`taskListID`)))
+        JOIN `userproject` `upr` ON ((`tkl`.`projectID` = `upr`.`projectID`)))
+        JOIN `comment` ON ((`comment`.`parentID` = `task`.`taskID`)))
+        JOIN `users` ON ((`users`.`id` = `upr`.`userID`)))
+    WHERE
+        (`comment`.`createdDate` > FN_PAST_DATE(-(10)))
+    ORDER BY 4 , 1 , 2
+    LIMIT 40
+
+VIEW `v_my_tasks` AS
+    SELECT
+        `project`.`projectID` AS `projectID`,
+        `project`.`projectName` AS `projectName`,
+        `tasklist`.`taskListID` AS `taskListID`,
+        `tasklist`.`taskListName` AS `taskListName`,
+        `task`.`taskID` AS `taskID`,
+        `task`.`taskName` AS `taskName`,
+        `task`.`taskDescription` AS `taskDescription`,
+        `task`.`assignedTo` AS `assignedTo`,
+        `task`.`deletedDate` AS `deletedDate`,
+        `task`.`taskID` AS `id`,
+        `task`.`clientID` AS `clientID`,
+        task.taskStatusID as taskStatusID
+    FROM
+        ((`task`
+        JOIN `tasklist` ON ((`task`.`taskListID` = `tasklist`.`taskListID`)))
+        JOIN `project` ON ((`project`.`projectID` = `tasklist`.`projectID`)))
+
+VIEW `v_task_dependency` AS
+    SELECT
+        `tsk`.`taskID` AS `taskID`,
+        `tkl`.`taskListID` AS `taskListID`,
+        `prj`.`clientID` AS `clientID`,
+        `prj`.`projectID` AS `projectID`,
+        `tsk`.`taskTypeID` AS `taskTypeID`,
+        `tsk`.`taskName` AS `taskName`,
+        `tsk`.`taskDescription` AS `taskDescription`,
+        `tsk`.`taskStatusID` AS `taskStatusID`,
+        `tsk`.`taskPriorityID` AS `taskPriorityID`,
+        `tsk`.`assignedTo` AS `assignedTo`,
+        `tsk`.`taskStartDate` AS `taskStartDate`,
+        `tsk`.`taskTimeEstimate` AS `taskTimeEstimate`,
+        `tsk`.`taskPercentComplete` AS `taskPercentComplete`,
+        `tsk`.`taskID` AS `id`
+    FROM
+        ((`task` `tsk`
+        JOIN `tasklist` `tkl` ON ((`tsk`.`taskListID` = `tkl`.`taskListID`)))
+        JOIN `project` `prj` ON ((`tkl`.`projectID` = `prj`.`projectID`)))
+
+=============================================================================================
+>>STATIC<<
+----------
+
+Javascript
+----------
+js\simpris\project\toggle-tk.js
+
+HTML
+----
+
+============================================================================================
+Notes
+-----
+xxxxxx
+
+Checklist
+---------
+1. Changes to urls.py?
+2. Changes to archive tables?
+3. Changes to models.py?

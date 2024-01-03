@@ -1,0 +1,51 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+  Lead Software Developer: Graham J
+  Site: 
+  Twitter: 
+  Location: United Kingdom
+
+  Lead Quality Assurance: Linda J
+  Site: 
+  Twitter: 
+  Location: United Kingdom
+  
+  Several other developers and designers
+
+/* THANKS */
+  To the many who inspired me along the way. And the open source movement in general.
+
+/* SITE */
+  Standards: HTML5, CSS3
+  Components: Modernizr, jQuery, AngularJS, D3 Charts, Bootstrap, JQueryUI
+  Software: Python, MySQL
+  v1.1
+  
+
+                                    
+                               -o/-                       
+                               +oo//-                     
+                              :ooo+//:                    
+                             -ooooo///-                   
+                             /oooooo//:                   
+                            :ooooooo+//-                  
+                           -+oooooooo///-                 
+           -://////////////+oooooooooo++////////////::    
+            :+ooooooooooooooooooooooooooooooooooooo+:::-  
+              -/+ooooooooooooooooooooooooooooooo+/::////:-
+                -:+oooooooooooooooooooooooooooo/::///////:-
+                  --/+ooooooooooooooooooooo+::://////:-   
+                     -:+ooooooooooooooooo+:://////:--     
+                       /ooooooooooooooooo+//////:-        
+                      -ooooooooooooooooooo////-           
+                      /ooooooooo+oooooooooo//:            
+                     :ooooooo+/::/+oooooooo+//-           
+                    -oooooo/::///////+oooooo///-          
+                    /ooo+::://////:---:/+oooo//:          
+                   -o+/::///////:-      -:/+o+//-         
+                   :-:///////:-            -:/://         
+                     -////:-                 --//:        
+                       --                       -:        

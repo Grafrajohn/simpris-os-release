@@ -1,0 +1,13 @@
+D.O. Django server
+
+Install python 3.x
+Set python default to 3.x via alias in bash file
+Make sure pip3 used
+Do not deleme python 2.x
+Install MySQL sudo
+Do mysql-secure-installation
+Install uwsgi - pip3
+Install nginx sudo
+Install simpris
+Upstart file to automatically start uwsgi
+Setup Nginx

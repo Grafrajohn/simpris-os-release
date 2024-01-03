@@ -1,0 +1,205 @@
+    {% load static %}
+			<div class="col-md-2 col-sm-4 col-xs-12 pricing-package simple">
+				<div class="pricing-package-inner">
+					<div class="package-header">
+						<h3>Free</h3>
+					</div>
+					<div class="package-content">
+						<div class="package-price">
+							&dollar;0<span class="package-month">/mo</span>
+						</div>
+						<ul class="package-top-features">
+							<li>
+								Ideal for single user
+							</li>
+							<li>
+								5 Users
+							</li>
+							<li>
+								2 Projects
+							</li>
+							<li>
+								10 MB Document Storage
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="package-footer">
+                    {% if subscription_url %}
+                    {% else %}
+					<a href="/register/new/" class="btn btn-success white">
+                        <span class="fa fa-shopping-cart fa-lg white"></span><span class="white"> Register for <br />free trial!</span>
+					</a>
+                    {% endif %}
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-4 col-xs-12 pricing-package simple">
+				<div class="pricing-package-inner">
+					<div class="package-header green-bg">
+						<h3>Micro</h3>
+					</div>
+					<div class="package-content">
+						<div class="package-price">
+							&dollar;9.99<span class="package-month">/mo</span>
+						</div>
+						<ul class="package-top-features">
+							<li>
+								Ideal for freelancer or small company
+							</li>
+							<li>
+								30 users
+							</li>
+							<li>
+								10 Projects
+							</li>
+							<li>
+								100MB Document Storage
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="package-footer">
+					{% if subscription_url %}
+                    <a href="{{ subscription_url }}micro?referrer={{ client }}" class="btn btn-success">
+						<span class="fa fa-shopping-cart fa-lg"></span> Upgrade!
+					</a>
+                    {% endif %}
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-4 col-xs-12 pricing-package simple">
+				<div class="pricing-package-inner">
+					<div class="package-header yellow-bg">
+						<h3>Small</h3>
+					</div>
+					<div class="package-content">
+						<div class="package-price">
+							&dollar;24.99<span class="package-month">/mo</span>
+						</div>
+						<ul class="package-top-features">
+							<li>
+								Ideal for small companies
+							</li>
+							<li>
+								150 Users
+							</li>
+							<li>
+								25 Projects
+							</li>
+							<li>
+								10GB Document Storage
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="package-footer">
+                    {% if subscription_url %}
+					<a href="{{ subscription_url }}small?referrer={{ client }}" class="btn btn-success">
+						<span class="fa fa-shopping-cart fa-lg"></span> Upgrade!
+					</a>
+                    {% endif %}
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-4 col-xs-12 pricing-package simple">
+				<div class="pricing-package-inner">
+					<div class="package-header purple-bg">
+						<h3>Medium</h3>
+					</div>
+					<div class="package-content">
+						<div class="package-price">
+							&dollar;39.99<span class="package-month">/mo</span>
+						</div>
+						<ul class="package-top-features">
+							<li>
+								Ideal for medium-sized companies
+							</li>
+							<li>
+								300 Users
+							</li>
+							<li>
+								50 Projects
+							</li>
+							<li>
+								20 GB Document Storage
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="package-footer">
+                    {% if subscription_url %}
+					<a href="{{ subscription_url }}medium?referrer={{ client }}" class="btn btn-success">
+						<span class="fa fa-shopping-cart fa-lg"></span> Upgrade!
+					</a>
+                    {% endif %}
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-4 col-xs-12 pricing-package simple">
+				<div class="pricing-package-inner">
+					<div class="package-header gray-bg">
+						<h3>Large</h3>
+					</div>
+					<div class="package-content">
+						<div class="package-price">
+							&dollar;59.99<span class="package-month">/mo</span>
+						</div>
+						<ul class="package-top-features">
+							<li>
+								Ideal for larger companies
+							</li>
+							<li>
+								600 Users
+							</li>
+							<li>
+								100 Projects
+							</li>
+							<li>
+								100 GB Document Storage
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="package-footer">
+                    {% if subscription_url %}
+					<a href="{{ subscription_url }}large?referrer={{ client }}" class="btn btn-success">
+						<span class="fa fa-shopping-cart fa-lg"></span> Upgrade!
+					</a>
+                    {% endif %}
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-4 col-xs-12 pricing-package simple">
+				<div class="pricing-package-inner">
+					<div class="package-header red-bg">
+						<h3>Corporate</h3>
+					</div>
+					<div class="package-content">
+						<div class="package-price">
+							&dollar;Call
+						</div>
+						<ul class="package-top-features">
+							<li>
+								Ideal for big corporations
+							</li>
+							<li>
+								Unlimited Users
+							</li>
+							<li>
+								Unlimited Projects
+							</li>
+							<li>
+								Negotiable Document Storage
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="package-footer">
+                    {% if subscription_url %}
+					<a href="{{ subscription_url }}large?referrer={{ client }}" class="btn btn-success">
+						<span class="fa fa-shopping-cart fa-lg"></span> Upgrade!
+					</a>
+                    {% endif %}
+				</div>
+			</div>

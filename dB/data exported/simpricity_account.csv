@@ -1,0 +1,4 @@
+"accountID";"accountName";"authenticationID";"authenticationID2";"authenticationID3";"membershipTypeID";"membershipRenewalDate";"firstname";"lastname";"phone";"email";"createdDate";"createdBy";"updateDate";"updatedBy";"deletedDate";"deletedBy"
+1;"testit";"SIM130924-1192-74410S";"simpricity@gmail.com";"Simpris $40 Medium Company";1;"2013-09-24 13:09:53";"Graham";"Johnson";"1234567812345";"simpricity@gmail.com";"2013-09-24 13:09:53";0;"";0;"";0
+2;"WMPS";"SIM130925-1192-48257S";"grahamj@wmps.com";"Simpris $40 Medium Company";1;"2013-09-25 15:13:16";"Graham";"Johnson";"07801 951492";"grahamj@wmps.com";"2013-09-25 15:13:16";0;"";0;"";0
+3;"GoodlyCode";"SIM160114-3559-31569S";"SIM160114-3559-31569S";"Simpris-Large";40;"2016-01-14 23:05:03";"Graham";"Johnson";"01482 865651";"user-name@gmail.com";"2013-09-26 13:04:21";0;"2016-01-14 23:05:03";0;"";0

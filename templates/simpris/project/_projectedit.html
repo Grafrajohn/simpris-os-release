@@ -1,0 +1,141 @@
+            {% if project %}
+            <div class="form-group row mb-3">
+                <label for="frmOrganisation" class="form-label col col-sm-2 col-md-3">Organisation</label>
+                <div id="frmOrganisation" class=" col col-sm-10 col-md-9">{{ project.organisationname }}</div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmProjectID" class="form-label col col-sm-2">Project ID</label>
+                <div id="frmProjectID" class="col col-sm-10">{{ id }}</div>
+            </div>
+            {% else %}
+            <div class="form-group row mb-3">
+                <label for="frmProjectOrganisation" class="form-label col col-sm-2">Organisation:</label>
+                <div class="col col-sm-10">
+                    <select id="frmProjectOrganisation" name="frmProjectOrganisation">
+                        <option selected value="">Please select</option>
+                        {% for organisation in organisations %}
+                            <option value="{{ organisation.organisationid }}">{{ organisation.organisationname }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {% endif %}
+            <div class="form-group row mb-3">
+                <label for="frmProjectName" class="form-label col-sm-2">Project Name</label>
+                <span class="col-sm-10">
+                    <input type="text" class="form-control" size="50" id="frmProjectName" name="frmProjectName" value="{{ project.projectname }}" placeholder="Project name"/>
+                </span>
+            </div>
+            <div class="form-group row mb-3 mb-3">
+                <label for="frmProjectDescription" class="form-label col-sm-2">Project Description</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" cols="50" rows="10" maxlength="500" id="frmProjectDescription" name="frmProjectDescription">{{ project.projectdescription }}</textarea>
+                </div>
+            </div>
+            {% if project %}
+            <div class="form-group row mb-3">
+                <label for="frmProjectStakeholder" class="form-label col-sm-2">Project Principal Stakeholder</label>
+                <div class="col-sm-10">
+                    <select name="frmProjectStakeholder" id="frmProjectStakeholder">
+                        <option selected value="0">Please select</option>
+                            {%  for user in organisationusers %}
+                                <option value="{{ user.userid }}" {% if user.userid == project.stakeholderid %} selected {% endif %}>{{ user.first_name }} {{  user.last_name }}</option>
+                            {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmProjectManager" class="col-sm-2 form-label">Project Manager</label>
+                <div class="col-sm-10">
+                    <select name="frmProjectManager" id="frmProjectManager">
+                        <option selected value="0">Please select</option>
+                            {% for user in organisationusers %}
+                                <option value="{{ user.userid }}" {% if user.userid == project.projectmanagerid %} selected {% endif %}>{{ user.first_name }} {{ user.last_name }}</option>
+                            {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {% endif %}
+            <div class="form-group row mb-3">
+                <label for="frmProjectDeliverables" class="form-label col-sm-2">Project Deliverables</label>
+                <div class="col-sm-10">
+                    <textarea maxlength="1500" rows="10" cols="50" id="frmProjectDeliverables" name="frmProjectDeliverables" placeholder="Deliverables - if any">{{ project.deliverables }}</textarea>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmProjectBudget" class="form-label col-sm-2">Project Budget</label>
+                <div class="col-sm-10">
+                    <input type="text" size="10" id="frmProjectBudget" name="frmProjectBudget" value="{{ project.budget }}" placeholder="Enter budget or leave blank"/>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmProjectImportance" class="form-label col-sm-2">Importance</label>
+                <div class="col-sm-10">
+                    <select id="frmProjectImportance" name="frmProjectImportance" required>
+                        <option selected value="">Please select</option>
+                        {% for item in importances %}
+                            <option value="{{ item.importanceid }}" {% if item.importanceid == project.importance %} selected {% endif %} >{{ item.importancename }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {% if project.projectname == "zzzzzzzzzzzzzzzzzzz" %}
+            <div class="form-group row mb-3">
+                <div>
+                    <div class="col-sm-2 form-label">
+                        Express an opinion on this project
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="radio">
+                            <label><input type="radio" name="frmOpinion" value="0" {% if opinion.opiniontype == "0" %} "checked" {% endif %}> No opinion</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="radio">
+                            <label><input type="radio" name="frmOpinion" value="1" {% if opinion.opiniontype == "1" %} "checked" {% endif %}> I am very happy with this project</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="radio">
+                            <label><input type="radio" name="frmOpinion" value="2" {% if opinion.opiniontype == "2" %} "checked" {% endif %}> I am happy with this project</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="radio">
+                            <label><input type="radio" name="frmOpinion" value="3" {% if opinion.opiniontype == "3" %} "checked" {% endif %}> I am reasonably satisfied with this project</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="radio">
+                            <label><input type="radio" name="frmOpinion" value="4" {% if opinion.opiniontype == "4" %} "checked" {% endif %}> I am worried about this project</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="radio">
+                            <label><input type="radio" name="frmOpinion" value="5" {% if opinion.opiniontype == "5" %} "checked" {% endif %}> I am very worried about this project</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <br>

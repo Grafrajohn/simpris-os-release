@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    {% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap/bootstrap.min.css" %}" />
+	<link rel="stylesheet" type="text/css" href="{% static "css/print.css" %}" />
+</head>
+<body>
+<table class="table">
+    {% for invoice in invoices %}
+    {% if forloop.first %}
+    <tr><td><h3>Invoice No: {{ id }}</h3></td></tr><tr><td>&nbsp;</td></tr>
+    <tr><td>Details:    {{ invoice.description }}</td></tr>
+    <tr><td>Comments:   {{ invoice.comments }}</td></tr>
+    <tr><td>Created on: {{ invoice.createddate }}</td></tr><tr><td>&nbsp;</td></tr>
+</table>
+<table class="table">
+    <thead><th>Item&nbsp;</th><th>&nbsp;No of Hours&nbsp;</th><th>&nbsp;Hourly&nbsp;</th><th>&nbsp;Total pre Tax&nbsp;</th><th>&nbsp;Tax Rate&nbsp;</th><th>&nbsp;Tax Total&nbsp;</th><th>&nbsp;Total after Tax&nbsp;</th></thead>
+    {% endif %}
+        <tr>
+            <td>{{ invoice.itemdescription }}</td>
+            <td>{{ invoice.nohours }}</td>
+            <td>{{ invoice.hourlyrate }}</td>
+            <td>{{ invoice.grosstotal }}</td>
+            <td>{{ invoice.tax1rate }}</td>
+            <td>{{ invoice.tax1 }}</td>
+            <td>{{ invoice.nettotal }}</td>
+        </tr>
+    {% empty %}
+        <tr><td></td><td></td><td>Invoice printing error</td><td></td></tr>
+    {% endfor %}
+    <tr><td colspan="7">&nbsp;</td></tr>
+    <tfoot><tr colspan="7"><td>End of invoice</td></tr></tfoot>
+</table>
+</body>
+</html>

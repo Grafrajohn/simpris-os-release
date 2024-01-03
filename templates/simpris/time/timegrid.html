@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha256-rByPlHULObEjJ6XQxW/flG2r+22R5dKiAoef+aXWfik=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-table/1.0.0/ng-table.min.css" />
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'framework' %}
+    ng-app="simpris"
+{% endblock %}
+{% block 'content' %}
+    <div>
+        <h3 style="display: inline;">My Time Editor&nbsp;&nbsp;</h3>
+        <a class="pageHelp" href="void" onclick="window.open('{{ BASE_URL_DJ }}/help/#timegrid')">Help about this page</a>
+    </div>
+    <div ng-init="ajaxURL=''">
+        <div ng-controller="timegrid">
+            <div ng-class="clsUpdateStatus" ng-cloak>[[ updateStatus ]]</div>
+            <div class="well">
+                <label>Choose a date:&nbsp; </label><input type="text" id="frmDatePicker" ng-change="selectDate(frmDate)" name="frmDatePicker" value="{{ dataobject | date:"Y/m/d" }}" ng-model="frmDate"/>
+                &nbsp;&nbsp;&nbsp;
+                <label>Active date: [[frmDate]] </label>
+            </div>
+            <form id="frmTimeGrid" name="frmTimeGrid" class="form-inline" method="post">
+                <div class="well">
+                    <label>Project / Task</label>
+                    <select id="selTask" class="timegridselected form-control" ng-model="seltask" ng-options="tasktime.taskid as tasktime.project + ' : ' + tasktime.tasklist + ' : ' + tasktime.task for tasktime in taskdata" ng-hide="selTaskHide">
+                    </select>
+                    <span class="timegridselected" ng-hide="selTaskTimeHide">[[ selectedTaskTime ]]</span>
+                    <label>Time started:</label>
+                    <select id="selStartHour" ng-model="starthour">
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                    </select>
+                    <select id="selStartMins" ng-model="startmin">
+                        <option value="00">00</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                    </select>
+                    <label>Duration:</label>
+                    <select id="selDurationHours" ng-model="hours">
+                        <option value="0">00</option>
+                        <option value="1">01</option>
+                        <option value="2">02</option>
+                        <option value="3">03</option>
+                        <option value="4">04</option>
+                        <option value="5">05</option>
+                        <option value="6">06</option>
+                        <option value="7">07</option>
+                        <option value="8">08</option>
+                        <option value="9">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                    </select>
+                    <select id="selDurationMins" ng-model="mins">
+                        <option value="0">00</option>
+                        <option value="0.25">15</option>
+                        <option value="0.5">30</option>
+                        <option value="0.75">45</option>
+                    </select>
+                    <input id="butSave" ng-click="updateTime(seltime,selTaskID,frmDate,starthour,startmin,hours,mins)" type="submit" value="Save" class="btn btn-sm btn-primary" ng-show="butSave" />
+                    <input id="butDelete" ng-click="deleteTime(seltime)" type="submit" value="Delete" class="btn btn-sm btn-primary" ng-show="butDelete" />
+                    <input id="butInsert" ng-click="insertTime(seltask,frmDate,starthour,startmin,hours,mins)" type="submit" value="Insert" class="btn btn-sm btn-primary" ng-show="butInsert" />
+                    <input id="butClearInsert" type="submit" value="Insert new time" ng-click="clearSelection()" class="btn btn-sm btn-primary" ng-show="butClearInsert" />
+                </div>
+            </form>
+            <div class="card panel-default">
+                <div class="card-header">
+                    Your time for today
+                </div>
+                <div class="card-body">
+                    <table id="tabTimes" ng-table="tableParams" show-filter="true" class="table ng-table-rowselected">
+                        <tr>
+                            <th>Project</th>
+                            <th>Tasklist</th>
+                            <th>Task</th>
+                            <th colspan="2">Start<br>Hours Minutes</th>
+                            <th colspan="2">Duration<br>Hours Minutes</th>
+                        </tr>
+                        <tr ng-repeat="time in $data"
+                            ng-click="time.$selected; changeSelection(time)"
+                            ng-class="{'ng-table-active': time.$selected}">
+                            <td data-title="'Project'">[[time.project]]</td>
+                            <td data-title="'Tasklist'">[[time.tasklist]]</td>
+                            <td data-title="'Task'">[[time.task]]</td>
+                            <td data-title="'Start Hour'">[[time.starthour]]</td>
+                            <td data-title="'Start Time'">[[time.startmin]]</td>
+                            <td data-title="'Time spent hours'">[[time.hours]]</td>
+                            <td data-title="'minutes'">[[time.minsformat]]</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+    {% load static %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha256-KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM=" crossorigin="anonymous"></script>
+	<script src="{% static "js/jquery-components/jquery.nanoscroller.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery.ui.touch-punch.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/common/common.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+	<script src="{% static "js/jquery-components/scripts.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/pace.min.js" %}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.19/angular.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-table/0.3.2/ng-table.min.js" type="text/javascript"></script>
+    <script src="/static/js/simpris/angular/app-timegrid.js" type="text/javascript"></script>
+
+	<!-- this page specific inline scripts -->
+    <script type="text/javascript">
+        $(function(){
+            // Datepicker
+            $('#frmDatePicker').datepicker({
+                    inline: true,
+                    dateFormat: 'yy/mm/dd'
+            });           
+        });
+    </script>
+{% endblock %}

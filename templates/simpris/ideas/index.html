@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content-heading' %}
+    <h3>Ideas Management</h3>
+    <a href="/ideas/index">0</a>
+    <a href="/ideas/index1">1</a>
+    <a href="/ideas/index2">2</a>
+    <a href="/ideas/index3">3</a>
+    <a href="/ideas/index4">4</a>
+    <a href="/ideas/index5">5</a>
+    <a href="/ideas/detail">Detail</a>
+{% endblock %}
+{% block 'content' %}
+    <div id='ideas-root'>
+    </div>
+{% endblock %}
+{% block 'end-js' %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content' %}
+    <div class="col-md-12">
+        <ul class="nav nav-tabs mb-3" role="tablist">
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/organisation/detail/{{ id }}">Organisation Overview</a></li>
+          <li class="nav-itemactive"><a class="nav-link" href="{{ BASE_URL_DJ }}/organisation/edit/{{ id }}">Edit Organisation</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/organisation/users/{{ id }}">Organisation Users</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/organisation/history/{{ id }}">Organisation History</a></li>
+        </ul>
+        <h3>Edit Organisation</h3>
+        <span id="spnError" class="spnError"></span>
+        <form id="frmOrganisationEdit" name="frmOrganisationEdit" class="form-horizontal">
+        {% csrf_token %}
+            {% for org in organisation %}
+            <div class="form-group row mb-3">
+                <label for="frmOrganisationID" class="form-label col-sm-2">Organisation ID</label>
+                <div class="col-sm-10">{{ org.organisationid }}</div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmOrganisationName" class="form-label col-sm-2">Organisation Name</label>
+                <div class="col-sm-10">
+                    <input id="frmOrganisationName" class="form-control" type="text" size="100" maxlength="100" name="frmOrganisationName" value="{{ org.organisationname }}"/>
+                </div>
+            </div>
+            {% empty %}
+                    <p>Organisation not found</p>
+            {% endfor %}
+            <input id="btn-organisation-edit" type="submit" value="Update organisation" class="btn btn-sm btn-primary"/>
+            <input type="hidden" name="hidOrganisationID" value="{{ id }}"/>
+        </form>
+    </div>
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+    {% load static %}
+	<script src="{% static "js/jquery/jquery-1.12.0.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery-ui.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/bootstrap/bootstrap.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/jquery-components/jquery.nanoscroller.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery.ui.touch-punch.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/common/common.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+
+	<!-- theme scripts -->
+	<script src="{% static "js/jquery-components/scripts.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/pace.min.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific inline scripts -->
+
+    <script type="text/javascript" src="/static/js/simpris/organisation/organisation.js"></script>
+{% endblock %}

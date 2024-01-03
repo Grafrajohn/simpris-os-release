@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+	<link rel="stylesheet" type="text/css" href="/static/css/react/fixed-data-table.css" />
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content' %}
+    <h3>Customer Interactions</h3>
+    <div id="interaction" />
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+	<script src="/static/js/jquery/jquery-3.1.1.min.js" type="text/javascript"></script>
+	<script src="/static/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/static/js/simpris/common/common.js" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+{#	<script src="/static/js/jquery-components/jquery.knob.js"></script>#}
+{#	<script src="/static/js/raphael/raphael-min.js"></script>#}
+{#	<script src="/static/js/morris/morris.min.js"></script>#}
+    <script src="/static/js/simpris/interaction/bundle_interaction.js" type="text/javascript"></script>
+
+	<!-- this page specific inline scripts -->
+
+{% endblock %}

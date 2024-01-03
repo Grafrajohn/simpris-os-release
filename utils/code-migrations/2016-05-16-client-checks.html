@@ -1,0 +1,209 @@
+Summary
+-------
+Make sure all major reads use clientid
+
+==============================================================================================
+Functionality to test
+---------------------
+app home page
+organisation list page
+task detail
+invoice list
+problem list
+time calendar
+time grid
+time task
+time list
+try and delete yourself
+
+==============================================================================================
+>>DJANGO<<
+----------
+API
+project\views.py
+task\views.py
+invoice\views.py
+problem\views.py
+time\views.py
+user\views.py
+
+APPS
+
+MODELS
+models.py
+
+TEMPLATES
+user\userlist.html
+
+Files
+-----
+xxxxxxxx
+
+=============================================================================================
+>>MYSQL<<
+---------
+VIEW `v_my_critical_work` AS
+    SELECT DISTINCT
+        'Task' AS `type`,
+        1 AS `ordercol`,
+        `pr`.`projectName` AS `projectName`,
+        `pr`.`projectID` AS `projectID`,
+        `tk`.`taskDescription` AS `taskDescription`,
+        `tk`.`taskID` AS `itemID`,
+        `tk`.`assignedTo` AS `assignedTo`,
+        `pr`.`organisationID` AS `organisationID`,
+        `tk`.`deletedDate` AS `deletedDate`,
+        `pr`.`projectID` AS `id`,
+        `pr`.`clientID` AS `clientID`
+    FROM
+        (((`project` `pr`
+        JOIN `tasklist` `tl` ON ((`pr`.`projectID` = `tl`.`projectID`)))
+        JOIN `task` `tk` ON ((`tl`.`taskListID` = `tk`.`taskListID`)))
+        JOIN `userproject` `upr` ON ((`upr`.`projectID` = `pr`.`projectID`)))
+    WHERE
+        ((`tk`.`taskPriorityID` = 1)
+            AND (`tk`.`taskStatusID` IN (1 , 2, 3, 4, 5, 6, 19))
+            AND ISNULL(`tk`.`deletedDate`))
+    UNION SELECT DISTINCT
+        'Problem' AS `type`,
+        1 AS `ordercol`,
+        `prb`.`problemHeader` AS `problemHeader`,
+        `prb`.`problemID` AS `problemID`,
+        `prb`.`problemDescription` AS `problemDescription`,
+        `prb`.`problemID` AS `itemID`,
+        `prb`.`assignedTo` AS `assignedTo`,
+        `prb`.`organisationID` AS `organisationID`,
+        `prb`.`deletedDate` AS `deletedDate`,
+        `prb`.`problemID` AS `id`,
+        `prb`.`clientID` AS `clientID`
+    FROM
+        `problem` `prb`
+    WHERE
+        ((`prb`.`problemPriorityID` = 1)
+            AND ISNULL(`prb`.`deletedDate`))
+
+VIEW `v_my_invoices` AS
+    SELECT
+        `inv`.`invoiceID` AS `invoiceID`,
+        `inv`.`statusID` AS `statusID`,
+        `lk`.`lookupValueChar` AS `lookupValueChar`,
+        `inv`.`createdDate` AS `createdDate`,
+        SUM(`invl`.`noHours`) AS `noHours`,
+        SUM(`invl`.`grossTotal`) AS `grossTotal`,
+        SUM(`invl`.`netTotal`) AS `netTotal`,
+        `inv`.`userID` AS `userID`,
+        `inv`.`deletedDate` AS `deletedDate`,
+        `inv`.`invoiceID` AS `id`,
+        `inv`.`clientID` AS `clientID`
+    FROM
+        ((`invoice` `inv`
+        JOIN `invoiceline` `invl` ON ((`inv`.`invoiceID` = `invl`.`invoiceID`)))
+        LEFT JOIN `lookup` `lk` ON ((`lk`.`lookupSubTypeID` = `inv`.`statusID`)))
+    WHERE
+        (`lk`.`lookupTypeID` = 18)
+    GROUP BY `inv`.`invoiceID`
+
+VIEW `v_my_problems` AS
+    SELECT
+        `pro`.`problemID` AS `problemID`,
+        `pro`.`organisationID` AS `organisationID`,
+        `lookty`.`lookupValueChar` AS `problemType`,
+        `pro`.`problemHeader` AS `problemHeader`,
+        `pro`.`assignedTo` AS `assignedTo`,
+        `looksc`.`lookupValueChar` AS `problemScope`,
+        `lookstat`.`lookupValueChar` AS `problemStatus`,
+        `lookpr`.`lookupValueChar` AS `problemPriority`,
+        `looksc`.`lookupValueNum` AS `problemScopeID`,
+        `pro`.`createdBy` AS `createdBy`,
+        `pro`.`problemID` AS `id`,
+        COALESCE(`usr`.`first_name`, ' ') AS `first_name`,
+        COALESCE(`usr`.`last_name`, ' ') AS `last_name`,
+        `pro`.`clientID` AS `clientID`
+    FROM
+        (((((`problem` `pro`
+        LEFT JOIN `lookup` `lookty` ON ((`pro`.`problemTypeID` = `lookty`.`lookupSubTypeID`)))
+        LEFT JOIN `lookup` `looksc` ON ((`pro`.`scope` = `looksc`.`lookupSubTypeID`)))
+        LEFT JOIN `lookup` `lookstat` ON ((`pro`.`problemStatusID` = `lookstat`.`lookupSubTypeID`)))
+        LEFT JOIN `lookup` `lookpr` ON ((`pro`.`problemPriorityID` = `lookpr`.`lookupSubTypeID`)))
+        LEFT JOIN `users` `usr` ON ((`usr`.`id` = `pro`.`assignedTo`)))
+    WHERE
+        ((`lookty`.`lookupTypeID` = 8)
+            AND (`looksc`.`lookupTypeID` = 10)
+            AND (`lookstat`.`lookupTypeID` = 11)
+            AND (`lookpr`.`lookupTypeID` = 12)
+            AND ISNULL(`pro`.`deletedBy`))
+
+VIEW `v_time_calendar` AS
+    SELECT
+        `ti`.`timeID` AS `id`,
+        `tk`.`taskDescription` AS `title`,
+        DATE_FORMAT(`ti`.`timeDay`, '%Y %m %d') AS `start`,
+        `ti`.`timeID` AS `url`,
+        `tk`.`assignedTo` AS `assignedTo`,
+        `ti`.`userID` AS `userID`,
+        `ti`.`clientID` AS `clientID`
+    FROM
+        (`time` `ti`
+        JOIN `task` `tk` ON ((`ti`.`taskID` = `tk`.`taskID`)))
+
+VIEW `v_time_task` AS
+    SELECT
+        `pr`.`projectName` AS `project`,
+        `pr`.`projectID` AS `projectid`,
+        `tl`.`taskListName` AS `tasklist`,
+        `tl`.`taskListID` AS `tasklistid`,
+        LEFT(`tk`.`taskDescription`, 50) AS `task`,
+        `tk`.`taskID` AS `taskid`,
+        `tk`.`assignedTo` AS `assignedTo`,
+        `tk`.`taskID` AS `id`,
+        `tk`.`clientID` AS `clientID`
+    FROM
+        ((`task` `tk`
+        JOIN `tasklist` `tl` ON ((`tl`.`taskListID` = `tk`.`taskListID`)))
+        JOIN `project` `pr` ON ((`pr`.`projectID` = `tl`.`projectID`)))
+
+VIEW `v_my_time` AS
+    SELECT
+        `time`.`timeID` AS `timeID`,
+        DATE_FORMAT(`time`.`timeDay`, '%Y %b %d') AS `timeDay`,
+        `time`.`timeDay` AS `timeDayraw`,
+        `time`.`hours` AS `hours`,
+        `time`.`taskID` AS `taskID`,
+        `time`.`timeTypeID` AS `timeTypeID`,
+        `time`.`userID` AS `userID`,
+        `users`.`first_name` AS `first_name`,
+        `users`.`last_name` AS `last_name`,
+        `time`.`deletedDate` AS `deletedDate`,
+        `time`.`comments` AS `comments`,
+        `task`.`taskDescription` AS `taskDescription`,
+        `lookup`.`lookupValueChar` AS `lookupValueChar`,
+        `time`.`timeID` AS `id`,
+        `time`.`clientID` AS `clientID`
+    FROM
+        (((`time`
+        JOIN `users` ON ((`time`.`userID` = `users`.`id`)))
+        JOIN `task` ON ((`time`.`taskID` = `task`.`taskID`)))
+        JOIN `lookup` ON ((`time`.`timeTypeID` = `lookup`.`lookupValueNum`)))
+    WHERE
+        (`lookup`.`lookupTypeID` = 13)
+
+=============================================================================================
+>>STATIC<<
+----------
+
+Javascript
+----------
+
+HTML
+----
+
+============================================================================================
+Notes
+-----
+xxxxxx
+
+Checklist
+---------
+1. Changes to urls.py?
+2. Changes to archive tables?
+3. Changes to models.py?

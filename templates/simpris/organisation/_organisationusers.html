@@ -1,0 +1,22 @@
+        <div>
+            <table id="tabOrganisationUsers" class="table">
+                {% for user in users %}
+                    <tr>
+                        <td class="tab-font-awesome-icon">{% if user_id != user.userid %}<a id="btn-organisation-user-delete-{{ user.id }}" class="btn-organisation-user-delete tab-font-awesome-icon" href="#" title="Remove user from organisation"><i class="fa fa-times" style="color: #ff0000;"></i></a>{% endif %}</td><td>{{ user.first_name }} {{ user.last_name }}</td>
+                    </tr>
+                {% empty %}
+                    <tr><td></td><td>No users for this organisation</td></tr>
+                {% endfor %}
+            </table>
+            <form id="form-organisation-user" method="post" class="form-inline">
+                {% csrf_token %}
+                <select name="selOrganisationUser" required  data-validation="required" data-validation-length="1-2" data-validation-error-msg="Organisation user must be specified">
+                    <option selected value="">Please select</option>
+                    {% for potential in potentials %}
+                        <option value="{{ potential.id }}">{{ potential.first_name }} {{ potential.last_name }}</option>
+                    {% endfor %}
+                </select>
+                <input id="btn-organisation-user-add" type="submit" class="btn btn-xs btn-success" value="Add user for organisation"/>
+                <input type="hidden" name="hidUserOrganisationID" value="{{ id }}"/>
+            </form>
+        </div>

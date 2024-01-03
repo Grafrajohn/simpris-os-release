@@ -1,0 +1,18 @@
+CREATE VIEW `v_interactions` AS
+    select
+        `lk`.`id` AS `id`,
+        `intr`.`interactionID` AS `interactionID`,
+        `intr`.`clientID` AS `clientID`,
+        `intr`.`details` AS `details`,
+        date_format(`intr`.`createdDate`, '%Y %b %d') AS `createdDate`,
+        `intr`.`createdBy` AS `createdBy`,
+        `intr`.`updatedDate` AS `updatedDate`,
+        `intr`.`updatedBy` AS `updatedBy`,
+        `intr`.`deletedDate` AS `deletedDate`,
+        `intr`.`deletedBy` AS `deletedBy`,
+        `lk`.`lookupValueChar` AS `interactiontype`
+    from
+        (`interaction` `intr`
+        join `lookup` `lk` ON ((`intr`.`interactionTypeID` = `lk`.`lookupSubTypeID`)))
+    where
+        (`lk`.`lookupTypeID` = 22)

@@ -1,0 +1,11 @@
+Best way to get working in eclipse:
+
+Create new Django project in Eclipse PyDev called simpris.
+
+To check it is OK right click on project in Eclipse then 'Run As' then 'PyDev Django'
+
+The project should then run.
+
+Then copy the other files from the project into the simpris folder in Eclipse workspace. This should overwrite manage.py, urls.py, wsgi.py etc.
+
+ 

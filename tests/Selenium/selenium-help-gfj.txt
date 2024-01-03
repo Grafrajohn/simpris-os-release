@@ -1,0 +1,1 @@
+To export tests from test recorder, export them as "python2 unittest remotecontrol"

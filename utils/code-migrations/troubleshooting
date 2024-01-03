@@ -1,0 +1,1 @@
+Inexplicable fail in ajax - caused by seemingly unrelated python mi#odule not being present. This caused API call from AJAX to fail.

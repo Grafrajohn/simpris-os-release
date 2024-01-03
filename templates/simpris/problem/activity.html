@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content-heading' %}
+    <ul class="nav nav-tabs mb-3" role="tablist">
+        <li class="nav-item"><a class="nav-link" href="/problem/list/">My Problems</a></li>
+        <li class="nav-item active"><a class="nav-link active" href="#">Problem Activity</a></li>
+    </ul>
+{% endblock %}
+{% block 'content' %}
+    <a href="{{ BASE_URL_DJ }}/report/generic/prob" target=_new>Problem Charts</a><br><br>
+    {% if sidebar %}
+        {% for problem in sidebar %}
+            <div>
+            {% if problem.column2 == "" %}
+                <h4>{{ problem.problemname }}</h4>
+            {% else %}
+                <a href="{{ BASE_URL_DJ }}/problem/detail/{{ problem.id }}">{{ problem.problemname }}</a>
+                {{ problem.column2 }}
+            {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <span>There is no recent problem activity</span>
+    {% endif %}
+{% endblock %}
+{% block 'end-js' %}
+{% endblock %}

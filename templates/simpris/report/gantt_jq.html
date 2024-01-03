@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+    <link rel="stylesheet" href="/static/css/gantt/style.css" type="text/css" rel="stylesheet" media="screen" />
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content' %}
+<div class="col-md-12">
+    <h3 style="padding-top: 0 !important;margin-top:0;">Gantt Chart for Project: {% for project in projects %}{{ project.projectid }} - {{ project.projectname }}{% endfor %}</h3>
+    <div style="margin-top :0;" class="gantt"></div>
+    <div>Note that tasks will only appear on this gantt chart if they have been allocated a start date and an estimated time.</div>
+</div>
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+    {% load static %}
+	<script src="{% static "js/jquery/jquery-1.12.0.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery-ui.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/bootstrap/bootstrap.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/jquery-components/jquery.nanoscroller.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery.ui.touch-punch.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/common/common.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+
+	<!-- theme scripts -->
+	<script src="{% static "js/jquery-components/scripts.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/pace.min.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific inline scripts -->
+
+    <script src="/static/js/jquery-components/gantt/jquery.fn.gantt.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        "use strict";
+        jQuery(function () {
+
+            // transform data
+            // dump serialized data from django
+            var raw_project_data = {{ times_formatted|safe }};
+            // set up JSON main array
+            var ganttData = [];
+            // loop through data from django and transform it into format suitable for gantt
+            for (var i=0;i<raw_project_data.length;i++) {
+                var last_tasklist = 0;
+                // place row of dj data into object
+                var obj = raw_project_data[i];
+                var json_temp = {};
+                var values = [];
+                var values_temp = {};
+                // get fields from object for transformation
+                var taskdescription = obj.fields.taskdescription || " ";
+                var taskdescription_format = taskdescription.substring(0,40) + '....';
+                var taskenddate = obj.fields.taskenddate || obj.fields.taskstartdate;
+                // create values variables
+                values_temp['to'] = '/Date(' + taskenddate + ')/' || obj.fields.taskstartdate;
+                values_temp['from'] = '/Date(' + obj.fields.taskstartdate + ')/' || 0;
+                values_temp['label'] = taskdescription_format;
+                // push into JSON sub-array
+                values.push(values_temp);
+                // build main JSON array
+                if (obj.fields.tasklistid != last_tasklist) {
+                    json_temp['name'] = obj.fields.tasklistname;
+                }
+                else {
+                    json_temp['name'] = " ";
+                }
+                json_temp['desc'] = obj.fields.tasklistdescription.substring(0,20);
+                json_temp['values'] = values;
+                ganttData.push(json_temp);
+                last_tasklist = obj.fields.tasklistid;
+            }
+            // gantt chart itself
+            jQuery(".gantt").gantt({
+                source: ganttData,
+                navigate: "scroll",
+				maxScale: "hours",
+				itemsPerPage: 20,
+                months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                scrollToToday: true
+                })
+        });
+    </script>
+{% endblock %}

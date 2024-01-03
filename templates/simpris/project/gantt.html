@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+    <link rel="stylesheet" type="text/css" href="/static/css/gantt/angular-ui-tree.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/gantt/style-angular.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/gantt/angular-gantt.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/gantt/angular-gantt-plugins.min.css">
+{% endblock %}
+{% block 'head-js' %}
+    <script type='text/javascript' src="/static/js/gantt/angular.min.js"></script>
+    <script type='text/javascript' src="/static/js/simpris/gantt/moment-with-locales.min.js"></script>
+    <script type='text/javascript' src="/static/js/simpris/gantt/angular-moment.min.js"></script>
+    <script type='text/javascript' src="/static/js/simpris/gantt/moment-range.min.js"></script>
+
+    <script type='text/javascript' src="/static/js/simpris/gantt/angular-ui-tree.js"></script>
+
+    <script type='text/javascript' src="/static/js/simpris/gantt/angular-gantt.min.js"></script>
+    <script type='text/javascript' src="/static/js/simpris/gantt/angular-gantt-plugins.min.js"></script>
+    <script type='text/javascript' src="/static/js/simpris/gantt/draganddrop.js"></script>
+
+    <script type='text/javascript' src="/static/js/simpris/gantt/ElementQueries.js"></script>
+    <script type='text/javascript' src="/static/js/simpris/gantt/ResizeSensor.js"></script>
+
+    <script type='text/javascript' src="/static/js/simpris/gantt/script.js"></script>
+{% endblock %}
+{% block 'content' %}
+	{% load static %}
+    <h3>{% for project in projects %} Project ID: {{ project.projectid }} / {{ project.projectname }} {% endfor %}&nbsp;&nbsp;<i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="Tasks will only appear here if they have been assigned to you and given a start date and estimated number of days."></i></h3>
+    <div ng-app="simprisGantt" ng-controller="Ctrl" style="width:100%;overflow-x: auto; white-space: nowrap;">
+        <div gantt data="data">
+            <!-- <gantt-table columns="['model.name']"></gantt-table> -->
+            <gantt-tree></gantt-tree>
+            <gantt-groups></gantt-groups>
+            <gantt-tooltips></gantt-tooltips>
+            <gantt-bounds></gantt-bounds>
+            <gantt-progress></gantt-progress>
+            <gantt-sortable></gantt-sortable>
+            <gantt-movable></gantt-movable>
+            <gantt-draw-task></gantt-draw-task>
+            <gantt-resize-sensor></gantt-resize-sensor>
+        </div>
+    </div>
+    <!--div id="dataTest"></div-->
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+    {% load static %}
+	<script src="{% static "js/jquery/jquery-1.12.0.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery-ui.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/bootstrap/bootstrap.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/jquery-components/jquery.nanoscroller.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery.ui.touch-punch.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/common/common.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+
+	<!-- theme scripts -->
+	<script src="{% static "js/jquery-components/scripts.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/pace.min.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific inline scripts -->
+
+    <script type="text/javascript">
+            var raw_project_data = {{ json_raw|safe }};
+            // set up JSON main array
+            simpris.project.ganttData = [];
+            // loop through data from django and transform it into format suitable for gantt
+            var values = [];
+            var last_tasklist = 0;
+            var json_temp = {};
+            var children_temp = [];
+            for (var i=0;i<raw_project_data.length;i++) {
+                if (last_tasklist == 0) {
+                    var milestones = [];
+                    milestones['name'] = 'Milestones';
+                    milestones['height'] = '3em';
+                    milestones['sortable'] = 'false';
+                    milestones['color'] = '#45607D';
+                    milestones['classes'] = 'gantt-row-milestone';
+                    simpris.project.ganttData.push(milestones);
+                }
+                // place row of dj data into object
+                var obj = raw_project_data[i];
+                // build main JSON array
+                if (obj.fields.tasklistid != last_tasklist && last_tasklist != 0) {
+                    // push children
+                    children = {name: last_tasklistname, children: children_temp};
+                    simpris.project.ganttData.push(children);
+                    children_temp = [];
+                    var json_temp = {name: obj.fields.tasklistname, tasks: null};
+                }
+                // get fields from object for transformation
+                var taskdescription = obj.fields.taskdescription || " ";
+                var taskdescription_format = taskdescription.substring(0,40) + '....';
+                var taskstartdate = new Date(obj.fields.taskstartdate);
+                var taskenddate = new Date(obj.fields.taskenddate);
+                // put task into children
+                children_temp.push(taskdescription_format);
+
+                // create values variables
+                var values_temp = {
+                    name: taskdescription_format,
+                    to: new Date(taskenddate.getFullYear(), taskenddate.getMonth(), taskenddate.getDate(), 00, 0, 0),
+                    from: new Date(taskstartdate.getFullYear(), taskstartdate.getMonth(), taskstartdate.getDate(), 00, 0, 0),
+                    color: '#9FC5F8'
+                };
+                // push into JSON sub-array
+                values.push(values_temp);
+
+                // push task
+                json_temp = {name: taskdescription_format, tasks: values};
+                //console.log('all values: ' + json_temp);
+                simpris.project.ganttData.push(json_temp);
+                values = [];
+
+                console.log('values: ' + values_temp);
+                last_tasklist = obj.fields.tasklistid;
+                last_tasklistname = obj.fields.tasklistname;
+                if (i == raw_project_data.length - 1) {
+                    children = {name: last_tasklistname, children: children_temp};
+                    simpris.project.ganttData.push(children);
+                    json_temp = {name: last_tasklistname, tasks: values};
+                    //console.log('all values: ' + json_temp);
+                    //simpris.project.ganttData.push(json_temp);
+                }
+            }
+    //$('#dataTest').html('Data: ' + JSON.stringify(simpris.project.ganttData));
+    </script>
+{% endblock %}

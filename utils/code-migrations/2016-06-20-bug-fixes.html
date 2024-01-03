@@ -1,0 +1,91 @@
+Summary
+-------
+User cannot delete their own organisation
+
+==============================================================================================
+Functionality to test
+---------------------
+User cannot delete their own organisation
+
+==============================================================================================
+>>DJANGO<<
+----------
+API
+organisation\views.py
+organisation\serializers.py
+project\views.py
+
+APPS
+organisation\views.py
+
+MODELS
+
+TEMPLATES
+organisation\list.html
+problem\problemlist.html
+
+urls.py
+
+Files
+-----
+xxxxxxxx
+
+=============================================================================================
+>>MYSQL<<
+---------
+VIEW `v_time_calendar` AS
+    SELECT
+        `ti`.`timeID` AS `id`,
+        `tk`.`taskName` AS `title`,
+        DATE_FORMAT(`ti`.`timeDay`, '%Y %m %d') AS `start`,
+        `ti`.`timeID` AS `url`,
+        `tk`.`assignedTo` AS `assignedTo`,
+        `ti`.`userID` AS `userID`,
+        `ti`.`clientID` AS `clientID`
+    FROM
+        (`time` `ti`
+        JOIN `task` `tk` ON ((`ti`.`taskID` = `tk`.`taskID`)))
+
+VIEW `v_time_grid` AS
+    SELECT DISTINCT
+        `pr`.`projectName` AS `project`,
+        `pr`.`projectID` AS `projectid`,
+        `tl`.`taskListName` AS `tasklist`,
+        `tl`.`taskListID` AS `tasklistid`,
+        `ti`.`timeID` AS `id`,
+        `tk`.`taskName` AS `task`,
+        `tk`.`taskID` AS `taskid`,
+        `ti`.`timeDay` AS `timeDay`,
+        CAST(`ti`.`timeDay` AS DATE) AS `timeDayDate`,
+        DATE_FORMAT(`ti`.`timeDay`, '%H') AS `starthour`,
+        DATE_FORMAT(`ti`.`timeDay`, '%i') AS `startmin`,
+        TRUNCATE(`ti`.`hours`, 0) AS `hours`,
+        (`ti`.`hours` - TRUNCATE(`ti`.`hours`, 0)) AS `mins`,
+        ((`ti`.`hours` - TRUNCATE(`ti`.`hours`, 0)) * 60) AS `minsformat`,
+        `tk`.`assignedTo` AS `assignedTo`
+    FROM
+        (((`time` `ti`
+        JOIN `task` `tk` ON ((`ti`.`taskID` = `tk`.`taskID`)))
+        JOIN `tasklist` `tl` ON ((`tl`.`taskListID` = `tk`.`taskListID`)))
+        JOIN `project` `pr` ON ((`pr`.`projectID` = `tl`.`projectID`)))
+
+=============================================================================================
+>>STATIC<<
+----------
+
+Javascript
+----------
+
+HTML
+----
+
+============================================================================================
+Notes
+-----
+xxxxxx
+
+Checklist
+---------
+1. Changes to urls.py?
+2. Changes to archive tables?
+3. Changes to models.py?

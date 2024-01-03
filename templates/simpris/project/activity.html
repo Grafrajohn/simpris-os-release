@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content-heading' %}
+    <ul class="nav nav-tabs mb-3" role="tablist">
+        <li class="nav-item"><a class="nav-link" href="/project/list/">My Projects</a></li>
+        <li class="nav-item active"><a class="nav-link active" href="#">Project Activity</a></li>
+    </ul>
+{% endblock %}
+{% block 'content' %}
+    <div class="col-md-12">
+    <a href="{{ BASE_URL_DJ }}/report/generic/proj" target="_new">Project Charts</a><br><br>
+    {% if sidebar %}
+        {% for project in sidebar %}
+            {% if project.column2 == "" %}
+            <div>
+                <h4>{{ project.projectname }}</h4>
+            {% else %}
+            <div>
+                <a href="{{ BASE_URL_DJ }}/project/detail/{{ project.id }}">{{ project.projectname }} {{ project.column2 }} </a>
+            {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <span>There is no recent project activity</span>
+    {% endif %}
+    </div>
+{% endblock %}
+{% block 'end-js' %}
+{% endblock %}

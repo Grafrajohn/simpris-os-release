@@ -1,0 +1,14 @@
+<div id="spnError" class="alert alert-danger d-none" role="alert">
+    {% if form.errors or error %}
+        {{ form.errors }} {{ error }}
+    {% endif %}
+</div>
+{% if messages %}
+    {% for message in messages %}
+<div id="div-notification" class="alert {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}alert-success {% else %} alert-error{% endif %}" role="alert" >
+        {{ message }}
+    {% endfor %}
+{% else %}
+<div id="div-notification" class="alert" role="alert" style="display: none;">
+{% endif %}
+</div>

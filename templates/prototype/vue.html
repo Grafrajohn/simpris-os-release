@@ -1,0 +1,45 @@
+{% extends 'base_vue.html' %}
+{% block 'head-css' %}
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content' %}
+    <div id="app" class="col-xs-12">
+        <table class="table table-striped">
+            <tr v-for="animal in animals">
+                <td><% animal.name %></td>
+                <td><% animal.id %></td>
+            </tr>
+        </table>
+        <v-paginator :resource_url="resource_url" @update="updateResource"></v-paginator>
+    </div>
+{% endblock %}
+{% block 'end-js' %}
+    <script>
+
+        Vue.component('v-paginator', {
+        });
+
+        new Vue({
+            el: '#app',
+            data () {
+                return {
+                    // The resource variable
+                    animals: this.animals,
+                    // Here you define the url of your paginated API
+                    resource_url: 'http://hootlex.github.io/vuejs-paginator/samples/animals1.json'
+                }
+            },
+            delimiters: ["<%","%>"],
+            components: {
+                VPaginator: VuePaginator
+                },
+            methods: {
+                updateResource(data){
+                    this.animals = data
+                }
+            }
+        });
+
+    </script>
+{% endblock %}

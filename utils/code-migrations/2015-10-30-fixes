@@ -1,0 +1,26 @@
+Summary
+-------
+Various fixes to problems etc
+
+DJANGO
+------
+templates\problem\edit
+templates\common\_opstatus
+templates\time\timesheet
+
+app\views\time
+
+Files
+-----
+xxxxxxxx
+
+dB
+--
+xxxxxxx
+
+Notes
+-----
+make sure django message stuff added into settings file
+
+PHP
+---

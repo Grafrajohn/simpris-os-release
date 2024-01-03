@@ -1,0 +1,397 @@
+/*
+Main app less css
+*/
+
+/* less mixins */
+
+@red:           #FF0000;
+@light-red:     #FF4040;
+@very-dark-red: #A60000;
+@dark-red:          #BF3030;
+@orange:            #FF7373;
+@pastel-red:        #FF8080;
+@light-pastel-red:  #FFE6E6;
+
+@yellow:            #FFAA00;
+@mustard:           #BF8F30;
+@brown:             #A66F00;
+@light-yellow:      #FFBF40;
+@very-light-yellow: #FFD073;
+@pastel-yellow:     #FFD580;
+@light-pastel-yellow:#FFF7E6;
+
+@blue:              #1240AB;
+@grey-blue:         #2A4480;
+@dark-blue:         #06266F;
+@light-blue:        #4671D5;
+@pastel-blue:       #6C8CD5;
+@light-pastel-blue: #80A6FF;
+@very-light-pastel-blue:#E6EDFF;
+@ultra-light-pastel-blue:#F5F8FF;
+@ultra-ultra-light-pastel-blue:#FAFBFF;
+
+@light-green:       #00CC00;
+@green:             #269926;
+@dark-green:        #008500;
+@very-light-green:  #39E639;
+@very-very-light-green:#67E667;
+@pastel-green:      #80FF80;
+@light-pastel-green:#E6FFE6;
+
+@white:             #FFFFFF;
+@light-grey:        #F8F8F8;
+
+/* Start of css */
+
+@font-face {
+    font-family: 'Museo700Regular';
+    src: url('fonts/Museo700-Regular-webfont.eot');
+    src: url('fonts/Museo700-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Museo700-Regular-webfont.woff') format('woff'),
+         url('fonts/Museo700-Regular-webfont.ttf') format('truetype'),
+         url('fonts/Museo700-Regular-webfont.svg#Museo700Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.app-title {
+    font-family: Museo700Regular;
+    font-size: 1.8em; 
+    color: @white;
+    font-weight: bold;
+}
+
+.app-title a:hover {
+    color: @red;
+}
+
+.header-link {
+    color: @white;
+}
+
+.dropdown a {
+    color: @white;
+}
+
+.dropdown a:hover {
+    color: @blue;
+}
+
+h3 {
+    //font-family: Museo700Regular;
+    border-bottom: none;
+}
+
+h6 {
+    font-family: Museo700Regular;    
+    //font-size: 0.8em; 
+    //padding-top: 0.4em;
+    //padding-bottom: 0.4em;    
+}
+
+.a-nostyle
+{
+    color: red;
+    text-decoration: none;   
+}
+
+img {
+    border: 0em;
+}
+
+#theme-wrapper {
+    box-shadow: none;
+}
+ 
+.frmSearch {
+    /*background-color: @white;*/
+    z-index: -1;
+    vertical-align: middle;
+    padding-top: 0.9em;
+}
+
+.updateStatus 
+{
+    background-color: @white;
+}
+
+.updateStatusOK
+{
+    background-color: @green;
+}
+
+.updateStatusError
+{
+    background-color: @red;
+}
+
+.spnError
+{
+    color: @red;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
+}
+
+.pnlError
+{
+    background-color: @very-light-pastel-blue;
+    color: @red;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
+}
+
+.flashData-advisory
+{
+    color: green;
+    padding-bottom: 1em;
+}
+
+.flashData-warning
+{
+    color: orange;
+    padding-bottom: 1em;    
+}
+
+.flashData-error
+{
+    color: red;
+    padding-bottom: 1em;    
+}
+
+.beta
+{
+    color: @red;
+}
+
+.indexPageHeader
+{
+    margin-top: 1em;
+    padding-top: 1em;
+    margin-bottom: 0.2em;
+    padding-bottom: 0.2em;
+    text-align: left;
+    display: inline;
+    padding-right: 1em;
+}
+
+.pageHelp
+{
+    font-size: small;
+    text-decoration: none;
+}
+
+.task-quick-edit {
+    display: none;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.dtable
+{
+    width: 100%;
+    text-align: left;
+}
+
+.dataTables_wrapper .dt-buttons {
+  float:right;
+  text-align:center;
+    padding-left: 3px;
+}
+
+.authlabel {
+    width: 50%;
+}
+
+.lnkPrint
+{
+    margin-top: 4em;
+    margin-bottom: 4em;
+    padding: 0.5em;
+    font-size: 1em;
+    background-color: @pastel-blue;
+    width: 4em;
+    height: 2em;
+}
+
+.lnkPrint a
+{
+    text-decoration: none;
+    color: white;
+}
+
+.searchtext {
+    background-color: @white;
+}
+
+.autocomplete_project_list
+{
+    //margin: 50px;
+    border: 1px solid #111;
+    background: transparent;
+    padding: 7px 35px 5px 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    height: 34px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: none;
+}
+
+.uploads
+{
+    border-color: @light-blue;
+    border-style: solid;
+    border-width: 0.1em;
+    background-color: @light-grey;
+    text-align: left;
+    padding: 0.3em;
+    margin: 0.3em;
+}
+
+.uploads h4
+{
+    padding-top: 0.1em;
+    margin-top: 0.1em;
+    color: #4671D5;    
+}
+
+.tab-font-awesome-icon
+{
+    max-width: 20px;
+}
+
+.tasklist
+{
+    text-align: left;
+    padding: 0.3em;
+    margin: 0.3em;    
+    border-color: @light-blue;
+    border-width: 0.1em;
+    border-style: solid;
+}
+
+.tasklist h4
+{
+    padding-top: 0.1em;
+    margin-top: 0.1em;    
+}
+
+.tasksmall
+{
+    border-color: black;
+    border-width: 0.1em;
+}
+
+.taskfull
+{
+    border-color: black;
+    border-width: 0.1em;
+}
+
+.ng-table-rowselected tr {
+    cursor: pointer;
+}
+
+.tasktable
+{
+    width: 100%;
+}
+
+#calendar {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    max-width: 3000px;
+    margin: 0 auto;
+    text-align: center;                  
+}
+
+.timegridselected {
+    min-width: 60%;
+}
+
+.printTable td th
+{
+    padding: 0.5em;
+}
+
+.yellow {
+    color:@yellow;
+}
+
+.red {
+    color:#FF4040;
+}
+
+.scarlet {
+    color:#FF7373;
+}
+
+.green {
+    color: #269926;
+}
+
+.brown {
+    color: #A66F00;
+}
+
+.purple {
+    color: #2A4489;
+}
+
+/* d3 object css */
+.arc path 
+{
+  stroke: #fff;
+}
+
+.card-body {
+    text-align: left;
+}
+
+.filter-datatable {
+    margin-bottom: 5px;
+}
+
+.sidebar h4
+{
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    margin-top: 0.1em;
+    color: @dark-green;
+}
+
+.sidebar h5
+{
+    padding-top: 0.1em;
+    margin-top: 0.1em;
+    color: @dark-green;
+}
+
+.narrow
+{
+    margin-bottom: 0.1em;
+    margin-top: 0.1em;
+}
+
+footer {
+    text-align: center;
+    vertical-align: middle;
+    padding: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.2em;
+    background-color: @light-grey;
+}
+
+/* Vue JS */
+[v-cloak] { display:none; }

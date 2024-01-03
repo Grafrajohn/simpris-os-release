@@ -1,0 +1,29 @@
+Summary
+-------
+Convert time handling to Django
+
+DJANGO
+------
+models.py
+app\time\*.py
+templates\simpris\time\*.html
+plain.html
+
+
+Files
+-----
+xxxxxxxx
+
+dB
+--
+v_time_detail   add id
+v_time_type     add id
+v_my_timesheet add id
+v_my_org_tasks add id
+
+Notes
+-----
+xxxxxx
+
+PHP
+---

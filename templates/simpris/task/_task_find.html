@@ -1,0 +1,14 @@
+        <div class="panel">
+            <form id="frmTaskFind" class="form-horizontal">
+                {% csrf_token %}
+                <div>
+                    <h4>Find a task:</h4>
+                    <input class="form-control" name="txtTask" id="txtTask" type="text" maxlength="50" size="40" placeholder="Type in a task" onkeyup="simpris.project.task_search(simpris.project.task_find)" list="task_list"/>
+                    <button id="btn_project" class="btn btn-primary" style="display: none;">Add</button>
+                    <br />
+                    <select class="autocomplete_task_list" name="task_list" id="task_list" style="display: none;">
+                    </select>
+                    <input id="hidTaskID" name="hidTaskID" type="hidden" value="" />
+                </div>
+            </form>
+        </div>

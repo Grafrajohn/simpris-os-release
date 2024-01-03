@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content' %}
+	{% load static %}
+    <div class="col-md-12">
+        <ul class="nav nav-tabs mb-3" role="tablist">
+          <li class="nav-item active"><a class="nav-link" href="#">Programme Overview</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/programme/edit/{{ id }}">Edit Programme</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/programme/history/{{ id }}">Programme History</a></li>
+        </ul>
+        {% include "simpris/common/_opstatus.html" %}
+        <div>
+        {% for programme in programmes %}
+            <h4><u>Programme</u> : {{ programme.programmename }}</h4>
+            <div class="bs-callout"><p>Description : {{ programme.programmedescription }}</p></div>
+        {% empty %}
+             <p>Programme not found</p>
+        {% endfor %}
+        </div>
+        <div>
+            <form id="frmProgrammeProject" class="form-horizontal">
+                {% csrf_token %}
+                <div>
+                    <h3>Add a project to this programme:</h3>
+                    <input name="txtProject" id="txtProject" type="text" size="50" placeholder="Type in a project" onkeyup="simpris.project.project_search()" list="project_list"/>
+                    <button id="btn_project" class="btn btn-primary">Add</button>
+                    <br />
+                    <select class="autocomplete_project_list" name="project_list" id="project_list" >
+                    </select>
+                    <input id="hidProjectID" name="hidProjectID" type="hidden" value="" />
+                    <input id="hidProgrammeID" name="hidProgrammeID" type="hidden" value="{{ id }}" />
+                </div>
+            </form>
+        </div>
+        {% include "simpris/programme/_programmeprojects.html" %}
+    </div>
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+    {% load static %}
+	<script src="{% static "js/jquery/jquery-1.12.0.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery-ui.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/bootstrap/bootstrap.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/jquery-components/jquery.nanoscroller.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery.ui.touch-punch.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/common/common.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+
+	<!-- theme scripts -->
+	<script src="{% static "js/jquery-components/scripts.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/pace.min.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific inline scripts -->
+
+<script>
+
+"use strict";
+
+  $(function () {
+
+      $("select#project_list").change(function () {
+          simpris.project.project_search_change();
+      });
+
+      $("#btn_project").click(function () {
+          simpris.project.project_programme_add();
+          return false;
+      });
+
+      simpris.project.project_search = function () {
+          var search_term = $('#txtProject').val();
+          if (search_term.length < 3) {
+              return;
+          }
+          $('#project_list').show();
+          $('#project_list').empty();
+          var data = {
+              term: search_term
+          };
+          $('#project_list').empty();
+          $.ajax({
+              url: '/api/project/searchj/',
+              data: data
+          })
+          .error(function (r) {
+              $('#spnError').text("There has been an error: " + r.statusText);
+              $('#div-notification').addClass("alert-danger");
+              $("#div-notification").css('display','block');
+          })
+          .success(function (r) {
+              $('#project_list').append('<option value="0">Select a project from list</option>');
+              for (var i = 0; i < r.length; i++) {
+                  $('#project_list').append('<option value="' + r[i].projectid + '">' + r[i].projectname + '</option>');
+                  $("#project_list").css("display", "block");
+                  $('#project_list').attr('size',r.length);
+              }
+              $('#project_list').trigger('mousedown')
+          });
+      }
+
+      simpris.project.project_search_change = function () {
+          var selected_proj = $("#project_list").find(":selected").text();
+          var selected_proj_id = $("#project_list").find(":selected").val();
+          //$("#selected_project").text(selected_proj);
+          $("#txtProject").val(selected_proj);
+          $("#hidProjectID").val(selected_proj_id);
+          $("#project_list").hide();
+      }
+
+      simpris.project.project_programme_add = function () {
+
+          if ($("#hidProjectID") == "") {
+                $('#spnError').text("Please select a project");
+                $('#div-notification').addClass("alert-danger");
+                $("#div-notification").css('display','block');
+                return false;
+          }
+
+          $.ajax({
+              url: '/api/project/programme/',
+    	    data: $("#frmProgrammeProject").serialize(),
+    	    type: 'POST'
+          })
+          .error(function (r) {
+              $('#spnError').text("There has been an error: " + r.statusText);
+              $('#div-notification').addClass("alert-danger");
+              $("#div-notification").css('display','block');
+          })
+          .success(function (r) {
+              window.location.reload(true);
+          });
+      }
+
+      simpris.project.programme_project_delete = function (projectID, programmeID) {
+          var confirm_delete = confirm("Are you sure you want to remove the project from the programme?");
+          if (confirm_delete == false) {
+              return;
+          }
+          var csrfmiddlewaretoken = '{{ csrf_token }}';
+          var data = {
+              programme_id: programmeID,
+              project_id: projectID,
+              csrfmiddlewaretoken: simpris.csrf_token
+            };
+          $.ajax({
+              url: '/api/project/programme_project_delete/',
+              data: data,
+              type: 'POST'
+          }).error(function(r){
+              $('#spnError').text("There has been an error: " + r.statusText);
+              $('#div-notification').addClass("alert-danger");
+              $("#div-notification").css('display','block');
+          })
+          .success(function(r){
+              $('#div-notification').text("Project removed from programme");
+              window.location.replace("/programme/detail/" + programmeID);
+          });
+      };
+  })
+</script>
+{% endblock %}

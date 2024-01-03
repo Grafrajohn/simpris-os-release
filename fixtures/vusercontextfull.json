@@ -1,0 +1,1 @@
+[{"model": "simpris.vusercontextfull", "pk": 4, "fields": {"id": 4, "clientid": 3, "username": "user-name", "first_name": "Graham", "last_name": "Johnson", "organisationid": 3, "organisationname": "GoodlyCode Ltd", "issuperuser": 1, "isstaff": 1}}]

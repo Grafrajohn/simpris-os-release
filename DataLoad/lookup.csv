@@ -1,0 +1,122 @@
+"id";"clientID";"lookupTypeID";"lookupSubTypeID";"lookupOrder";"lookupValueNum";"lookupValueChar";"lookupDescription";"disabled";"createdDate";"createdBy";"updatedDate";"updatedBy";"deletedDate";"deletedBy"
+1;0;1;1;0;1;"Lookup Type";"LookupType";"";"2012-09-22 23:20:25";1;"";0;"";0
+2;0;2;1;0;1;"Lookup SubType";"Lookup SubType";"";"2012-09-22 23:20:25";1;"";0;"";0
+3;0;3;1;0;1;"Excellent";"Status - Excellent";"";"2012-09-22 23:20:25";1;"";0;"";0
+4;0;3;2;0;2;"Status - Good";"Good";"";"2012-09-22 23:20:25";1;"";0;"";0
+5;0;3;3;0;3;"Acceptable";"Status - Acceptable";"";"2012-09-22 23:20:25";1;"";0;"";0
+6;0;3;4;0;4;"Poor";"Status - Poor";"";"2012-09-22 23:20:25";1;"";0;"";0
+7;0;3;5;0;5;"Crisis";"Status - Crisis";"";"2012-09-22 23:20:25";1;"";0;"";0
+8;0;4;1;0;1;"Critical";"Priority - Critical";"";"2012-09-22 23:20:25";1;"";0;"";0
+9;0;4;2;0;2;"High";"Priority - High";"";"2012-09-22 23:20:25";1;"";0;"";0
+10;0;4;3;0;3;"Medium";"Priority - Medium";"";"2012-09-22 23:20:25";1;"";0;"";0
+11;0;4;4;0;4;"Low";"Priority - Low";"";"2012-09-22 23:20:25";1;"";0;"";0
+12;0;5;1;0;1;"Research & Investigate";"Task Type - Research & Investigate";"";"2012-09-22 23:20:25";1;"";0;"";0
+13;0;5;2;0;2;"Planning";"Task Type - Planning";"";"2012-09-22 23:20:25";1;"";0;"";0
+14;0;5;3;0;3;"Execution";"Task Type - Execution";"";"2012-09-22 23:20:25";1;"";0;"";0
+15;0;5;4;0;4;"Testing";"Task Type - Testing";"";"2012-09-22 23:20:25";1;"";0;"";0
+16;0;5;5;0;5;"Final Implementation";"Task Type - Final Implementation";"";"2012-09-22 23:20:25";1;"";0;"";0
+17;0;5;6;0;6;"Post Implementation";"Task Type - Post Implementation";"";"2012-09-22 23:20:25";1;"";0;"";0
+18;0;6;1;0;1;"Worry";"Comment type - worry";"";"2012-09-22 23:20:25";1;"";0;"";0
+19;0;6;2;0;2;"Happy";"Comment type - happy";"";"2012-09-22 23:20:25";1;"";0;"";0
+20;0;6;3;0;3;"Comment";"Comment type - comment";"";"2012-09-22 23:20:25";1;"";0;"";0
+21;0;7;1;0;1;"View index page";"Activity - View index page";"";"2012-09-22 23:20:25";1;"";0;"";0
+22;0;7;2;0;2;"View detail page";"Activity - View detail page";"";"2012-09-22 23:20:25";1;"";0;"";0
+23;0;7;3;0;3;"Create record";"Activity - Create record";"";"2012-09-22 23:20:25";1;"";0;"";0
+24;0;7;4;0;4;"Insert record";"Activity - Insert record";"";"2012-09-22 23:20:25";1;"";0;"";0
+25;0;7;5;0;5;"Delete record";"Activity - Delete record";"";"2012-09-22 23:20:25";1;"";0;"";0
+26;0;7;6;0;6;"Edit record";"Activity - Edit record";"";"2012-09-22 23:20:26";1;"";0;"";0
+27;0;7;7;0;7;"Update record";"Activity - Update record";"";"2012-09-22 23:20:26";1;"";0;"";0
+28;0;7;8;0;8;"Confirm subscription post";"Activity - Confirm Subscription Post";"";"2012-09-22 23:20:26";1;"";0;"";0
+29;0;7;9;0;9;"Confirm subscription";"Activity - Confirm Subscription";"";"2012-09-22 23:20:26";1;"";0;"";0
+30;0;8;1;5;1;"Human Resources";"Problem - Human Resources";"";"2012-09-22 23:20:26";1;"";0;"";0
+31;0;8;2;7;2;"Purchasing";"Problem - Purchasing";"";"2012-09-22 23:20:26";1;"";0;"";0
+32;0;8;3;150;3;"Sales";"Problem - Sales";"";"2012-09-22 23:20:26";1;"";0;"";0
+33;0;8;4;0;4;"Marketing";"Problem - Marketing";"";"2012-09-22 23:20:26";1;"";0;"";0
+34;0;8;5;5;5;"Public Relations";"Problem Type - PR";"";"2012-09-22 23:20:25";0;"";0;"";0
+35;0;8;6;6;6;"Property";"Problem Type - Property";"";"2012-09-22 23:20:26";0;"";0;"";0
+36;0;8;7;7;7;"Legal";"Problem Type - Legal";"";"2012-09-22 23:20:26";0;"";0;"";0
+37;0;8;8;8;8;"Logistics";"Problem Type - Logistics";"";"2012-09-22 23:20:26";0;"";0;"";0
+38;0;8;9;9;9;"Production";"Problem Type - Production";"";"2012-09-22 23:20:26";0;"";0;"";0
+39;0;8;10;10;10;"Quality Assurance";"Problem Type - QA";"";"2012-09-22 23:20:26";0;"";0;"";0
+40;0;8;11;11;11;"Transport";"Problem Type - Transport";"";"2012-09-22 23:20:26";0;"";0;"";0
+41;0;8;12;12;12;"Finance";"Problem Type - Finance";"";"2012-09-22 23:20:26";0;"";0;"";0
+42;0;8;13;13;13;"Retail";"Problem Type - Retail";"";"2012-09-22 23:20:26";0;"";0;"";0
+43;0;8;14;14;14;"Distribution";"Problem Type - Distribution";"";"2012-09-22 23:20:26";0;"";0;"";0
+44;0;8;15;3;15;"Design";"Problem Type - Design";"";"2012-09-22 23:20:26";0;"";0;"";0
+45;0;8;16;4;16;"Event";"Problem Type - Event";"";"2012-09-22 23:20:26";0;"";0;"";0
+46;0;8;17;17;17;"Premises";"Problem Type - Premises ";"";"2012-09-22 23:20:26";0;"";0;"";0
+47;0;8;18;18;18;"Point of Sale";"Problem Type - Point of Sale";"";"2012-09-22 23:20:26";0;"";0;"";0
+48;0;8;19;1;19;"Client";"Problem Type - Client";"";"2012-09-22 23:20:26";0;"";0;"";0
+49;0;8;20;0;20;"Capital Assets";"Problem Type - Cap Assets";"";"2012-09-22 23:20:26";0;"";0;"";0
+50;0;8;21;21;21;"Research & Development";"Problem Type - R & D";"";"2012-09-22 23:20:26";0;"";0;"";0
+51;0;8;22;22;22;"IT & Computers";"Problem Type - IT & Computers";"";"2012-09-22 23:20:26";0;"";0;"";0
+52;0;8;23;11;23;"Security";"problem Type - security failure";"";"2016-04-19 21:55:00";0;"";0;"";0
+53;0;9;1;10;1;"Equipment Failure";"Problem subtype - Equipment Failure";"";"2012-09-22 23:20:26";1;"";0;"";0
+54;0;9;2;65;2;"Organisational Failure";"Problem subtype - Organisational Failure";"";"2012-09-22 23:20:26";0;"";0;"";0
+55;0;9;4;5;4;"Communications Failure";"Problem subtype - Communications Failure";"";"2013-10-15 19:49:38";1;"";0;"";0
+56;0;9;5;50;5;"Logistics Failure";"Problem subtype - Logistics Failure";"";"2013-10-15 19:56:13";1;"";0;"";0
+57;0;9;6;30;6;"Infrastructure Failure";"Problem subtype - Infrastructure Failure";"";"2013-10-15 19:59:19";1;"";0;"";0
+58;0;9;7;120;7;"Staffing Failure";"Problem subtype - Staffing Failure";"";"2013-10-15 20:03:31";1;"";0;"";0
+59;0;9;9;130;9;"Supply Failure";"Problem subtype - Supply Failure";"";"2013-10-15 20:07:40";1;"";0;"";0
+60;0;9;10;90;10;"Power Failure";"Problem subtype - Power Failure";"";"2013-10-15 20:08:30";1;"";0;"";0
+61;0;9;11;100;11;"Quality Failure";"Problem subtype - Quality Failure";"";"2013-10-15 20:08:55";1;"";0;"";0
+62;0;9;12;70;12;"Planning Failure";"Problem subtype - Planning Failure";"";"2013-10-15 20:09:22";1;"";0;"";0
+63;0;9;13;40;13;"Legal Failure";"Problem subtype - Legal Failure";"";"2013-10-15 20:09:47";1;"";0;"";0
+64;0;9;14;140;14;"Transport Failure";"Problem subtype - Transport Failure";"";"2013-10-15 20:10:33";1;"";0;"";0
+65;0;9;15;80;15;"Public Relations Failure";"Problem subtype - Public Relations Failure";"";"2013-10-15 20:12:36";1;"";0;"";0
+66;0;9;16;110;16;"Research Failure";"Problem subtype - Research Failure";"";"2013-10-15 20:13:28";1;"";0;"";0
+67;0;9;17;60;17;"Material Failure";"Problem subtype - Matrial Failure";"";"2013-10-15 20:13:52";1;"";0;"";0
+68;0;9;18;20;18;"Human Resources Failure";"Problem subtype - Human Resources Failure";"";"2012-09-22 23:20:26";1;"";0;"";0
+69;0;10;1;1;1;"Network";"Problem scope - Network";"";"2012-09-22 23:20:25";1;"";0;"";0
+70;0;10;2;0;2;"Global";"Problem scope - Global";"";"2012-09-22 23:20:26";1;"";0;"";0
+71;0;10;3;0;3;"One site";"Problem scope - One site";"";"2012-09-22 23:20:26";1;"";0;"";0
+72;0;10;4;0;4;"One product or service";"Problem scope - One product or service";"";"2012-09-22 23:20:26";1;"";0;"";0
+73;0;10;5;0;5;"No-one affected";"Problem scope - No-one affected";"";"2012-09-22 23:20:26";1;"";0;"";0
+74;0;11;1;0;1;"New";"Problem status - New";"";"2012-09-22 23:20:26";1;"";0;"";0
+75;0;11;2;0;2;"Under investigation";"Problem ststus - Under investigation";"";"2012-09-22 23:20:26";1;"";0;"";0
+76;0;11;3;0;3;"Resolution in progress";"Problem status - Resolution in progress";"";"2012-09-22 23:20:26";1;"";0;"";0
+77;0;11;4;0;4;"Resolved";"Problem status - Resolved";"";"2012-09-22 23:20:26";1;"";0;"";0
+78;0;12;1;0;1;"Critical";"Problem priority - Critical";"";"2012-09-22 23:20:26";1;"";0;"";0
+79;0;12;2;0;2;"Major";"Problem priority - Major";"";"2012-09-22 23:20:26";1;"";0;"";0
+80;0;12;3;0;3;"Medium";"Problem priority - Medium";"";"2012-09-22 23:20:26";1;"";0;"";0
+81;0;12;4;0;4;"Minor";"Problem priority - Minor";"";"2012-09-22 23:20:26";1;"";0;"";0
+82;0;13;1;0;1;"Agree scope";"Time type - agree scope";"";"2012-09-22 23:20:26";1;"";0;"";0
+83;0;13;2;0;2;"Investigate";"Time type - investigate";"";"2012-09-22 23:20:26";1;"";0;"";0
+84;0;13;3;0;3;"Working on it";"Time type - working on it";"";"2012-09-22 23:20:26";1;"";0;"";0
+85;0;13;4;0;4;"Testing";"Time type - testing";"";"2012-09-22 23:20:26";1;"";0;"";0
+86;0;13;5;0;5;"Testing";"Time type - testing";"";"2012-09-22 23:20:26";1;"";0;"";0
+87;0;13;6;0;6;"Going through with customer";"Time type - with customer";"";"2012-09-22 23:20:26";1;"";0;"";0
+88;0;13;7;0;7;"Finalizing";"Time type - finalizing";"";"2012-09-22 23:20:26";1;"";0;"";0
+89;0;13;8;0;8;"Other";"Time type - other";"";"2012-09-22 23:20:26";1;"";0;"";0
+90;0;13;9;0;9;"Negotiating";"Time type - negotiating";"";"2012-09-22 23:20:26";1;"";0;"";0
+91;0;13;10;0;10;"Drafting contract";"Time type - drafting contract";"";"2012-09-22 23:20:26";1;"";0;"";0
+92;0;13;11;0;11;"Conflict resolution";"Time type - conflict resolution";"";"2012-09-22 23:20:26";1;"";0;"";0
+93;0;14;0;0;1;"Time";"Reports - Time";"";"2012-09-22 23:20:26";1;"";0;"";0
+94;0;15;1;0;1;"Time";"Reports - Time";"";"2012-09-22 23:20:26";1;"";0;"";0
+95;0;15;2;0;2;"Projects";"Reports - Projects";"";"2012-09-22 23:20:26";1;"";0;"";0
+96;0;15;3;0;3;"Problems";"Reports - Problems";"";"2012-09-22 23:20:26";1;"";0;"";0
+97;0;15;4;0;4;"Activity";"Reports - Activity";"";"2012-09-22 23:20:26";1;"";0;"";0
+98;0;18;1;0;5;"New";"New Invoice";"";"2012-09-22 23:20:26";1;"";0;"";0
+99;0;18;2;0;5;"Refused";"Invoice Refused";"";"2012-09-22 23:20:26";1;"";0;"";0
+100;0;18;5;0;5;"Paid";"Invoice Paid";"";"2012-09-22 23:20:26";1;"";0;"";0
+101;0;19;1;0;1;"Extreme";"Importance - Extreme";"";"2012-09-22 23:20:26";0;"";0;"";0
+102;0;19;2;0;2;"Very";"Importance - Very";"";"2012-09-22 23:20:26";0;"";0;"";0
+103;0;19;3;0;3;"Medium";"Importance - Medium";"";"2012-09-22 23:20:26";0;"";0;"";0
+104;0;19;4;0;4;"Minor";"Importance - Minor";"";"2012-09-22 23:20:26";0;"";0;"";0
+105;0;19;5;0;5;"Insignificant";"Importance - Insignificant";"";"2012-09-22 23:20:26";0;"";0;"";0
+106;0;20;1;1;1;"Very happy";"Opinion - Very happy";"";"2012-09-22 23:20:26";0;"";0;"";0
+107;0;20;2;2;2;"Happy";"Opinion - Happy";"";"2012-09-22 23:20:26";0;"";0;"";0
+108;0;20;3;3;3;"Satisfied";"Opinion - Satisfied";"";"2012-09-22 23:20:26";0;"";0;"";0
+109;0;20;4;4;4;"Worried";"Opinion - Worried";"";"2012-09-22 23:20:26";0;"";0;"";0
+110;0;20;5;5;5;"Very worried";"Opinion - Very worried";"";"2012-09-22 23:20:26";0;"";0;"";0
+111;0;21;1;1;1;"New";"Task - New";"";"2012-09-22 23:20:26";0;"";0;"";0
+112;0;21;2;2;2;" Excellent progress";"Task - Excellent progress";"";"2012-09-22 23:20:26";0;"";0;"";0
+113;0;21;3;4;3;"Acceptable progress";"Task - Acceptable progress";"";"2012-09-22 23:20:26";0;"";0;"";0
+114;0;21;4;5;4;"Poor progress";"Task - Poor progress";"";"2012-09-22 23:20:26";0;"";0;"";0
+115;0;21;5;6;5;"Very Poor progress";"Task - Very poor progress";"";"2012-09-22 23:20:26";0;"";0;"";0
+116;0;21;6;3;6;"Good progress";"Task - Good progress";"";"2012-09-22 23:20:26";0;"";0;"";0
+117;0;21;7;7;7;"Complete";"Task - Complete";"";"2012-09-22 23:20:26";0;"";0;"";0
+118;0;21;8;8;8;"Cancelled";"Task - Cancelled";"";"2012-09-22 23:20:26";0;"";0;"";0
+119;0;21;9;9;9;"Abandoned";"Task - Abandoned";"";"2012-09-22 23:20:26";0;"";0;"";0
+120;0;21;10;10;19;"On Hold";"Task - On Hold";"";"2012-09-22 23:20:26";0;"";0;"";0
+121;0;22;1;1;1;"Inbound phone call";"Interaction inbound telephone call";"";"2017-08-10 22:00:00";0;"";0;"";0

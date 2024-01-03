@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+	<link rel="stylesheet" href="/static/css/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="/static/css/datatables/dataTables.tableTools.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content' %}
+    <div class="col-md-12">
+        <ul class="nav nav-tabs mb-3" role="tablist">
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/time/detail/{{ id }}">Time Detail</a></li>
+          <li class="nav-itemactive"><a class="nav-link" href="#">Edit Time</a></li>
+        </ul>
+        <span id="spnError" class="spnError"></span>
+        <form id="frmTimeEdit" name="frmTimeEdit" class="form-horizontal">
+        {% csrf_token %}
+            {% for time in times %}
+            <div class="form-group row mb-3">
+                <label for="frmTimeID" class="form-label col-sm-2">Time ID</label>
+                <div class="col-sm-10">{{ id }}</div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmTaskDescription" class="form-label col-sm-2">Task Description</label>
+                <div class="col-sm-10">{{ time.taskname }}</div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmTimeDay" class="form-label col-sm-2">Time of day</label>
+                <div class="col-sm-10">{{ time.timeday }}</div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmHours" class="form-label col-sm-2">Hours</label>
+                <div class="col-sm-10"><input id="frmHours" name="frmHours" size="10" type="text" value="{{ time.hours }}" readonly ></div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmUser" class="form-label col-sm-2">User</label>
+                <div class="col-sm-10">{{ time.first_name }} {{ time.last_name }}</div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmTimeType" class="form-label col-sm-2">Time Type</label>
+                <div class="col-sm-10">
+                    <select name="frmTimeType" id="frmTimeType">
+                        <option selected value="">Please select</option>
+                        {% for type in time_types %}
+                            <option value="{{ type.lookupvaluenum }}" {% if time.timetypeid == type.lookupvaluenum %} selected {% endif %} >{{ type.lookupvaluechar }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmComment" class="form-label col-sm-2">Comment</label>
+                <div class="col-sm-10"><textarea rows="1" cols="50" maxlength="50" id="frmComment" name="frmComment">{{ time.comments }}</textarea></div>
+            </div>
+            <input id="btn-time-edit" type="submit" value="Update time" class="btn btn-sm btn-primary"/>
+            <input type="hidden" name="hidTimeID" value="{{ time.timeid }}"/>
+            <input type="hidden" name="hidTaskID" value="{{ time.taskid }}"/>
+            <input type="hidden" name="hidUserID" value="{{ time.userid }}"/>
+            {% empty %}
+                <p>Time not found</p>
+            {% endfor %}
+        </form>
+    </div>
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+    {% load static %}
+	<script src="{% static "js/jquery/jquery-1.12.0.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery-ui.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/bootstrap/bootstrap.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/jquery-components/jquery.nanoscroller.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery.ui.touch-punch.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/common/common.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+
+	<!-- theme scripts -->
+	<script src="{% static "js/jquery-components/scripts.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/pace.min.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific inline scripts -->
+
+    <script type="text/javascript" src="/static/js/simpris/time/time.js"></script>
+{% endblock %}

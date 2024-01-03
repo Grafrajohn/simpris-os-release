@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+    <link href="/static/css/calendar/fullcalendar.css" rel="stylesheet" />
+    <link href="/static/css/calendar/fullcalendar.print.css" rel="stylesheet" media="print" />
+{% endblock %}
+{% block 'head-js' %}              
+{% endblock %}
+{% block 'framework' %}ng-app="simpris"{% endblock %}
+{% block 'content' %}
+    <div id="calTimeEdit"></div>
+    <div id="calendar"></div>
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+    {% load static %}
+	<script src="{% static "js/jquery/jquery-1.12.0.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery-ui.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/bootstrap/bootstrap.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/jquery-components/jquery.nanoscroller.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery.ui.touch-punch.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/common/common.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+
+	<!-- theme scripts -->
+	<script src="{% static "js/jquery-components/scripts.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/pace.min.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific inline scripts -->
+
+    <script src="/static/js/jquery-components/fullcalendar.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+            $('#calendar').fullCalendar({
+                editable: false,
+                events: '/api/time/calendar'
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,159 @@
+Summary
+-------
+Sort out comments, document uploads and datatable buttons
+
+DJANGO
+------
+apps\task\views.py
+apps\project\views.py
+templates\document\_list.html
+templates\document\_upload.html
+apps\document\*.*
+apps\comment\*.*
+apps\uploads\*.*
+templates\task\*.*
+templates\comment\*.*
+templates\project\home.html
+models\models.py
+
+Files
+-----
+xxxxxxxx
+
+dB
+--
+v_project_documents
+>>
+    SELECT
+        `document`.`documentID` AS `documentID`,
+        `document`.`documentTypeID` AS `documentTypeID`,
+        `document`.`documentParentID` AS `documentParentID`,
+        `document`.`documentName` AS `documentName`,
+        `document`.`documentFileName` AS `documentFileName`,
+        `document`.`documentTitle` AS `documentTitle`,
+        `document`.`createdDate` AS `createdDate`,
+        `document`.`createdBy` AS `createdBy`,
+        `document`.`deletedDate` AS `deletedDate`,
+        `document`.`deletedBy` AS `deletedBy`,
+        `document`.`documentID` AS `id`
+    FROM
+        `document`
+    WHERE
+        ((`document`.`documentTypeID` = 1)
+            AND ISNULL(`document`.`deletedDate`))
+<<
+v_comments_parent
+>>
+    SELECT
+        `usr`.`first_name` AS `first_name`,
+        `usr`.`last_name` AS `last_name`,
+        `com`.`commentID` AS `commentID`,
+        `com`.`parentID` AS `parentID`,
+        `com`.`parentTypeID` AS `parentTypeID`,
+        `com`.`commentTypeID` AS `commentTypeID`,
+        `com`.`commentText` AS `commentText`,
+        DATE_FORMAT(`com`.`createdDate`,
+                '%a %D %M %Y %l:%i %p') AS `createdDate`,
+        `com`.`createdBy` AS `createdBy`,
+        `lk`.`lookupValueChar` AS `lookupValueChar`,
+        `doc`.`documentFileName` AS `documentFileName`,
+        `doc`.`documentName` AS `documentName`,
+        `doc`.`documentTitle` AS `documenttitle`,
+        `com`.`commentID` AS `id`
+    FROM
+        (((`comment` `com`
+        JOIN `lookup` `lk` ON ((`lk`.`lookupValueNum` = `com`.`commentTypeID`)))
+        JOIN `users` `usr` ON ((`com`.`createdBy` = `usr`.`id`)))
+        LEFT JOIN `document` `doc` ON (((`doc`.`documentParentID` = `com`.`commentID`)
+            AND (`doc`.`documentTypeID` = 2))))
+    WHERE
+        (`lk`.`lookupTypeID` = 6)
+<<
+>>
+v_project_documents
+    SELECT
+        `document`.`documentID` AS `documentID`,
+        `document`.`documentTypeID` AS `documentTypeID`,
+        `document`.`documentParentID` AS `documentParentID`,
+        `document`.`documentName` AS `documentName`,
+        `document`.`documentFileName` AS `documentFileName`,
+        `document`.`documentTitle` AS `documentTitle`,
+        `document`.`createdDate` AS `createdDate`,
+        `document`.`createdBy` AS `createdBy`,
+        `document`.`deletedDate` AS `deletedDate`,
+        `document`.`deletedBy` AS `deletedBy`,
+        `document`.`documentID` AS `id`
+    FROM
+        `document`
+    WHERE
+        ((`document`.`documentTypeID` = 1)
+            AND ISNULL(`document`.`deletedDate`))
+<<
+>>
+Add row to lookup for Task status - In QA
+<<
+>>
+v_board
+    SELECT
+        `brd`.`id` AS `id`,
+        `brd`.`userID` AS `userID`,
+        `brd`.`itemID` AS `itemID`,
+        `brd`.`itemType` AS `itemType`,
+        `brd`.`columnNo` AS `columnNo`,
+        `brd`.`itemOrder` AS `itemOrder`,
+        `tsk`.`taskDescription` AS `description`
+    FROM
+        (`board` `brd`
+        LEFT JOIN `task` `tsk` ON ((`brd`.`itemID` = `tsk`.`taskID`)))
+<<
+>>
+VIEW `v_board_queue` AS
+    SELECT
+        `tsk`.`taskID` AS `id`,
+        `tsk`.`taskDescription` AS `description`,
+        `tsk`.`assignedTo` AS `assignedTo`,
+        1 AS `type`
+    FROM
+        ((`project` `prj`
+        JOIN `tasklist` `tkl` ON ((`prj`.`projectID` = `tkl`.`taskListID`)))
+        JOIN `task` `tsk` ON ((`tkl`.`taskListID` = `tsk`.`taskListID`)))
+    WHERE
+        (NOT (`tsk`.`taskID` IN (SELECT
+                `board`.`itemID`
+            FROM
+                `board`
+            WHERE
+                (`board`.`itemType` = 1))))
+    UNION SELECT
+        `prb`.`problemID` AS `id`,
+        `prb`.`problemHeader` AS `description`,
+        `prb`.`assignedTo` AS `assignedTo`,
+        2 AS `type`
+    FROM
+        `problem` `prb`
+    WHERE
+        (NOT (`prb`.`problemID` IN (SELECT
+                `board`.`itemID`
+            FROM
+                `board`
+            WHERE
+                (`board`.`itemType` = 2))))
+<<
+>>
+board table
+CREATE TABLE `board` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userID` int(11) NOT NULL,
+  `itemID` int(11) NOT NULL,
+  `itemType` int(11) NOT NULL,
+  `columnNo` int(11) NOT NULL,
+  `itemOrder` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='Kanban board table';
+<<
+Notes
+-----
+xxxxxx
+
+PHP
+---

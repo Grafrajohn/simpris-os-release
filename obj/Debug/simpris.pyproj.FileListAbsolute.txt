@@ -1,0 +1,13 @@
+C:\source\simpris\bin\Microsoft.PythonTools.WebRole.dll
+C:\source\simpris\obj\Debug\attach_server.py
+C:\source\simpris\obj\Debug\visualstudio_py_debugger.py
+C:\source\simpris\obj\Debug\visualstudio_py_repl.py
+C:\source\simpris\obj\Debug\visualstudio_py_util.py
+C:\source\simpris\obj\Debug\__init__.py
+C:\source\simpris\obj\Debug\__main__.py
+C:\source\simpris\bin\AzureSetup.cfg
+C:\source\simpris\bin\Microsoft.PythonTools.AzureSetup.exe
+C:\source\simpris\bin\Microsoft.PythonTools.AzureSetup.exe.config
+C:\source\simpris\bin\wfastcgi.py
+C:\source\simpris\obj\Debug\web.config
+C:\source\simpris\obj\Debug\web.debug.config

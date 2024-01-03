@@ -1,0 +1,147 @@
+Summary
+-------
+Ckeditor for tasks
+
+==============================================================================================
+Functionality to test
+---------------------
+Task editing, listing, detail
+
+==============================================================================================
+>>DJANGO<<
+----------
+
+Files
+
+api\task\views.py
+api\task\serializers.py
+app\task\views.py
+models.py
+templates\task\*.*
+templates\project\detail.html
+templates\schedule\*.*
+templates\task\*.*
+
+
+=============================================================================================
+>>MYSQL<<
+---------
+
+change task.name field to task.taskName
+ditto for task_archive
+
+VIEW `v_task_detail` AS
+    SELECT
+        `tsk`.`taskID` AS `taskID`,
+        `tsk`.`taskName` AS `taskName`,
+        `tsk`.`taskDescription` AS `taskDescription`,
+        `tsk`.`taskTypeID` AS `taskTypeID`,
+        `lkpr`.`lookupValueChar` AS `taskPriority`,
+        `lkst`.`lookupValueChar` AS `taskStatus`,
+        `lkpr`.`lookupValueNum` AS `taskPriorityID`,
+        `lkst`.`lookupValueNum` AS `taskStatusID`,
+        `tsk`.`assignedTo` AS `assignedTo`,
+        CONCAT(`usr`.`first_name`,
+                ' ',
+                `usr`.`last_name`) AS `assignedToName`,
+        DATE_FORMAT(`tsk`.`taskStartDate`, '%Y/%m/%d') AS `taskStartDate`,
+        `tsk`.`taskTimeEstimate` AS `taskTimeEstimate`,
+        `tsk`.`taskPercentComplete` AS `taskPercentComplete`,
+        `tsk`.`taskLinkID` AS `taskLinkID`,
+        `tsk2`.`taskID` AS `linkedTaskID`,
+        `tsk2`.`taskDescription` AS `linkedTaskDescription`,
+        `upr`.`userID` AS `userID`,
+        `prj`.`projectName` AS `projectName`,
+        `tkl`.`taskListName` AS `tasklistName`,
+        `tkl`.`taskListID` AS `taskListID`,
+        DATE_FORMAT(`tsk`.`completionDate`, '%Y/%m/%d') AS `completionDate`,
+        `tsk`.`phaseID` AS `phaseID`,
+        `phs`.`phaseName` AS `phaseName`,
+        `tsk`.`taskID` AS `id`,
+        `tsk`.`clientID` AS `clientID`
+    FROM
+        ((((((((`task` `tsk`
+        JOIN `tasklist` `tkl` ON ((`tkl`.`taskListID` = `tsk`.`taskListID`)))
+        JOIN `project` `prj` ON ((`prj`.`projectID` = `tkl`.`projectID`)))
+        JOIN `userproject` `upr` ON ((`upr`.`projectID` = `prj`.`projectID`)))
+        LEFT JOIN `lookup` `lkpr` ON (((`tsk`.`taskPriorityID` = `lkpr`.`lookupValueNum`)
+            AND (`lkpr`.`lookupTypeID` = 4))))
+        LEFT JOIN `lookup` `lkst` ON (((`tsk`.`taskStatusID` = `lkst`.`lookupValueNum`)
+            AND (`lkst`.`lookupTypeID` = 21))))
+        LEFT JOIN `users` `usr` ON ((`tsk`.`assignedTo` = `usr`.`id`)))
+        LEFT JOIN `task` `tsk2` ON ((`tsk`.`taskLinkID` = `tsk2`.`taskID`)))
+        LEFT JOIN `phase` `phs` ON ((`tsk`.`phaseID` = `phs`.`phaseID`)))
+
+VIEW `v_my_tasks` AS
+    SELECT
+        `project`.`projectID` AS `projectID`,
+        `project`.`projectName` AS `projectName`,
+        `tasklist`.`taskListID` AS `taskListID`,
+        `tasklist`.`taskListName` AS `taskListName`,
+        `task`.`taskID` AS `taskID`,
+        `task`.`taskName` AS `taskName`,
+        `task`.`taskDescription` AS `taskDescription`,
+        `task`.`assignedTo` AS `assignedTo`,
+        `task`.`deletedDate` AS `deletedDate`,
+        `task`.`taskID` AS `id`,
+        `task`.`clientID` AS `clientID`
+    FROM
+        ((`task`
+        JOIN `tasklist` ON ((`task`.`taskListID` = `tasklist`.`taskListID`)))
+        JOIN `project` ON ((`project`.`projectID` = `tasklist`.`projectID`)))
+
+VIEW `v_project_tasks` AS
+    SELECT DISTINCT
+        `pr`.`projectID` AS `projectID`,
+        `pr`.`projectName` AS `projectName`,
+        `pr`.`projectDescription` AS `projectDescription`,
+        `tl`.`taskListID` AS `taskListID`,
+        `tl`.`taskListName` AS `taskListName`,
+        `tl`.`taskListDescription` AS `taskListDescription`,
+        `tk`.`taskID` AS `taskID`,
+        `tk`.`taskName` AS `taskName`,
+        `tk`.`taskDescription` AS `taskDescription`,
+        CONCAT(LEFT(`tk`.`taskDescription`, 80), '...') AS `taskDescriptionShort`,
+        `tk`.`taskTypeID` AS `taskTypeID`,
+        `tk`.`taskStatusID` AS `taskStatusID`,
+        `tk`.`taskPriorityID` AS `taskPriorityID`,
+        `tk`.`assignedTo` AS `assignedTo`,
+        `lkst`.`lookupValueChar` AS `taskStatus`,
+        `lkpr`.`lookupValueChar` AS `taskPriority`,
+        `tk`.`taskID` AS `id`,
+        `pr`.`clientID` AS `clientID`,
+        `tk`.`createdBy` AS `taskCreatedBy`,
+        `tk`.`deletedBy` AS `task_deleted_by`,
+        `tl`.`deletedBy` AS `tasklist_deleted_by`
+    FROM
+        ((((`project` `pr`
+        JOIN `tasklist` `tl` ON ((`pr`.`projectID` = `tl`.`projectID`)))
+        LEFT JOIN `task` `tk` ON ((`tl`.`taskListID` = `tk`.`taskListID`)))
+        LEFT JOIN `lookup` `lkst` ON (((`tk`.`taskStatusID` = `lkst`.`lookupValueNum`)
+            AND (`lkst`.`lookupTypeID` = 21))))
+        LEFT JOIN `lookup` `lkpr` ON (((`tk`.`taskPriorityID` = `lkpr`.`lookupValueNum`)
+            AND (`lkpr`.`lookupTypeID` = 4))))
+
+=============================================================================================
+>>STATIC<<
+----------
+
+Javascript
+----------
+static\js\simpris\project\toggle-tk.js
+static\js\simpris\task\task.js
+static\js\editor\*.*
+
+HTML
+----
+
+============================================================================================
+Notes
+-----
+xxxxxx
+
+Checklist
+---------
+1. Changes to urls.py?
+2. Changes to archive tables?
+3. Changes to models.py?

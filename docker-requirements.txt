@@ -1,0 +1,5 @@
+mysqlclient>=2.1.0,<2.2 # just install this until we get Postgres sorted out
+gunicorn>=20.1.0,<21
+django>=3,<5
+djangorestframework>=3.12,<4
+pytz>=2020.1,<2022

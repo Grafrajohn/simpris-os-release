@@ -1,0 +1,19 @@
+            {% if mode == "edit" and not team %}<p>Team not found</p>{% endif %}
+            {%  if mode == "edit" %}
+            <div class="form-group row mb-3">
+                <label for="frmTeamID" class="form-label col-sm-2">Team ID</label>
+                <div class="col-sm-10">{{ team.0.teamid }}</div>
+            </div>
+            {% endif %}
+            <div class="form-group row mb-3">
+                <label for="frmTeamName" class="form-label col-sm-2">Team Name</label>
+                <div class="col-sm-10">
+                    <input id="frmTeamName" class="form-control" type="text" size="50" maxlength="50" name="frmTeamName" value="{% if team %}{{ team.0.teamname }}{% endif %}"/>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmTeamDescription" class="form-label col-sm-2">Team Description</label>
+                <div class="col-sm-10">
+                    <textarea id="frmTeamDescription" class="form-control" type="textarea" rows="10" cols="50" maxlength="500" name="frmTeamDescription">{% if team %}{{ team.0.teamdescription }}{% endif %}</textarea>
+                </div>
+            </div>

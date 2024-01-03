@@ -1,0 +1,324 @@
+"problemID";"clientID";"organisationID";"problemTypeID";"problemSubTypeID";"problemHeader";"problemDescription";"noOfPeopleAffected";"scope";"problemStatusID";"problemPriorityID";"assignedTo";"completedDate";"createdDate";"createdBy";"updatedDate";"updatedBy";"deletedDate";"deletedBy"
+1;11;11;16;4;"Event comm failure";"Description";10;1;1;3;0;"";"2013-11-25 12:52:22";11;"";0;"";0
+2;1;1;1;18;"Invoicing problem";"Invoices wrongly generated.";5;4;3;2;0;"";"2013-11-26 13:26:03";1;"2014-02-20 20:18:25";1;"";0
+3;1;12;15;13;"Legal design case";"Legal design case brought by rival media company.";10;3;2;2;0;"";"2013-11-27 12:41:27";1;"2014-02-07 17:16:01";1;"";0
+4;13;14;19;4;"Big cock up";"B C U";15;2;1;2;0;"";"2013-12-17 13:54:04";15;"";0;"";0
+5;2;2;22;11;"Problems with EGL mobile web.config";"problems with EGL web.config";100;2;2;1;0;"";"2013-12-19 15:31:45";3;"";0;"";0
+6;1;12;20;4;"Under valuation of property by surveyor";"Surveyor has in our opinion seriously undervalued a property.";1;3;1;2;0;"";"2014-02-07 21:22:58";1;"";0;"";0
+7;3;37;22;11;"Message on add new client";"Brief message displayed on add of new client. Message then disappears - something about ID";100;4;1;3;0;"";"2014-09-03 17:13:28";4;"2014-09-03 22:15:44";4;"2016-07-19 19:07:03";4
+8;3;37;22;11;"Problem detail page format incorrect";"Problem detail page incorrectly formatted - text box to large, left panel incorrectly formatted, button uncoloured.";1;4;1;4;0;"";"2014-09-03 17:15:59";4;"2014-09-03 22:36:44";4;"2015-10-30 13:07:48";4
+9;3;37;22;11;"When datatable has no data it gets stuck";"When datatable page has no data it gets stuck with 'Processing' message.";1;4;4;2;0;"";"2014-09-03 17:17:45";4;"2014-09-15 15:44:01";4;"2014-09-15 15:44:15";4
+10;3;37;22;11;"Add new problem slow";"Adding a new problem is very slow.";1;4;4;1;0;"";"2014-09-03 17:19:01";4;"2014-09-14 16:11:26";4;"2014-09-14 16:11:42";4
+11;3;37;22;11;"No of people affected not validate on add problem";"When a new problem is added the number of people affected is not validated so if user adds a character such as # there is an ugly error message.";1;4;1;2;0;"";"2014-09-03 17:20:32";4;"";0;"2014-09-07 15:57:35";4
+12;3;37;22;11;"Cannot add project";"Error message:
+Error Number: 2014
+
+Commands out of sync; you can't run this command now
+
+SELECT `users_groups`.`group_id` as id, `groups`.`name`, `groups`.`description` FROM (`users_groups`) JOIN `groups` ON `users_groups`.`group_id`=`groups`.`id` WHERE `users_groups`.`user_id` = '4'
+
+Filename: /var/www/application/admin/models/ion_auth_model.php
+
+Line Number: 1181";1;4;4;1;0;"";"2014-09-03 17:24:00";4;"2014-09-03 21:46:42";4;"2014-09-03 22:04:30";4
+13;3;37;22;11;"No column headers on datatables";"No column headers displayed above datables";1;4;1;2;0;"";"2014-09-03 17:27:15";4;"";0;"2014-09-04 15:21:28";4
+14;3;37;22;11;"Cannot edit project";"A Database Error Occurred
+
+Error Number: 2014
+
+Commands out of sync; you can't run this command now
+
+SELECT `users_groups`.`group_id` as id, `groups`.`name`, `groups`.`description` FROM (`users_groups`) JOIN `groups` ON `users_groups`.`group_id`=`groups`.`id` WHERE `users_groups`.`user_id` = '4'
+
+Filename: /var/www/application/admin/models/ion_auth_model.php
+
+Line Number: 1181";1;4;4;1;0;"";"2014-09-03 17:28:44";4;"2014-09-03 21:46:01";4;"2014-09-03 22:04:40";4
+15;3;37;22;11;"When new problem added and header too long";"Following error message:
+
+A Database Error Occurred
+
+Error Number: 1406
+
+Data too long for column 'problemHeader' at row 1
+
+INSERT INTO `problem` (`organisationID`, `problemTypeID`, `problemSubTypeID`, `problemHeader`, `problemDescription`, `noOfPeopleAffected`, `scope`, `problemStatusID`, `problemPriorityID`, `clientID`, `createdDate`, `createdBy`) VALUES ('37', '22', '11', 'When new project added \'new user\' shows in left panel', 'When a new project is added a \'New User\' shows for that project in the left hand panel. No New project is added to the panel.', '1', '4', '1', '2', '3', '2014-09-03 17:39:39', '4')
+
+Filename: /var/www/application/main/models/problem_model.php
+
+Line Number: 83";1;4;4;2;0;"";"2014-09-03 17:40:43";4;"2014-09-07 15:50:38";4;"2014-09-07 15:57:44";4
+16;3;37;22;11;"When project added 'new user' shows in left panel";"When a new project is added a 'New User' shows for that project in the left hand panel. No New project is added to the panel.";1;4;1;3;0;"";"2014-09-03 17:41:05";4;"2014-09-03 22:33:58";4;"2015-10-15 17:06:06";4
+17;3;37;22;11;"Problem Charts link";"When user clicks problem charts link on left panel of problem index page, they are show a bank page.";1;4;4;3;0;"";"2014-09-03 17:42:39";4;"2014-10-01 14:36:00";4;"2014-10-01 14:36:21";4
+18;3;37;22;11;"Left panel of project detail";"Header is wrong colour - it is blue instead of white.";1;4;4;3;0;"";"2014-09-03 17:44:47";4;"2014-09-05 18:30:31";4;"2014-09-05 18:31:03";4
+19;3;37;22;11;"Add tasklist button not correct colour";"In project detail user adds new tasklist - the button in the tasklist add page is the wrong colour.";1;4;1;4;0;"";"2014-09-03 17:47:28";4;"2014-09-03 22:17:48";4;"2015-10-30 13:06:41";4
+20;3;37;22;11;"Empty tasklist still has view task link";"Empty tasklists still have an icon button to view a task - this gives an ugly not found error when clicked:
+
+Not Found
+
+The requested URL /main.php/task/edit was not found on this server.
+
+Apache/2.4.7 (Ubuntu) Server at www.simpris.com Port 443";1;4;1;4;0;"";"2014-09-03 17:50:10";4;"2014-09-03 22:32:02";4;"2015-10-30 13:10:43";4
+21;3;37;22;11;"On task error the task description not repopulated";"When there is a task validation error the task description is not populated.";1;4;1;2;0;"";"2014-09-03 17:56:29";4;"";0;"2014-09-07 16:35:49";4
+22;3;37;22;11;"Problem detail panel";"Problem detail left panel only shows problem date created but no activity detail - but maybe that is where there is no activity. Test this by editing a problem and seeing if there is any activity listed. It might not be a problem at all.";1;4;1;4;0;"";"2014-09-03 17:59:35";4;"2014-09-03 22:16:47";4;"2015-10-30 13:11:39";4
+23;3;37;22;11;"When project deleted user sent to home page";"When the user deletes a project they are taken to the home page in Simpris application - they should be taken to the projects index page.";1;4;1;3;0;"";"2014-09-03 18:04:33";4;"";0;"2015-10-30 12:49:14";4
+24;3;37;22;11;"After insert user";"Email not at all informative.
+Telephone number shows 2 dashes at end
+
+Notification email:
+
+Simpris
+Notification email
+Your new login has been allocated. 
+If you'd like to unsubscribe and stop receiving these emails click here.  
+W: www.simpris.com
+E: support@simpris.com
+Simpris Team";1;4;4;2;4;"";"2014-09-03 18:11:18";4;"2014-10-15 16:54:36";4;"2014-10-15 16:54:49";4
+25;3;37;22;11;"After insert project";"Worked but not clear what to do next – add link to create tasklist or flash message to newly created project";1;4;1;3;0;"";"2014-09-03 18:12:14";4;"";0;"2015-10-30 12:50:32";4
+26;3;37;22;11;"After insert user - project access";"Not clear why newly created users cannot be added to project – make it clear they need to be given access to project..";1;4;1;3;4;"";"2014-09-03 18:13:14";4;"2016-04-14 20:14:04";4;"";0
+27;3;37;22;11;"Add project user errors";"Error messages displayed:
+
+INFO  - 2014-03-18 20:53:30 --&gt; get_UserDetail - no data retrieved from dB.
+ERROR - 2014-03-18 20:53:30 --&gt; Severity: Warning  --&gt; Invalid argument supplied for foreach() /var/www/application/admin/models/email_model.php 46
+DEBUG - 2014-03-18 20:53:30 --&gt; Email class already loaded. Second attempt ignored.
+INFO  - 2014-03-18 20:53:30 --&gt; email library loaded
+ERROR - 2014-03-18 20:53:30 --&gt; Severity: Notice  --&gt; Undefined variable: userName /var/www/application/admin/models/email_model.php 60";1;4;4;1;0;"";"2014-09-03 18:13:56";4;"2014-09-07 16:44:08";4;"2014-09-07 16:53:04";4
+28;3;37;22;11;"After add task user project manager not in user pr";"Project manager should be added to userproject table.";1;4;1;3;0;"";"2014-09-03 18:14:38";4;"2016-06-11 22:55:38";4;"";0
+29;3;37;22;11;"Gantt chart for project";"Space i.e. gap before header in page";1;4;4;3;0;"";"2014-09-03 18:22:27";4;"2014-09-06 19:24:57";4;"2014-09-06 19:25:25";4
+30;3;37;22;11;"User views report 'My problems per project'";"No data displayed. Also the header.php include looks wrong and has maybe the wrong inc file.
+
+This is caused by empty dataset from query - not a fault as such we just need to handle empty charts.";1;4;2;3;4;"";"2014-09-03 18:23:58";4;"2014-09-23 15:16:21";4;"2015-10-30 12:54:55";4
+31;3;37;22;11;"Project history does not show activity";"The left hand panel for project does not show any details of activity on the projects apart from created date.";1;4;1;3;4;"";"2014-09-03 18:30:32";4;"2015-10-30 12:35:25";4;"2016-07-26 20:35:31";4
+32;3;37;22;11;"Project detail page";"Project detail page shows full text of task - it should only show the first nnn characters. This will have to be decided from iPad and iPhone testing etc.";1;4;4;2;0;"";"2014-09-03 18:35:43";4;"2014-09-07 17:58:28";4;"2014-09-07 17:58:38";4
+33;3;37;22;11;"Problems per project chart is blank";"The 'problems per project' metric is blank even when lots of problems!";1;4;1;3;0;"";"2014-09-03 18:37:59";4;"2014-09-03 22:34:46";4;"2016-02-24 20:02:52";4
+34;3;37;22;11;"Critical problems do not show up on home page";"Critical problems do not show up on the home page 'Critical issues across all of my projexcts'";1;4;1;3;0;"";"2014-09-03 21:35:06";4;"2014-09-03 22:33:20";4;"2015-10-30 13:05:04";4
+35;3;37;22;11;"Cannot delete problem";"Error message on deleting problem: 
+A PHP Error was encountered
+
+Severity: Notice
+
+Message: Undefined index: problemID
+
+Filename: models/problem_model.php
+
+Line Number: 112
+
+A Database Error Occurred
+
+Error Number: 1054
+
+Unknown column 'active' in 'field list'
+
+UPDATE `problem` SET `active` = 0, `ID` = '12' WHERE `problemID` IS NULL
+
+Filename: /var/www/application/admin/models/problem_model.php
+
+Line Number: 113";1;4;4;2;0;"";"2014-09-03 21:38:37";4;"2014-09-03 22:21:34";4;"2014-09-03 22:21:43";4
+36;3;37;22;11;"Problem detail does not display description";"problem detail does not display the problem description.";1;4;1;2;0;"";"2014-09-03 21:40:41";4;"2014-09-06 21:04:13";4;"2014-09-07 16:23:34";4
+37;3;37;22;11;"Edit problem very slow to load";"After insert of problem or when going into edit the loading of the problem edit page is very slow.";1;4;4;3;0;"";"2014-09-03 21:43:21";4;"2014-09-19 18:02:51";4;"2014-09-19 18:03:24";4
+38;3;37;22;11;"Time charts show blank";"Despite there being some time entered the 'Time charts' link on the left panel of the time index page leads to a blank page.";1;4;1;3;0;"";"2014-09-03 22:27:26";4;"";0;"2015-10-30 12:39:36";4
+39;3;37;22;11;"Time activity in left panel shows incorrect values";"In time index page, the left hand panel shows incorrect figures next to time spent.";1;4;1;4;0;"";"2014-09-03 22:29:38";4;"";0;"";0
+40;3;37;22;11;"New user does not show in left panel";"When a new user is added they do not show in the 'New Users' in the left panel of the users index page.";1;4;1;4;0;"";"2014-09-03 22:39:45";4;"";0;"";0
+41;3;37;22;11;"Search from main header";"When searched from main header the correct item shows, but there is no link to that item in the datatable. Maybe it was not updated when the new version of datatables applied?..";1;4;4;2;0;"";"2014-09-03 22:42:49";4;"2014-09-07 17:04:33";4;"2014-09-07 17:04:44";4
+42;3;37;22;11;"Change password page shows thin headers";"The change password page only shows thin headers instead of full headers with menus.";1;4;1;3;0;"";"2014-09-03 22:47:37";4;"";0;"2015-10-31 08:00:57";4
+43;3;37;22;11;"Search from header when in admin system";"When user is in the admin system and searches then they are presented with a blank page.";1;4;4;2;0;"";"2014-09-04 15:25:05";4;"2014-09-07 17:25:52";4;"2014-09-07 17:26:01";4
+44;3;37;22;11;"No sort/order icons on datatable columns";"The datatables have no icons to allow sorting ordering. There should be triangular icons according to datatables website.";1;4;4;3;0;"";"2014-09-04 15:29:46";4;"2014-09-09 10:17:30";4;"2014-09-09 10:18:16";4
+45;3;37;22;11;"Task update slow";"Task update slow";1;4;1;3;4;"";"2014-09-04 15:49:23";4;"2014-10-01 14:16:07";4;"2015-10-30 12:38:46";4
+46;3;37;22;11;"On mobile devices some datatables icons missing";"Datatables tools icons use flash which is not supported on some mobile devices e.g. Android, makers of datatables tools say that this will not be corrected any time soon.
+
+Best option is to render different datatables for android devices, detected by PHP device detection module.
+
+Also show as black on frefox";1;4;2;2;4;"";"2014-09-04 15:52:10";4;"2015-10-30 13:14:29";4;"2016-02-24 19:58:02";4
+47;3;37;22;11;"Task add comment slow";"Task add comment very slow - from task detail";1;4;1;3;0;"";"2014-09-04 15:54:41";4;"";0;"2015-10-30 12:40:31";4
+48;3;37;22;11;"New project user email";"Email which notifies user they have been added to project: has only number in title.";1;4;1;3;0;"";"2014-09-04 15:57:14";4;"";0;"";0
+49;3;37;22;11;"Project update email";"Email project updated does not give name and has only link to project need more text.";1;4;1;3;0;"";"2014-09-04 15:58:40";4;"";0;"2016-07-19 19:18:24";4
+50;3;37;22;11;"Project chart link left hand panel";"In project index page the link in the left hand panel to Project Charts shows blank page.";1;4;1;3;0;"";"2014-09-04 16:22:37";4;"";0;"2015-10-30 13:02:05";4
+51;3;37;22;11;"Task charts link in index side panel";"Task - Charts link in sidebar shows blank page";1;4;1;3;0;"";"2014-09-04 16:24:51";4;"";0;"2015-10-30 13:02:54";4
+52;3;37;22;11;"Organisation detail";"Organisation detail just shows the organisation name - looks bad. Add table of personnel to the page.";1;4;1;4;0;"";"2014-09-04 16:34:42";4;"";0;"2016-07-19 19:09:14";4
+53;3;37;22;11;"User can register twice";"Confirm index - after user has paid and registered they can try and register again.";1;4;4;2;4;"";"2014-09-04 16:36:55";4;"2014-09-25 15:27:45";4;"2014-09-25 15:27:56";4
+54;3;37;22;11;"Firefox registration problem";"Firefox failed login causes username and password to disappear";1;4;1;3;0;"";"2014-09-04 16:39:55";4;"";0;"2014-09-04 16:41:19";4
+55;3;37;22;11;"Gantt chart - navigtion icons and buttons missing";"Navigation buttons and icons are missing from gantt charts";1;4;4;3;0;"";"2014-09-04 17:30:59";4;"2014-09-09 07:14:13";4;"2014-09-09 07:14:25";4
+56;3;37;22;11;"People - Charts link in sidebar shows blank page";"In left panel the people charts link leads to blank page.";1;4;1;3;0;"";"2014-09-05 15:49:43";4;"";0;"2015-10-30 12:50:05";4
+57;3;37;22;11;"User detail Email and telephone not visible";"User detail - Email and telephone should be visible.";1;4;1;3;0;"";"2014-09-05 15:51:56";4;"";0;"";0
+58;3;37;22;11;"User edit page format";"Edit display of user shows two dashes at end of phone number.";1;4;1;3;0;"";"2014-09-05 15:53:10";4;"";0;"2015-10-30 21:05:38";4
+59;3;37;22;11;"Time - Charts link in sidebar shows blank page";"Time - Charts link in sidebar shows blank page";1;4;1;3;0;"";"2014-09-05 15:59:29";4;"";0;"2015-10-30 13:00:40";4
+60;3;37;22;11;"Search should return problem and comment details";"Search index - Search should return problem and comment details.";1;4;1;3;0;"";"2014-09-05 16:02:31";4;"";0;"2016-07-19 18:50:11";4
+61;3;37;22;11;"Confirm index - Prefills with last used name";"Confirm index - Prefills with last used name";1;4;1;3;0;"";"2014-09-05 16:04:41";4;"";0;"2015-10-30 12:39:25";4
+62;3;37;22;11;"Confirm - user can try and register again";"Confirm - After user has paid and registered they can try and register again.";1;4;1;3;0;"";"2014-09-05 16:08:14";4;"";0;"2015-10-30 13:00:56";4
+63;3;37;22;11;"More task types needed";"More task types needed";1;4;1;3;0;"";"2014-09-05 16:19:39";4;"";0;"2016-07-14 18:20:48";4
+64;3;37;22;11;"When add project manager or stakeholder";"Project/edit When add project manager or stakeholder also add them to userproject table.";1;4;1;3;0;"";"2014-09-05 16:20:55";4;"";0;"";0
+65;3;37;22;11;"Task edit should have project name";"Task edit should have project name";1;4;1;3;0;"";"2014-09-05 16:22:17";4;"";0;"2015-10-30 13:00:17";4
+66;3;37;22;11;"Print timesheet formatting";"Time - print timesheet - grand Total needs more spacing around it.";1;4;1;3;0;"";"2014-09-05 16:23:13";4;"";0;"2015-10-30 21:32:29";4
+67;3;37;22;11;"When text file uploaded no image displayed.";"When text file uploaded to project no image displayed.";1;4;1;3;0;"";"2014-09-05 16:24:17";4;"";0;"2016-07-27 18:51:27";4
+68;3;37;22;11;"Terms and conditions in registration";"Terms and conditions in registration";1;4;4;2;4;"";"2014-09-05 16:35:29";4;"2014-10-01 14:15:04";4;"2014-10-01 14:15:19";4
+69;3;37;22;11;"Project budget would not take £100.00";"Project budget would not take £100.00. The api sends back a message but it is not displayed in the edit form. The error is supposed to happen - only integer numbers are allowed.";1;4;1;2;4;"";"2014-09-05 16:58:34";4;"2016-07-19 19:00:02";4;"2016-07-26 18:18:52";4
+70;3;37;22;11;"Importance?";"Importance?";1;4;1;3;0;"";"2014-09-05 17:00:00";4;"";0;"2015-10-30 12:51:26";4
+71;3;37;22;11;"Critical? Background?";"Critical? Background?";1;4;1;3;0;"";"2014-09-05 17:00:58";4;"";0;"2015-10-30 21:34:37";4
+72;3;37;22;11;"Anxiety UK logo";"No Anxiety UK logo. No mention of me being the only Anxiety UK therapist in the area.";1;4;1;3;0;"";"2014-09-05 17:15:43";4;"";0;"2016-02-24 20:01:39";4
+73;3;37;22;11;"Virtual Gastric Band not mentioned in menu";"Virtual Gastric Band not mentioned in menu";1;4;1;3;0;"";"2014-09-05 17:16:53";4;"";0;"2016-07-19 18:50:59";4
+74;3;37;22;11;"Article in GT nowhere on website";"Article in GT nowhere on website";1;4;1;3;0;"";"2014-09-05 17:17:49";4;"";0;"2016-07-19 19:03:31";4
+75;3;37;22;11;"After task insert";"After task insert the user should be taken to the view project page";1;4;1;3;0;"";"2014-09-05 17:41:37";4;"";0;"2015-10-30 12:49:42";4
+76;3;37;22;11;"Voting on size of problem";"Vote - big/medium/small problem so people can express their opinion on problem";1;4;1;3;0;"";"2014-09-05 17:46:12";4;"";0;"2015-10-30 12:32:39";4
+77;3;37;22;11;"Web site contact form does not work";"On the main web site the contact form does not work";1;4;1;3;0;"";"2014-09-07 15:57:01";4;"";0;"2016-04-12 20:56:38";4
+78;3;37;22;11;"Datatables Excel button does not work";"Pressing the Excel button when in a datatable does not work.";1;4;4;2;0;"";"2014-09-09 06:32:08";4;"2014-09-09 07:01:13";4;"2014-09-09 07:01:32";4
+79;3;37;22;11;"Not able to assign user to problem";"the problem table has an assignedTo column but there is no facility in add or update to assign problems.";1;4;4;2;0;"";"2014-09-09 10:34:02";4;"2014-09-19 17:51:45";4;"2014-09-19 17:51:53";4
+80;3;37;22;11;"Logout button not clear";"Most people will not know what the logout button means.";1;4;1;3;0;"";"2014-09-09 10:51:36";4;"";0;"2015-10-30 12:38:59";4
+81;3;37;22;11;"Not explained that password should be 8 chars";"User are not told that their password should be 8 chars in length when registering.";1;4;1;3;0;"";"2014-09-09 10:53:20";4;"";0;"2015-10-30 12:56:49";4
+82;3;37;22;11;"left panel on home page out for Linda's laptop";"Linda's laptop showed left panel with metrics - title was out of alignment.
+
+Unable to reproduce this on any browser.";1;4;4;3;0;"";"2014-09-09 10:54:44";4;"2016-08-02 19:09:29";4;"2016-08-02 19:09:39";4
+83;3;37;22;4;"No way to get back to welcome page";"User should be able to get back to the welcome page from menu.";1;4;1;3;0;"";"2014-09-09 10:58:29";4;"";0;"2016-07-26 22:00:49";4
+84;3;37;22;4;"Question Mark does not indicate help";"Question mark does not indicate help.";1;4;4;3;0;"";"2014-09-09 11:21:54";4;"2014-09-09 15:11:37";4;"2014-09-09 15:12:46";4
+85;3;37;22;11;"Critical task appears twice in home page";"When a critical task is added it appears twice in the home index page.";1;4;4;2;0;"";"2014-09-09 11:55:48";4;"2014-09-19 17:52:06";4;"2014-09-19 17:52:14";4
+86;3;37;22;11;"Test of Saasy forwards to wrong URL";"Target URL of subscriptions:
+
+https://www.simpris.com/sub.php/confirm/index/test140909v1@simpris.com";1;4;4;2;0;"";"2014-09-09 12:37:43";4;"2014-09-19 12:14:15";4;"2014-09-19 12:14:27";4
+87;3;37;22;11;"Critical problem not appearing in home";"Critical problem not appearing in home index page.";1;4;4;2;0;"";"2014-09-09 12:49:23";4;"2014-09-19 17:52:24";4;"2014-09-19 17:52:33";4
+88;3;37;22;11;"Link from confirmation email does not work.";"Confirmation email says this:
+
+Congratulations on subscribing to Simpris - one of the most exciting services on the web today. If you have not started to use Simpris, visit the following link to confirm your login and password: Click here
+
+Link is: https://www.simpris.com/sub.php/confirm/index/test140909v1@simpris.com";1;4;4;2;0;"";"2014-09-09 16:47:12";4;"2014-09-19 17:54:38";4;"2014-09-19 17:54:49";4
+89;3;37;22;4;"Notification failure for Saasy system.";"Following email received from Saasy:
+
+HTTP Notification Failure for SIM140909-5522-96212S - 09/09/2014 16:35:33, GMT
+
+HTTP Notification URL: https://www.simpris.com/sub.php/confirm/auto
+
+Error Message: POST https://www.simpris.com/sub.php/confirm/auto
+
+We will not automatically retry this notification.   If you login to SpringBoard, click Notify in upper-right, then click Notification Issues, you can see all failed notifications, view details of the error to help debug any script/server problems you may be having, and delete or retry the notification.
+
+If you need further assistance, please submit support request via the support link in the control panel.";1;4;4;2;0;"";"2014-09-09 16:50:10";4;"2014-09-19 17:55:05";4;"2014-09-19 17:55:43";4
+90;3;37;22;11;"Home page index sorted wrongly";"On the home page the items are sorted wrongly with criticals appearing below attention required. Criticals should appear at the top.";1;4;4;2;0;"";"2014-09-14 16:54:19";4;"2014-09-19 17:55:24";4;"2014-09-19 17:55:33";4
+91;3;37;22;11;"Task description should not be in bold";"Task description should not be in bold now that task descriptions can be longer";1;4;4;2;0;"";"2014-09-18 16:40:54";4;"2014-09-19 11:24:52";4;"2014-09-19 11:25:03";4
+92;3;37;22;11;"Home index page problem description not shown";"The home index page does not show a problem descrition";1;4;1;3;0;"";"2014-09-19 18:00:12";4;"";0;"2015-10-30 12:40:06";4
+93;3;37;22;11;"Problem detail does not show assignee or date";"In the problem detail page assignee is not shown. Also date created not shown.";1;4;2;3;4;"";"2014-09-19 18:02:06";4;"2016-07-26 21:54:44";4;"2016-07-27 20:22:26";4
+94;3;37;22;11;"Time index page - summary sidebar formatting";"On the time index page a number is shown against each task but not what the number of hours refers to e.g. the number of hours??";1;4;1;3;0;"";"2014-09-23 14:32:52";4;"";0;"2016-07-19 18:45:41";4
+95;3;37;22;11;"New subscribers - confusing text";"After new subscribers sign up the message is confusing - they enter a password and username then they are told to sign in with their username and password but only email and password actually signs them in.";1;4;4;2;0;"";"2014-09-30 16:59:49";4;"2014-10-01 14:19:58";4;"2014-10-01 14:20:16";4
+96;3;37;22;11;"Delete user does not work and redirect invalid";"Delete user does not delete the user and redirects to an invalid URL: https://www.simpris.com/project/admin.php/user/index";1;4;1;2;0;"";"2014-10-20 16:48:28";4;"";0;"2015-10-30 11:50:45";4
+97;3;37;22;11;"Task update fails when no assignee";"When no assignee for task there 3 ugly error messages. Also task priority is lost.";1;4;4;1;4;"";"2014-10-27 18:25:33";4;"2014-10-31 20:05:54";4;"2014-10-31 20:06:07";4
+98;3;37;22;11;"Completed tasks still display in home index";"Completed tasks should not show on home page.";1;4;4;1;0;"";"2014-10-27 18:34:05";4;"2014-11-17 18:16:21";4;"2014-11-17 18:16:29";4
+99;3;37;22;11;"Critical problems not in home page";"Critical problems do not appear in home page.";1;4;4;1;0;"";"2014-10-27 18:37:15";4;"2014-11-17 17:16:42";4;"2014-11-17 17:16:54";4
+100;3;37;22;11;"Add empty task list causes failure";"Add empty task list causes 2 ugly messages to appear on screen.";1;4;4;1;0;"";"2014-10-31 20:05:14";4;"2014-11-16 04:17:26";4;"2014-11-16 04:17:46";4
+101;3;37;22;11;"Add time shows all projects";"Add time shows tasks from all projects should be limited to tasks from projects that user can see.";1;4;4;1;0;"";"2014-11-05 16:33:05";4;"2014-11-17 18:30:52";4;"2014-11-17 18:31:00";4
+102;3;37;22;11;"In home page all links are to project - even prob";"All links on home page go to projects even where a critical problem is listed.";1;4;4;1;4;"";"2014-11-17 18:33:40";4;"2014-11-18 16:15:37";4;"2014-11-18 16:15:51";4
+103;3;37;15;11;"After delete project user is taken to home";"User should be taken to projects index page after delete project and not the Si home page.";1;4;1;2;0;"";"2014-12-23 09:47:49";4;"";0;"2015-10-30 11:41:16";4
+104;3;37;22;11;"Menu pull downs not shown on iPad portrait Chrome";"In initial load of ipad portrait in Google chrome the pull down menus will not show. To get round this rotate to portrait mode then they work.";1;4;1;2;4;"";"2014-12-23 09:58:17";4;"2015-11-02 20:51:37";4;"2016-04-11 22:20:43";4
+105;3;37;22;11;"New projects do not appear on left bar of projects";"projects index page left hand bar does not show newly added projects";1;4;1;2;0;"";"2015-01-03 05:49:14";4;"";0;"2015-10-30 11:40:16";4
+106;3;37;22;11;"New users not in left hand projects bar";"On projects index page new users do not appear";1;4;1;3;4;"";"2015-01-03 05:50:07";4;"2015-10-30 12:00:17";4;"2016-07-14 18:19:09";4
+107;3;37;22;11;"Edit tasklst description too short";"In tasklist edit page the textbox for tasklist name is too short.";1;4;1;3;0;"";"2015-01-03 18:55:17";4;"";0;"2015-10-31 08:00:17";4
+108;3;37;22;11;"organisation index sidebar shows puzzling info";"Organisation index sidebar makes no sense - just shows name of organisation and user name????";1;4;1;2;0;"";"2015-02-15 10:55:53";4;"2016-06-11 22:53:09";4;"2016-07-05 20:25:44";4
+109;3;37;22;11;"Task detail screwed up";"Task detail page is screwed up and task details are displayed on right of page.";1;4;1;2;0;"";"2015-02-15 11:59:31";4;"";0;"2015-10-15 17:02:44";4
+110;3;37;22;11;"si_auth and csrftoken dj cookies are not secure";"si_auth and csrftoken dj cookies are not secure cookies - should they be?";1;4;4;2;4;"";"2015-03-08 15:46:54";4;"2015-10-22 22:44:49";4;"2015-10-30 11:19:52";4
+111;3;37;10;11;"Gantt chart screwed up on Dj";"Gantt chart not working.";1;4;4;1;0;"";"2015-03-29 16:32:48";4;"2015-04-19 16:23:34";4;"2015-04-19 16:26:25";4
+112;3;37;10;11;"My Overdue Projects report fails";"Message: DataTables warning: table id=tbReportIndex - Ajax error. For more information about this error, please see http://datatables.net/tn/7";1;4;4;1;0;"";"2015-03-30 16:08:02";4;"2015-04-19 16:25:32";4;"2015-04-19 16:26:12";4
+113;3;37;10;11;"My overdue tasks";"DataTables warning: table id=tbReportIndex - Ajax error. For more information about this error, please see http://datatables.net/tn/7
+
+Error Number: 1054
+
+Unknown column 'tkl.updatedID' in 'where clause'
+
+call sr_report_my_overdue_projects(4)
+
+Filename: /var/www/application/main/models/report_model.php
+
+Line Number: 193";1;4;4;1;0;"";"2015-03-30 16:08:58";4;"2015-04-19 16:27:42";4;"2015-04-19 16:27:58";4
+114;3;37;22;11;"No invoice history on index page";"Invoice index page has no history displayed.";1;4;1;2;0;"";"2015-04-10 17:02:03";4;"";0;"2015-10-15 17:03:09";4
+115;3;37;7;11;"Thumbnail not created for big ping image";"When a large .png image i.e. 800k+ is uploaded to a project in Firefox (and maybe other browsers) no thumbnail is generated. However smaller and/or .jpg images work fine.";1;4;1;3;0;"";"2015-04-19 15:48:55";4;"2015-04-19 15:49:18";4;"2016-07-26 20:01:59";4
+116;3;37;22;11;"On task update failure status lost";"When a task is updated including the status and there is a problem, the status of the task is lost i.e. not retained by the form.";1;4;1;3;0;"";"2015-04-19 16:08:16";4;"";0;"2015-10-30 21:37:06";4
+117;3;37;22;11;"Non admin users in Dj can see Admin menu";"Non-admin users in Dj can see Admin menu they should not be able to see it.";1;4;1;1;0;"";"2015-04-19 16:18:36";4;"";0;"2015-10-15 17:11:14";4
+118;3;37;22;11;"500 server error on logout.";"When users log out they get a 500 server error. But not on Firefox.
+";20;4;1;1;4;"";"2015-09-25 07:39:37";4;"2015-10-15 21:22:12";4;"2015-10-16 10:51:59";4
+119;3;37;22;11;"No help page for timegrid";"When user follows help link on timegrid page they see a page not found message.";20;4;1;3;4;"";"2015-09-25 07:40:57";4;"2015-12-19 22:37:49";4;"2016-07-28 19:26:20";4
+120;3;37;10;11;"No feedback when problem edit malfunctions";"If edit problem and do not set assignee there is a silent error and the problem is not updated.";1;4;1;2;0;"";"2015-10-15 15:42:06";4;"";0;"2015-10-30 21:33:53";4
+121;3;37;22;11;"Create user problem";"organisations duplicated in create user form and not ordered.";1;4;1;3;0;"";"2015-10-15 17:26:19";4;"";0;"2016-04-14 19:53:29";4
+122;3;37;22;11;"New organisations not listed";"New organisations added can be seen in view/edit tabs but cannot be seen in organisation list";1;4;1;1;0;"";"2015-10-15 17:29:29";4;"";0;"2015-10-15 16:59:25";4
+123;3;37;22;11;"dates formatted wrongly on invoice list";"Dates formatted strangely on invoice list: 2015-10-15T18:15:08Z";1;4;1;3;0;"";"2015-10-15 18:19:33";4;"";0;"2016-07-27 20:04:28";4
+124;3;37;12;11;"New timesheet adds extra row with hours.";"New timesheet adds an extra row with hours.";1;4;1;1;0;"";"2015-10-15 18:20:49";4;"";0;"2015-10-30 20:44:05";4
+125;3;37;22;11;"Newly created tasks cannot be edited.";"Newly created tasks cannot be edited.";1;4;1;1;4;"";"2015-10-16 14:50:22";4;"2015-10-30 13:04:20";4;"2015-10-31 12:26:38";4
+126;3;37;22;11;"Project users cannot be deleted";"When a project user is added it cannot be deleted.";1;4;1;1;4;"";"2015-10-16 14:51:18";4;"2015-10-30 16:58:46";4;"2015-10-31 07:59:08";4
+127;3;37;22;11;"Search does not work";"Search for simpris should bring back results but does not. This is being fixed. May just be datatables.";1;4;1;1;4;"";"2015-10-22 22:42:07";4;"2015-10-30 11:16:03";4;"2015-10-30 11:17:59";4
+128;3;37;22;11;"Cannot update problems";"problem update causes nothing to happen. Stop press - it is actually working but gives no warning. Problem here also on create, is that validation is giving no warnings.";1;4;1;2;4;"";"2015-10-22 22:45:38";4;"2015-10-23 22:24:49";4;"2015-10-30 21:00:24";4
+129;3;37;22;11;"Simpris menu points to home";"Simpris menu points to /home which is illegal url";1;4;1;1;0;"";"2015-10-23 22:23:07";4;"";0;"2015-10-30 11:18:38";4
+130;3;54;8;13;"test organisation problem";"Test organisation problem";10;3;1;2;0;"";"2015-10-29 23:45:54";4;"";0;"2015-10-29 23:48:41";4
+131;3;37;22;11;"Task status not updated on edit in spa";"When a task is edited the task status in the project overview page is wrongly displayed.  The task status has been updated and is displayed correctly on refresh.";1;4;1;2;4;"";"2015-10-30 11:37:29";4;"2015-11-21 00:11:51";4;"2016-02-24 19:59:23";4
+132;3;37;22;11;"Problem type and subtype are not sorted correctly";"When adding new problem the drop downs are not sorted correctly.";10;4;1;3;0;"";"2015-10-30 11:38:56";4;"";0;"2016-02-24 20:01:23";4
+133;3;37;22;11;"No feedback when new task is invalud";"When new task entered there is no validation feedback if field wrong.";1;4;1;1;4;"";"2015-10-30 11:54:02";4;"2016-02-24 19:57:45";4;"2016-02-24 21:31:08";4
+134;3;37;22;11;"When task edit closes gap in table";"When user closes task edit it leaves a gap in the table.";1;4;2;4;0;"";"2015-10-30 16:56:19";4;"";0;"";0
+135;3;37;22;11;"Inactive users show in user drop downs";"In project user drop downs active users feature.";1;4;2;1;4;"";"2015-10-30 16:57:40";4;"2015-10-30 17:00:00";4;"2015-10-30 21:33:22";4
+136;3;37;22;11;"Datatables number of rows per page";"Datatables number of rows per page does not show up";1;4;1;4;4;"";"2015-10-30 17:01:18";4;"2015-10-30 17:01:30";4;"2016-07-19 19:11:35";4
+137;3;37;22;11;"Page layout screwed on mobile";"Page layouts screwed on small mobile devices:
+
+datatables widths wrong
+menus wrong";1;4;2;1;4;"";"2015-10-30 17:09:58";4;"2015-10-30 20:19:43";4;"2015-11-16 20:59:22";4
+138;3;37;22;11;"Notification email for project update";"Notification email for project update shows dodgy link. Needs changing as per registration email.";1;4;2;2;0;"";"2015-10-30 17:14:03";4;"";0;"2015-10-30 23:46:33";4
+139;3;37;22;11;"Problem assignee can only be yourself";"Apparently users even admin users can only ad themselves as problem assignees.";1;4;1;1;0;"";"2015-10-30 21:00:05";4;"";0;"2015-11-16 21:48:25";4
+140;3;37;22;11;"Task assign to user";"Users can only assign tasks to themselves";1;4;2;1;0;"";"2015-10-30 21:04:09";4;"";0;"2015-11-17 20:17:03";4
+141;3;37;22;11;"Baffling error message on project update";"When update project with no manager/stakeholder set, baffling error message. Is JavaScript validation present? Is it working?";1;3;2;2;0;"";"2015-10-30 22:08:22";4;"";0;"2016-07-17 22:03:20";4
+142;3;37;22;11;"Uploads not showing for comments";"Uploads do not show for comments. they are made successfully but do not show up in the list.";10;4;1;2;4;"";"2015-11-16 21:01:01";4;"2015-11-29 20:32:34";4;"2015-11-29 20:43:19";4
+143;3;37;10;11;"Project spa screwed on mobile android ";"Project spa task edit shows blank task";1;4;1;2;4;"";"2015-11-20 23:50:59";4;"2015-12-19 22:37:09";4;"2016-04-12 20:55:58";4
+144;3;37;22;11;"Gantt controls do not show in ipad";"Gantt controls missing in ipad";1;4;1;2;0;"";"2015-11-21 00:08:53";4;"";0;"2015-12-19 22:39:14";4
+145;3;37;22;11;"Left hand panel of Gantt chart repeats data";"Oft hand panel of Gantt repeats data.";1;4;1;2;0;"";"2015-11-21 00:10:40";4;"";0;"2015-12-19 22:38:44";4
+146;3;37;22;11;"Menus not collapsed properly on phone";"Menus not collapsed properly on android phone ";1;4;1;2;0;"";"2015-11-21 00:15:46";4;"";0;"2016-04-11 22:21:02";4
+147;3;37;22;11;"Task edit in project spa shows blank ";"When edit task in project spa the popup form is blank and the code gives an error either too many rows found or task description not found ";1;4;1;1;0;"";"2015-11-21 21:40:23";4;"";0;"2015-11-21 22:41:36";4
+148;3;37;22;11;"My organisations puzzling 1.3.1";"Organisations displayed make no sense for user-name.";1;4;1;2;0;"";"2015-12-17 19:46:20";4;"";0;"2016-07-04 20:38:43";4
+149;3;37;22;11;"Cannot add organisations";"Internal server error on add organisation";1;4;1;1;0;"";"2015-12-17 23:40:53";4;"";0;"2015-12-19 22:36:30";4
+150;3;37;10;11;"Cannot add fractions of hour in time";"When adding new time cannot add fractions of time.";1;4;1;1;0;"";"2015-12-25 22:35:22";4;"";0;"2015-12-28 12:40:15";4
+151;3;37;22;11;"Prevent delete of active task not working";"User can delete active task";1;4;1;2;0;"";"2016-01-15 07:04:32";4;"";0;"2016-01-15 07:14:16";4
+152;3;37;22;11;"Default task completion date set to 1970";"On update the completion date for tasks is set to 1970";1;4;1;1;0;"";"2016-02-11 20:19:21";4;"";0;"2016-02-24 21:31:14";4
+153;3;37;22;11;"Cannot update task without setting phase";"Updates to task fail if no phase is set and there is no error message.";1;4;1;1;0;"";"2016-02-11 20:23:44";4;"";0;"2016-02-24 21:30:38";4
+154;3;37;10;11;"Deleted or completed tasks show up in scedule";"Completed and maybe deleted tasks show up in schedule";1;4;1;1;0;"";"2016-02-24 19:40:33";4;"";0;"2016-02-24 19:56:17";4
+155;3;37;22;11;"SPA task edit date picker no styles";"Datepicker calendar has no styles in SPA task edit.";1;4;1;1;0;"";"2016-02-24 20:00:19";4;"";0;"2016-02-24 20:18:31";4
+156;3;37;22;11;"If a number of problems deleted messages show";"If a number of problems are deleted the message shows for each one i.e several stacked messages.";1;4;1;2;0;"";"2016-02-24 20:04:19";4;"";0;"2016-07-01 20:17:05";4
+157;3;37;22;11;"No javascript validation of SPA task insert";"No validstion of SPA task insert ";1;4;1;2;0;"";"2016-02-24 21:32:14";4;"";0;"2016-03-23 18:53:29";4
+158;3;37;22;11;"No javascript validation of SPA task edit";"No validation by javascript of edited tasks in SPA";1;4;1;2;0;"";"2016-02-24 21:33:09";4;"";0;"2016-03-23 18:52:47";4
+159;3;37;22;11;"New phase does not save dates";"When new phase is created dates are not saved.";1;4;1;1;0;"";"2016-02-29 18:45:19";4;"";0;"2016-03-01 18:59:25";4
+160;3;37;22;11;"On new registration creator not listed";"On new registration, the creator is not listed as an organisation user.";1;4;1;2;0;"";"2016-03-20 20:03:58";4;"";0;"2016-07-08 22:52:31";4
+161;3;37;22;11;"On new or edit user multiple organisations";"On new registration multiple organisations shown for create new user and edit user.";1;4;1;2;4;"";"2016-03-20 20:06:27";4;"2016-04-14 19:52:28";4;"2016-04-14 19:53:00";4
+162;3;37;22;11;"Timesheet display order";"Timesheet display order is wrong where multiple months are shown. Times are ordered grouped by the first 2 digits of the date.";1;4;1;2;0;"";"2016-03-23 18:51:09";4;"";0;"2016-03-25 19:43:27";4
+163;3;37;22;11;"Cannot move tasks";"Server error on move of tasks";1;4;1;1;0;"";"2016-03-25 19:43:05";4;"";0;"2016-03-25 20:19:49";4
+164;3;37;22;11;"Some users not visible.";"Some users not visible in detail when drill down from list.";1;4;1;1;0;"";"2016-03-25 20:23:25";4;"";0;"2016-04-14 19:23:22";4
+165;3;37;22;11;"No validation on project update for stakeholder pr";"No validation on project update for stakeholder or project manager";2;4;1;2;0;"";"2016-03-27 19:41:11";4;"";0;"2016-07-14 18:16:46";4
+166;3;37;22;11;"Search duplicates";"In search a search for 'linked' produces triplicated results.";1;4;4;1;0;"";"2016-03-27 21:44:51";4;"2016-06-24 21:12:41";4;"2016-06-24 21:16:56";4
+167;3;37;22;11;"Search shows deleted tasks";"Search for email and you see the apparently deleted php email tasks.
+
+Downgrade to minor problem as this is intended behaviour. ";1;4;1;4;4;"";"2016-03-27 22:00:04";4;"2016-04-14 19:31:28";4;"2016-07-19 19:09:47";4
+168;3;37;22;11;"Lists wrong on mobile";"Some lists except problems wrongly displayed on mobile margins wrong. Home page way out.";1;4;1;2;0;"";"2016-04-12 21:02:41";4;"";0;"";0
+169;3;37;22;11;"User organisation not shown on edit";"On user edit page the user's organisation shows blank in the dropdown list.
+
+This is only a mobile problem so downgrade.";1;4;1;2;4;"";"2016-04-12 21:05:31";4;"2016-04-14 19:29:58";4;"2016-07-13 20:30:27";4
+170;3;37;22;11;"Cannot edit problem without set assignee";"It is impossible to edit a problem without setting an assignee.....";1;4;1;1;0;"";"2016-04-14 19:34:11";4;"2016-04-15 17:47:07";4;"2016-04-15 17:47:48";4
+171;3;37;22;11;"Edit user message afterwards";"When user edited if successful the message is shown in red.";1;4;1;3;0;"";"2016-04-14 20:07:30";4;"";0;"";0
+172;3;37;22;11;"When change user email it does not update";"When a user;s email address is edited and updated it is not changed.";1;4;1;1;0;"";"2016-04-14 20:08:33";4;"";0;"2016-04-22 20:17:47";4
+173;3;37;22;11;"User edit email does not accept some emails";"For some reason the user edit email does not accept the name BarratO@simpris.com. Puzzlingly this works fine on test.";1;4;1;1;0;"";"2016-04-14 20:09:28";4;"2016-05-20 18:12:17";4;"2016-05-20 20:14:55";4
+174;3;37;22;11;"User edit cannot add new project";"Cannot add new project for user. Also at bottom of user edit is drop down to add projects for user. This shows a long list unordered and full of duplicates.";1;4;1;2;4;"";"2016-04-14 20:10:42";4;"2016-07-19 20:48:43";4;"2016-07-26 19:17:30";4
+175;3;37;22;12;"Cannot cancel move project from project detail pg";"Cannot cancel move project dialogue from project detail page";1;4;1;3;0;"";"2016-04-14 20:50:38";4;"";0;"2016-07-28 19:31:12";4
+176;3;37;22;11;"task detail linked tasks shows raw html";"Task detail linked tasks shows raw html.
+Task 198 'new ideas' is an example";1;4;1;1;0;"";"2016-04-14 21:39:36";4;"";0;"2016-04-15 17:36:25";4
+177;3;37;22;11;"On add new user cannot make them admins";"When adding a new user they cannot be made admins in the system 
+
+or stakeholders
+
+or project managers
+
+This can be done afterwards in edit";1;4;1;3;4;"";"2016-04-19 20:44:06";4;"2016-07-19 17:27:51";4;"";0
+178;3;37;22;11;"Ordinary user can add themselves to projects";"Ordinary users can add themselves to projects";1;4;1;1;0;"";"2016-04-19 20:44:57";4;"";0;"2016-04-22 19:48:50";4
+179;3;37;22;11;"Ordinary users can delete themselves";"Ordinary users can delete themselves";1;4;1;1;0;"";"2016-04-19 20:46:53";4;"";0;"2016-05-18 18:15:49";4
+180;3;37;22;11;"Ordinary users can add organisations";"Ordinary users can add organisations";1;4;1;1;0;"";"2016-04-19 20:48:29";4;"";0;"2016-04-22 19:51:10";4
+181;3;37;22;11;"Ordinary users can delete their organisation";"Ordinary and admin users can delete their own organisation";1;4;1;1;0;"";"2016-04-19 20:49:45";4;"";0;"2016-07-01 19:59:56";4
+182;3;37;22;11;"Ordinary users can edit teams";"Ordinary users can edit teams
+
+and delete them too";1;4;1;1;0;"";"2016-04-19 20:51:15";4;"2016-04-19 20:57:35";4;"2016-04-22 19:49:06";4
+183;3;37;22;11;"Ordinary users can create teams";"Ordinary users can create teams";1;4;1;1;0;"";"2016-04-19 20:52:37";4;"";0;"2016-04-22 19:48:58";4
+184;3;37;23;11;"Ordinary users can see all metrics";"Ordinary users should not be able to see the top group of reports:
+VIP summary
+Overdue tasks by project
+Overdue projects
+Problems per project
+Billed revenue per client
+";1;4;1;1;0;"";"2016-04-19 21:02:10";4;"2016-04-21 19:57:05";4;"2016-04-22 19:41:52";4
+185;3;37;22;11;"Time editor tasks dropdown has html";"Time editor tasks dropdown has html in it.";1;4;1;2;0;"";"2016-05-17 18:32:50";4;"";0;"2016-07-04 21:27:46";4
+186;3;37;22;11;"In calendar html tags show for tasks";"In calendar html tags show for tasks";1;4;1;2;0;"";"2016-05-18 18:45:44";4;"";0;"2016-07-01 20:09:28";4
+187;3;37;22;11;"Registration form screwed on ipad";"Registration form not formatted well on iPad. Input text fields are too wide for portrait mode.";1;4;1;2;0;"";"2016-06-11 22:49:40";4;"";0;"2016-07-08 22:43:50";4
+188;3;37;22;11;"Programme user add/delete";"Programme user add or delete - error messages are not displayed just a blank panel.";1;4;1;2;0;"";"2016-06-12 22:27:02";4;"";0;"";0
+189;3;37;22;11;"Project edit and org edit";"Project edit and org edit are not showing user as context not passed through";1;4;1;1;0;"";"2016-07-14 18:23:47";4;"";0;"2016-07-19 17:25:36";4
+190;3;37;22;11;"No validation on project create";"No validation on project create. No messages show if error.";1;4;1;1;0;"";"2016-07-14 18:24:40";4;"";0;"2016-07-14 23:23:23";4
+191;3;37;22;11;"On iPad project view priority and status don't wor";"Right most 2 columns do not show on project tasks table on project detail page.";1;4;1;2;0;"";"2016-07-26 21:52:52";4;"";0;"";0

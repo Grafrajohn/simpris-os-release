@@ -1,0 +1,159 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Python template
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+*.pyc
+bin
+develop-eggs
+dist
+downloads
+eggs
+parts
+src/*.egg-info
+lib
+lib64
+*/Thumbs.db
+SimprisDj/static/css/images/Thumbs.db
+SimprisDj/static/images/Thumbs.db
+SimprisDj/static/images/gantt_img/Thumbs.db
+SimprisDj/static/images/icons/Thumbs.db
+SimprisDj/static/img/Thumbs.db
+.project
+.idea/*
+simpris/.idea/*.xml
+simpris/.idea/*.iml
+simpris/.idea/.name
+!.idea/runConfigurations/
+simpris/uploads/
+documents/
+.idea/runConfigurations/Simpris.xml
+!*/jasmine*/lib
+!*/jasmine*/spec
+!*/jasmine*/src
+
+#ignore thumbnails created by windows
+Thumbs.db
+#Ignore files build by Visual Studio
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.dll
+*.lib
+*.sbr
+
+# ignore for React, Angular2, npm etc
+node_modules
+# end of npm ignore
+
+#React ignore
+
+# dependencies
+
+# production
+build
+
+# misc
+.DS_Store
+npm-debug.log
+
+# end of React ignore
+
+# angular2 ignore
+
+typings
+app/**/*.js
+app/**/*.map
+jspm_packages
+bower_components
+
+# end of angular2 ignore
+
+# vs code
+.vscode/tasks.json
+.vscode/settings.json
+.vscode/launch.json
+.vscode/
+
+# ideas management
+static/js/ideas/package-lock.json
+static/js/ideas/package.json
+static/js/ideas-es6/package-lock.json
+static/js/ideas-es6/package.json
+static/js/ideas/package.json
+.settings/
+
+# Visual Studio
+.vs/
+.metadata/
+UpgradeLog*.htm

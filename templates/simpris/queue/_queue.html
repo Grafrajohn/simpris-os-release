@@ -1,0 +1,19 @@
+            {% if mode == "edit" and not queue %}<p>Queue not found</p>{% endif %}
+            {%  if mode == "edit" %}
+            <div class="form-group row mb-3">
+                <label for="frmQueueID" class="form-label col-sm-2">Queue ID</label>
+                <div class="col-sm-10">{{ queue.0.queueid }}</div>
+            </div>
+            {% endif %}
+            <div class="form-group row mb-3">
+                <label for="frmQueueName" class="form-label col-sm-2">Queue Name</label>
+                <div class="col-sm-10">
+                    <input id="frmQueueName" class="form-control" type="text" size="50" maxlength="50" name="frmQueueName" value="{% if queue %}{{ queue.0.queuename }}{% endif %}"/>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmQueueDescription" class="form-label col-sm-2">Queue Description</label>
+                <div class="col-sm-10">
+                    <textarea id="frmQueueDescription" class="form-control" type="textarea" rows="10" cols="50" maxlength="500" name="frmQueueDescription">{% if queue %}{{ queue.0.queuedescription }}{% endif %}</textarea>
+                </div>
+            </div>

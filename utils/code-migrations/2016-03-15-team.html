@@ -1,0 +1,120 @@
+Summary
+-------
+Team members
+Registration - VERY IMPORTANT
+User create - VERY IMPORTANT
+
+==============================================================================================
+Functionality to test
+---------------------
+View, add, remove team members
+
+==============================================================================================
+>>DJANGO<<
+----------
+api\users\*.*
+apps\register\views.py
+apps\team\views.py
+apps\user\views.py
+models.py
+templates\team\*.*
+templates\topmenu.html
+urls.py
+
+Files
+-----
+xxxxxxxx
+
+=============================================================================================
+>>MYSQL<<
+---------
+
+users add clientID as 2nd column with default value of 0
+users_archive add clientID
+team_users add clientID
+
+set sql_safe_updates = 0;
+
+update users usr
+join organisation org on usr.company = org.organisationID
+set usr.clientID = org.clientID;
+
+set sql_safe_updates = 1;
+
+CREATE PROCEDURE `temp_update_users` ()
+BEGIN
+
+DECLARE CclientID int;
+declare CorganisationID int;
+declare Cid mediumint;
+DECLARE no_more_rows BOOLEAN;
+
+DECLARE mycursor CURSOR FOR
+select id, org.clientID, organisationID
+from organisation org
+join users usr on usr.company = org.organisationID;
+
+DECLARE CONTINUE HANDLER FOR NOT FOUND
+	SET no_more_rows = TRUE;
+
+open mycursor;
+
+the_loop: LOOP
+
+	fetch mycursor into Cid, CclientID, CorganisationID;
+
+	IF no_more_rows THEN
+	CLOSE mycursor;
+	LEAVE the_loop;
+    END IF;
+
+	update users
+	set clientID = CclientID
+	where id = Cid;
+
+END LOOP the_loop;
+
+
+END
+
+VIEW `v_team_members` AS
+    SELECT
+        `tm`.`teamID` AS `teamID`,
+        `tm`.`teamName` AS `teamName`,
+        `tu`.`userID` AS `userID`,
+        `tm`.`clientID` AS `clientID`,
+        `tu`.`id` AS `id`,
+        `usr`.`first_name` AS `first_name`,
+        `usr`.`last_name` AS `last_name`,
+        `tu`.`deletedDate` AS `deletedDate`
+    FROM
+        ((`team` `tm`
+        JOIN `team_user` `tu` ON ((`tm`.`teamID` = `tu`.`teamID`)))
+        JOIN `users` `usr` ON ((`usr`.`id` = `tu`.`userID`)))
+
+update users usr
+join organisation org on usr.company = org.organisationID
+set usr.clientID = org.clientID;
+
+=============================================================================================
+>>STATIC<<
+----------
+font awesome files
+
+Javascript
+----------
+static\js\simpris\team\team.js
+
+HTML
+----
+
+============================================================================================
+Notes
+-----
+xxxxxx
+
+Checklist
+---------
+1. Changes to urls.py?
+2. Changes to archive tables?
+3. Changes to models.py?

@@ -1,0 +1,86 @@
+Summary
+-------
+Users on list not always visible in detail
+
+==============================================================================================
+Functionality to test
+---------------------
+
+==============================================================================================
+>>DJANGO<<
+----------
+API
+user\views.py
+
+APPS
+user\views.py
+
+MODELS
+models.py
+
+TEMPLATES
+
+Files
+-----
+xxxxxxxx
+
+=============================================================================================
+>>MYSQL<<
+---------
+VIEW `v_my_users` AS
+    SELECT DISTINCT
+        `usr`.`id` AS `user_id`,
+        `usr`.`first_name` AS `first_name`,
+        `usr`.`last_name` AS `last_name`,
+        `org`.`organisationID` AS `organisationID`,
+        `org`.`organisationName` AS `organisationName`,
+        `org`.`clientID` AS `clientID`,
+        `usr`.`active` AS `active`,
+        CONCAT(`usr`.`first_name`,
+                ' ',
+                `usr`.`last_name`) AS `name`,
+        `uo`.`userID` AS `userID`,
+        IF((`usr`.`active` = 1), 'Yes', 'No') AS `activeDesc`,
+        `usr`.`id` AS `id`
+    FROM
+        ((`organisation` `org`
+        JOIN `userorganisation` `uo` ON ((`org`.`organisationID` = `uo`.`organisationID`)))
+        JOIN `users` `usr` ON ((`org`.`organisationID` = `usr`.`company`)))
+    UNION SELECT DISTINCT
+        `usr`.`id` AS `user_id`,
+        `usr`.`first_name` AS `first_name`,
+        `usr`.`last_name` AS `last_name`,
+        `org`.`organisationID` AS `organisationID`,
+        `org`.`organisationName` AS `organisationName`,
+        `org`.`clientID` AS `clientID`,
+        `usr`.`active` AS `active`,
+        CONCAT(`usr`.`first_name`,
+                ' ',
+                `usr`.`last_name`) AS `name`,
+        `usr`.`id` AS `userID`,
+        IF((`usr`.`active` = 1), 'Yes', 'No') AS `activeDesc`,
+        `usr`.`id` AS `id`
+    FROM
+        (`organisation` `org`
+        JOIN `users` `usr` ON ((`org`.`organisationID` = `usr`.`company`)))
+
+=============================================================================================
+>>STATIC<<
+----------
+
+Javascript
+----------
+
+HTML
+----
+
+============================================================================================
+Notes
+-----
+xxxxxx
+
+Checklist
+---------
+1. Changes to urls.py?
+2. Changes to archive tables?
+3. Changes to models.py?

@@ -1,0 +1,8 @@
+            <div class="row mb-3">
+                <label for="frmProgrammeHeader" class="form-label col-sm-3 col-md-4">Programme Summary:</label>
+                <div class="col-sm-9 col-md-8"><input class="form-control" size="50" type="text" maxlength="50" id="frmProgrammeName" name="frmProgrammeName" placeholder="A very short summary of your programme" value="{{ programme.programmename }}" required /></div>
+            </div>
+            <div class="row mb-3">
+                <label for="frmProgrammeDescription" class="form-label col-sm-3 col-md-4">Programme Description:</label>
+                <div class="col-sm-9 col-md-8"><textarea class="form-control" rows="10" cols="50" id="frmProgrammeDescription" name="frmProgrammeDescription" placeholder="A more detailed description of your programme" required>{{ programme.programmedescription }}</textarea></div>
+            </div>

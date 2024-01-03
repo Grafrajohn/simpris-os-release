@@ -1,0 +1,34 @@
+Summary
+-------
+Project history
+
+DJANGO
+------
+
+Files
+-----
+templates\simpris\project\*.*
+templates\simpris\tasklist\*.*
+templates\simpris\task\*.*
+static\js\simpris\project\toggle-tk.js
+static\js\simpris\project\toggle-tkl.js
+
+dB
+--
+v_project_detail add id
+V_project_opinion_detail add id
+v_project_documents add id
+v_project_tasks
+v_my_tasktypes
+v_my_priorities
+v_task_statuses
+
+Notes
+-----
+
+
+PHP
+---
+
+simpricity\views\shared\menu.php - change project add
+simpricityadmin\views\shared\menu.php - change project add

@@ -1,0 +1,19 @@
+        <div id="links" class="card">
+            <div class="card-header bg-info text-white">
+                <h4>Links for this {{ item_label }}</h4>
+            </div>
+            <div class="card-body">
+                <div v-if="linkPanelVisible">
+                    <table class="table table-striped table-responsive">
+                        <tr v-for="link in linkData">
+                            <td><i class="fa fa-link fa-1x" style="color: blue;"></i>&nbsp;<% link.link_name %></td>
+                            <td v-if="lnkURLText"><a :href="link.link_url" target="_blank"><% link.link_url %></a></td>
+                            <td v-if="lnkURLEditText"><textarea><% link.link_url %></textarea></td>
+{#                            <td v-if="lnkURLEdit"><a v-on:click="editLink(link.id)" :data-item="link.id" href="#"><i class="fa fa-edit icon-large" style="color: green;"></i></a></td>#}
+                            <td><a id="lnkLinkDelete" v-on:click="confirmDeleteLink(link.id)" :data-item="link.id" href="#"><i class="fa fa-times icon-large" style="color: red;"></i></a></td>
+                        </tr>
+                    </table>
+                </div>
+                <span v-if="noLinkPanelVisible">No links have been added for this {{ item_label }}</span>
+            </div>
+        </div>

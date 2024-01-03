@@ -1,0 +1,24 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^7.17.5",
+    "babel-loader": "^8.2.3",
+    "babel-preset-env": "^7.6.11",
+    "babel-preset-react": "^6.24.1",
+    "babel-runtime": "^6.26.0",
+    "fixed-data-table": "^0.6.5npm",
+    "webpack": "^5.69.1"
+  },
+  "dependencies": {
+    "react": "^15.6.2",
+    "react-dom": "^17.0.2"
+  }
+}

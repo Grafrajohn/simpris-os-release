@@ -1,0 +1,10 @@
+<div id="div_postit" class="col-xs-12">
+    <form id="frmIdeaInsert">
+        {% csrf_token %}
+        <input name="project_id" type="hidden" value="{{ id }}" />
+        <button class="postit_create btn btn-primary">Create Idea</button>
+    </form>
+    <div id="div_notes" class="col-xs-12">
+
+    </div>
+</div>

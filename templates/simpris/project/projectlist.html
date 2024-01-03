@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/r-2.2.0/sl-1.2.3/datatables.min.css"/>
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content-heading' %}
+    <ul class="nav nav-tabs mb-3" role="tablist">
+        <li class="nav-item active"><a class="nav-link active" href="#">My Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="/project/activity/">Project Activity</a></li>
+    </ul>
+{% endblock %}
+{% block 'content' %}
+    <div class="table-responsive">
+        <table id="tbProjectIndex" class="table table-sm table-striped" style="width:100%">
+        </table>
+    </div>
+{% endblock %}
+{% block 'end-js' %}
+    <!-- global scripts -->
+    
+    <!-- page scripts -->
+    {% load static %}
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/r-2.2.0/sl-1.2.3/datatables.min.js"></script>
+
+	<script type="text/javascript" charset="utf-8">
+	    $(document).ready(function() {
+	        $('#tbProjectIndex').DataTable( {
+	            "ajax": "/api/project/projects",
+                "sAjaxDataProp": "",
+                "data_id": "projectid",
+                "dom": 'Bfrtip',
+                "buttons": [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                "select": true,
+	            "columns": [
+	                { "className": "hidden-xs","render": function ( data, type, row ) {
+                    return '<a id="lnk-project-delete-' + row.projectid + '" onclick="simpris.project.project_delete(' + row.projectid + ')" class="lnk-project-delete text-danger" href="#" title="Delete"><i class="fa fa-trash red"></i></a>';
+                    } },
+                    { "className": "hidden-xs","render": function ( data, type, row ) {
+                    return '<a href="{{ BASE_URL_DJ }}/project/edit/' + row.projectid + '" title="Edit"><i class="fa fa-edit"></a>';
+                    } },
+                    { "render": function ( data, type, row ) {
+                    return '<a id="lnkView' + row.projectname.substring(0, 8) + '" href="{{ BASE_URL_DJ }}/project/detail/' + row.projectid + '" title="View"><i class="fa fa-eye text-success"></i></a>';
+                    } },
+                    { "className": "hidden-xs","render": function ( data, type, row ) {
+                    return '<a href="{{ BASE_URL_DJ }}/project/gantt/' + row.projectid + '" title="Gantt Chart"><i class="fas fa-chart-bar"</i></a>';
+                    } },
+                    { "className": "hidden-xs","render": function ( data, type, row ) {
+                    return '<a href="{{ BASE_URL_DJ }}/report/chart/project/' + row.projectid + '" title="Project Charts"><i class="fas fa-tachometer-alt"></i></a>';
+                    } },
+                    { "title": "Client", "mDataProp": "organisationname" },
+                    { "title": "Project Name" , "mDataProp": "projectname"}
+	            ]
+	        } );	
+	    } );
+  	</script>
+    <script type="text/javascript" charset="utf-8">
+        // delete existing project via ajax api
+        simpris.project.project_delete = function (projectID) {
+            var confirm_delete = confirm("Are you sure you want to delete?");
+            if (confirm_delete == false) {
+                return;
+            }
+            $.ajax({
+                url: '/api/project/delete/' + projectID,
+                type: 'GET',
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            }).error(function(r){
+                $('#spnError').text("There has been an error: " + r.statusText);
+            })
+            .success(function(r){
+                $('#spnError').text("Project successfully deleted");
+                window.location.replace("/project/list/");
+            });
+        };
+  	</script>
+{% endblock %}

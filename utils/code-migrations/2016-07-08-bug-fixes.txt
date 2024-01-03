@@ -1,0 +1,61 @@
+Summary
+-------
+calendar brings back tasks in addition to times
+
+==============================================================================================
+Functionality to test
+---------------------
+calendar brings back tasks in addition to times
+
+==============================================================================================
+>>DJANGO<<
+----------
+API
+time\views.py
+
+APPS
+
+MODELS
+
+TEMPLATES
+
+Files
+-----
+xxxxxxxx
+
+=============================================================================================
+>>MYSQL<<
+---------
+VIEW `v_time_calendar` AS
+    SELECT
+        IFNULL(`ti`.`timeID`, tk.taskID) AS `id`,
+        `tk`.`taskName` AS `title`,
+        IFNULL(DATE_FORMAT(`ti`.`timeDay`, '%Y %m %d') , DATE_FORMAT(tk.taskstartDate, '%Y %m %d')) AS `start`,
+        `ti`.`timeID` AS `url`,
+        `tk`.`assignedTo` AS `assignedTo`,
+        `ti`.`userID` AS `userID`,
+        IFNULL(`ti`.`clientID`, tk.clientID) AS `clientID`
+    FROM
+        (`time` `ti`
+        RIGHT JOIN `task` `tk` ON ((`ti`.`taskID` = `tk`.`taskID`)))
+
+=============================================================================================
+>>STATIC<<
+----------
+
+Javascript
+----------
+
+HTML
+----
+
+============================================================================================
+Notes
+-----
+xxxxxx
+
+Checklist
+---------
+1. Changes to urls.py?
+2. Changes to archive tables?
+3. Changes to models.py?

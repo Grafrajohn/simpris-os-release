@@ -1,0 +1,1 @@
+dumpdata simpris.vproblems > /Users/grahamjohnson/Source/Simpris/simpris/fixtures/vproblems.json

@@ -1,0 +1,24 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+//html, body, removed by GFJ
+
+#root {
+	width: 100%;
+	height: 100%;
+	//background: rgb(60,60,60); GFJ out
+	display: flex;
+}
+
+.demo-link {
+  padding: 0.5rem 1rem;
+  a {
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+@import "../src/sass.scss";

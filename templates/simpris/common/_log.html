@@ -1,0 +1,12 @@
+        <div class="well">
+            <div id="addComment" class="newComment">
+                <form action="{{ BASE_URL_DJ }}/comment/insert/{{ id }}/" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <textarea id="frmTextComment" name="frmTextComment" rows="4" placeholder="Log information to this {{ entity }} here...." cols="100"></textarea><br />
+                    <button type="submit" id="frmButAddComment" name="frmButAddComment" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;Log new entry</button>
+                    <input name="hidUploadSource" type="hidden" value="{{ entity }}_upload">
+                    <input name="hidParentID" type="hidden" value="{{ id }}">
+                    <input name="hidParentType" type="hidden" value="{{ parent_type }}">
+                </form>
+            </div>
+        </div>

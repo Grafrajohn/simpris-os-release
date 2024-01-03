@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+	<link rel="stylesheet" href="/static/css/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="/static/css/datatables/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="/static/css/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content-heading' %}
+    <ul class="nav nav-tabs mb-3" role="tablist">
+        <li class="nav-item active"><a class="nav-link" href="/time/list">My Times</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#">Time Activity</a></li>
+    </ul>
+{% endblock %}
+{% block 'content' %}
+    <a href="{{ BASE_URL_DJ }}/report/generic/time" target=_new>Time Charts</a><br><br>
+    {% if sidebar %}
+        {% for time in sidebar %}
+            {% if time.column2 == "" %}
+                <div class="sidebar-subheader">
+            {% else %}
+                <div>
+            {% endif %}
+            {% if time.column4 == 3 %}
+            <a href="{{ BASE_URL_DJ }}/time/detail/{{ time.id }}">{{ time.projectname }}</a>
+            {{ time.columnn2 }}
+            {% else %}
+            {{ time.projectname }}
+            {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <span>There is no recent time activity</span>
+    {% endif %}
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+    {% load static %}
+	<script src="{% static "js/jquery/jquery-1.12.0.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery-ui.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/bootstrap/bootstrap.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/jquery-components/jquery.nanoscroller.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery.ui.touch-punch.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/common/common.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+
+	<!-- theme scripts -->
+	<script src="{% static "js/jquery-components/scripts.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/pace.min.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific inline scripts -->
+
+	<script src="/static/js/jquery-components/datatables/jquery.dataTables.min.js" type="text/javascript" language="javascript"></script>
+	<script src="/static/js/jquery-components/ZeroClipboard.js" type="text/javascript" language="javascript"></script>
+	<script src="/static/js/jquery-components/datatables/dataTables.buttons.min.js" type="text/javascript" language="javascript"></script>
+	<script src="/static/js/jquery-components/datatables/buttons.flash.min.js" type="text/javascript" language="javascript"></script>
+	<script src="/static/js/jquery-components/datatables/buttons.html5.min.js" type="text/javascript" language="javascript"></script>
+	<script src="/static/js/jquery-components/datatables/buttons.print.min.js" type="text/javascript" language="javascript"></script>
+	<script src="/static/js/jquery-components/datatables/buttons.colVis.min.js" type="text/javascript" language="javascript"></script>
+	<script type="text/javascript" charset="utf-8">	
+	    $(document).ready(function() {
+	        $('#tbTimeIndex').dataTable( {
+	            "language": {
+	                "zeroRecords": "No records to display"
+	                },
+	            "pageLength": 20,            
+	            "ajax": "/api/time/times",
+                "sAjaxDataProp": "",
+                "data_id": "timeid",  
+                "sEmptyTable" : "No data found",
+                "dom": 'Bfrtip',
+                "buttons": [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                "select": true,
+	            "columns": [
+	                { "className": "hidden-xs","render": function ( data, type, row ) {
+	                return '<a id="lnk-time-delete-' + row.timeid + '" href="#" onclick="simpris.project.time_delete(' + row.timeid + ')" class="lnk-time-delete" title="Delete"><i class="fas fa-trash" style="color: red;"></a>';
+	                } },                
+	                { "className": "hidden-xs","render": function ( data, type, row ) {
+	                return '<a href="{{ BASE_URL_DJ }}/time/edit/' + row.timeid +'" title="Edit"><i class="fa fa-edit" style="color: scarlet;"></a>';
+	                } },
+	                { "render": function ( data, type, row ) {
+	                return '<a href="{{ BASE_URL_DJ }}/time/detail/' + row.timeid +'" title="View"><i class="fa fa-eye" style="color: green;"></a>';
+	                } },            
+	                { "title": "Date","mDataProp": "timeday" },
+	                { "title": "Description","mDataProp": "taskdescription" },
+	                { "title": "Hours","mDataProp": "hours" },
+	                { "className": "hidden-xs","title": "Type of work","mDataProp": "lookupvaluechar" }
+	            ]
+	        } );	
+	    } );
+   	</script>
+    <script type="text/javascript" charset="utf-8">
+        // delete existing time via ajax api
+        simpris.project.time_delete = function (timeID) {
+            var confirm_delete = confirm("Are you sure you want to delete?");
+            if (confirm_delete == false) {
+                return;
+            }
+            $.ajax({
+                url: '/api/time/delete/' + timeID,
+                type: 'GET',
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            }).error(function(r){
+                $('#spnError').text("There has been an error: " + r.statusText);
+            })
+            .success(function(r){
+                $('#spnError').text("Time successfully deleted");
+                window.location.replace("/time/list/");
+            });
+        };
+  	</script>
+{% endblock %} 	

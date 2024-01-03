@@ -1,0 +1,15 @@
+        <div id="addLink" class="card">
+            <div class="card-header bg-info text-white">
+                <h4>Add a link</h4>
+            </div>
+            <div class="card-body">
+                <form id="frmLinkAdd" action="#">
+                    {% csrf_token %}
+                    <textarea id="txtLinkURL" name="txtLinkURL" placeholder="Type in the link address here e.g. www.cnn.com"></textarea>
+                    <input id="txtLinkName" name="txtLinkName" type="text" placeholder="Enter a name for your link e.g. CNN" />
+                    <input id="btnAddLink" v-on:click="insertLink({{ id }}, 2)" type="submit" name="btnAddLink" class="btn btn-sm btn-primary" value="Add link"/>
+                    <input type="hidden" name="hidItemID" value="{{ item_id }}"/>
+                    <input type="hidden" name="hidItemType" value="{{ item_type }}"/>
+                </form>
+            </div>
+        </div>

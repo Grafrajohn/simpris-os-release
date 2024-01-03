@@ -1,0 +1,178 @@
+Summary
+-------
+Various fixes to project
+
+Functionality to test
+---------------------
+Delete tasklist
+Board menu
+Gantt menu
+Board updates
+Gantt chart
+
+DJANGO
+------
+api\tasklist\views.py
+
+models\models.py
+
+templates\project\detail
+
+Files
+-----
+xxxxxxxx
+
+dB
+--
+VIEW `v_project_tasks` AS
+    SELECT DISTINCT
+        `pr`.`projectID` AS `projectID`,
+        `pr`.`projectName` AS `projectName`,
+        `pr`.`projectDescription` AS `projectDescription`,
+        `tl`.`taskListID` AS `taskListID`,
+        `tl`.`taskListName` AS `taskListName`,
+        `tl`.`taskListDescription` AS `taskListDescription`,
+        `tk`.`taskID` AS `taskID`,
+        `tk`.`taskDescription` AS `taskDescription`,
+        CONCAT(LEFT(`tk`.`taskDescription`, 80), '...') AS `taskDescriptionShort`,
+        `tk`.`taskTypeID` AS `taskTypeID`,
+        `tk`.`taskStatusID` AS `taskStatusID`,
+        `tk`.`taskPriorityID` AS `taskPriorityID`,
+        `tk`.`assignedTo` AS `assignedTo`,
+        `lkst`.`lookupValueChar` AS `taskStatus`,
+        `lkpr`.`lookupValueChar` AS `taskPriority`,
+        `tk`.`taskID` AS `id`,
+        `pr`.`clientID` AS `clientID`,
+        `tk`.`createdBy` AS `taskCreatedBy`,
+        `tk`.`deletedBy` AS `task_deleted_by`,
+        `tl`.`deletedBy` AS `tasklist_deleted_by`
+    FROM
+        ((((`project` `pr`
+        JOIN `tasklist` `tl` ON ((`pr`.`projectID` = `tl`.`projectID`)))
+        LEFT JOIN `task` `tk` ON ((`tl`.`taskListID` = `tk`.`taskListID`)))
+        LEFT JOIN `lookup` `lkst` ON (((`tk`.`taskStatusID` = `lkst`.`lookupValueNum`)
+            AND (`lkst`.`lookupTypeID` = 21))))
+        LEFT JOIN `lookup` `lkpr` ON (((`tk`.`taskPriorityID` = `lkpr`.`lookupValueNum`)
+            AND (`lkpr`.`lookupTypeID` = 4))))
+
+VIEW `vw_select_project_index_sidebar` AS
+    SELECT
+        'New projects' AS `projectName`,
+        '' AS `column2`,
+        '' AS `id`,
+        0 AS `column4`,
+        '' AS `userID`,
+        '1900-01-01 00:00:00:000' AS `dateorder`
+
+    UNION SELECT DISTINCT
+        `proj`.`projectName` AS `projectName`,
+        `proj`.`createdDate` AS `createdDate`,
+        `proj`.`projectID` AS `projectID`,
+        3 AS `column4`,
+        `upr`.`userID` AS `userID`,
+        `proj`.`createdDate` AS `dateorder`
+    FROM
+        (`project` `proj`
+        JOIN `userproject` `upr` ON ((`proj`.`projectID` = `upr`.`projectID`)))
+    WHERE
+        (`proj`.`createdDate` > FN_PAST_DATE(-(10)))
+    UNION SELECT
+        'Changed projects' AS `projectName`,
+        '' AS `column2`,
+        '' AS `id`,
+        5 AS `column4`,
+        '' AS `userID`,
+        '1900-01-01 00:00:00:000' AS `dateorder`
+
+    UNION SELECT
+        `proj`.`projectName` AS `projectName`,
+        `proj`.`updatedDate` AS `updatedDate`,
+        `proj`.`projectID` AS `projectID`,
+        7 AS `column4`,
+        `upr`.`userID` AS `userID`,
+        `proj`.`updatedDate` AS `dateorder`
+    FROM
+        (`project` `proj`
+        JOIN `userproject` `upr` ON ((`proj`.`projectID` = `upr`.`projectID`)))
+    WHERE
+        (`proj`.`updatedDate` > FN_PAST_DATE(-(10)))
+    UNION SELECT
+        'New users' AS `New users`,
+        '' AS `column2`,
+        '' AS `id`,
+        9 AS `column4`,
+        '' AS `userID`,
+        '1900-01-01 00:00:00:000' AS `dateorder`
+
+    UNION SELECT
+        `proj`.`projectName` AS `projectName`,
+        `usr`.`username` AS `column2`,
+        `proj`.`projectID` AS `projectID`,
+        11 AS `column4`,
+        `upr2`.`userID` AS `userID`,
+        `usr`.`created_on` AS `dateorder`
+    FROM
+        (((`project` `proj`
+        LEFT JOIN `userproject` `upr` ON ((`proj`.`projectID` = `upr`.`projectID`)))
+        JOIN `users` `usr` ON ((`upr`.`userID` = `usr`.`id`)))
+        JOIN `userproject` `upr2` ON ((`proj`.`projectID` = `upr2`.`projectID`)))
+    WHERE
+        (`usr`.`created_on` > FN_PAST_DATE(-(10)))
+    UNION SELECT
+        'New tasklists' AS `New tasklists`,
+        '' AS `column2`,
+        '' AS `id`,
+        13 AS `column4`,
+        '' AS `userID`,
+        '1900-01-01 00:00:00:000' AS `dateorder`
+
+    UNION SELECT
+        `proj`.`projectName` AS `projectName`,
+        `tsk`.`taskListName` AS `taskListName`,
+        `proj`.`projectID` AS `projectID`,
+        15 AS `column4`,
+        `upr`.`userID` AS `userID`,
+        `tsk`.`createdDate` AS `dateorder`
+    FROM
+        ((`project` `proj`
+        JOIN `userproject` `upr` ON ((`proj`.`projectID` = `upr`.`projectID`)))
+        JOIN `tasklist` `tsk` ON ((`tsk`.`projectID` = `proj`.`projectID`)))
+    WHERE
+        (`tsk`.`createdDate` > FN_PAST_DATE(-(10)))
+    ORDER BY `column4` , `dateorder` DESC
+    LIMIT 40
+
+VIEW `v_project_gantt` AS
+    SELECT
+        `prj`.`projectID` AS `projectID`,
+        `prj`.`projectName` AS `projectName`,
+        `prj`.`projectDescription` AS `projectDescription`,
+        `prj`.`updatedDate` AS `updatedDate`,
+        `prj`.`updatedBy` AS `updatedBy`,
+        `tsl`.`taskListID` AS `taskListID`,
+        `tsl`.`taskListName` AS `taskListName`,
+        `tsl`.`taskListDescription` AS `taskListDescription`,
+        `tsk`.`taskID` AS `taskID`,
+        `tsk`.`taskDescription` AS `taskDescription`,
+        `prj`.`deletedDate` AS `deletedDate`,
+        IFNULL(`tsk`.`taskStartDate`,
+                (NOW() - INTERVAL 30 DAY)) AS `taskStartDate`,
+        `tsk`.`assignedTo` AS `assignedTo`,
+        (`tsk`.`taskStartDate` + INTERVAL `tsk`.`taskTimeEstimate` DAY) AS `taskEndDate`,
+        IFNULL(`tsk`.`taskTimeEstimate`, 1) AS `taskTimeEstimate`,
+        `tsk`.`taskPercentComplete` AS `taskpercentcomplete`,
+        `tsk`.`taskID` AS `id`,
+        tsk.deletedDate as taskDeletedDate
+    FROM
+        ((`project` `prj`
+        JOIN `tasklist` `tsl` ON ((`prj`.`projectID` = `tsl`.`projectID`)))
+        JOIN `task` `tsk` ON ((`tsk`.`taskListID` = `tsl`.`taskListID`)))
+    WHERE
+        (`tsk`.`taskStartDate` IS NOT NULL)
+    ORDER BY `tsl`.`taskListID` , `tsk`.`assignedTo` , `tsk`.`taskStartDate`
+Notes
+-----
+xxxxxx
+
+PHP
+---

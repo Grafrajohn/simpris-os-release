@@ -1,0 +1,30 @@
+Summary
+-------
+Problem convert to Django
+
+DJANGO
+------
+apps\problem\views.py
+
+
+Files
+-----
+models.py
+
+dB
+--
+v_problems add id
+V_actual_problem_links add id
+v_problem_edit add id
+v_lookups_by_type add id
+v_my_problem_scope
+v_my_problem_statuses
+v_my_problem_priorities
+v_problem_assignees
+
+Notes
+-----
+This is dependant or project detail being live since the problem links can link to a project
+
+PHP
+---

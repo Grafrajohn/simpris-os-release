@@ -1,0 +1,103 @@
+    <nav class="sb-topnav navbar navbar-expand navbar-light bg-primary">
+      <!-- Navbar Brand-->
+      <a class="navbar-brand ps-3 app-title" href="index.html">Simpris</a>
+      <!-- Navbar--> 
+      <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <!-- Sidebar Toggle-->
+        <li class="nav-item">
+          <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 nav-link" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#!">Settings</a></li>
+                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="/auth/logoff">Logout</a></li>
+            </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a id="menu-top-home" class="nav-link" href="/project/home"><i class="fa fa-home fa-lg"></i></a>
+        </li>  
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-list-alt"></i>&nbsp;Projects & Tasks 
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" id="menu-drop-projects" href="/project/list"><i class="fa fa-th-list"></i> My Projects</a></li>
+            <li><a class="dropdown-item" id="menu-drop-programmes" href="/programme/list"><i class="fa fa-th-list"></i> My Programmes</a></li>
+            {% if perms.simpris.add_project %}
+            <li><a class="dropdown-item" id="menu-drop-project-create" href="/project/create"><i class="fa fa-plus-square"></i> Add project</a></li>
+            {% endif %}
+            {% if perms.simpris.add_programme %}
+            <li><a class="dropdown-item" id="menu-drop-programme-create" href="/programme/create"><i class="fa fa-plus-square"></i> Add programme</a></li>
+            {% endif %}
+            <li><a class="dropdown-item" id="menu-drop-tasks" class="header-link" href="/task/list"><i class="fa fa-table"></i> My Tasks</a></li>
+            <li><a class="dropdown-item" id="menu-drop-tasks" class="header-link" href="/project/home/"><i class="fa fa-table"></i> My Critical Work</a></li>
+            <li><a class="dropdown-item" id="menu-drop-tasks" class="header-link" href="/ideas/index/"><i class="far fa-lightbulb"></i> Ideas Management</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a id="menu-top-problems" class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;Problems
+          </a>
+          <div class="dropdown-menu">
+              <a class="dropdown-item" id="menu-drop-problems" href="/problem/list"><i class="fa fa-exclamation-triangle"></i> My Problems</a>
+              <a class="dropdown-item" id="menu-drop-problem-create" href="/problem/create"><i class="fa fa-exclamation"></i> Add problem</a>
+              <a class="dropdown-item" id="menu-drop-queues" href="/queue/list"><i class="fas fa-bars"></i> Queues</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a id="menu-top-people" class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-user"></i>&nbsp;People & Clients
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" id="menu-drop-people" href="/user/list"><i class="fa fa-user"></i> People</a>
+            {% if perms.simpris.add_users %}
+            <a class="dropdown-item" id="menu-drop-user-create" href="/user/create"><i class="fa fa-user-plus"></i> Add user</a>
+            {% endif %}
+            <a class="dropdown-item" id="menu-drop-password" href="/user/password"><i class="fa fa-key"></i> Change my password</a>
+            <a class="dropdown-item" id="menu-drop-profile" href="/user/profile"><i class="fa fa-user"></i> Edit my profile</a>
+            <a class="dropdown-item" id="menu-drop-clients" href="/client/list"><i class="fa fa-building"></i> My Clients</a>
+            {% if perms.simpris.add_organisation %}
+            <a class="dropdown-item" id="menu-drop-organisation" href="/organisation/create"><i class="fas fa-landmark"></i> Add organisation</a>
+            {% endif %}
+            <a class="dropdown-item" id="menu-drop-teams" href="/team/list"><i class="fa fa-users"></i> Teams</a>
+            {% if perms.simpris.add_team %}
+            <a class="dropdown-item" id="menu-drop-team-create" href="/team/create"><i class="fa fa-user"></i> Create team</a>
+            <a class="dropdown-item" id="menu-drop-interaction" href="/interaction/index"><i class="fa fa-user"></i> Interaction</a>
+            {% endif %}
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a id="menu-top-time" class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="far fa-clock"></i>&nbsp;Time
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" id="menu-drop-times" href="/time/list"><i class="far fa-clock"></i> My Time</a>
+            <a class="dropdown-item" id="menu-drop-time-create" href="/time/create"><i class="far fa-clock"></i> Add time</a>
+            <a class="dropdown-item" id="menu-drop-timesheets" href="/time/timesheet"><i class="fas fa-file"></i> My timesheets</a>
+            <a class="dropdown-item" id="menu-drop-invoice" href="/invoice/list"><i class="fa fa-tasks"></i> My invoices</a>
+            <a class="dropdown-item" id="menu-drop-invoice-create" href="/invoice/create"><i class="fas fa-money-bill"></i> Create invoice</a>
+            <a class="dropdown-item" id="menu-drop-calendar" href="/time/calendar"><i class="fa fa-calendar"></i> My Calendar</a>
+            <a class="dropdown-item" id="menu-drop-time-edit" href="/time/timegrid"><i class="far fa-clock"></i> Time Editor</a>
+            <a class="dropdown-item" id="menu-drop-kanban" href="/schedule/kanban"><i class="fa fa-bars"></i> Kanban Board</a>
+            <a class="dropdown-item" id="menu-drop-phase" href="/phase/list"><i class="fa fa-adjust"></i> Phases</a>
+            <a class="dropdown-item" id="menu-drop-schedule" href="/schedule/schedule"><i class="fa fa-calendar"></i> Schedule</a>
+          </div>
+        </li>
+      </ul>            
+      <!-- Navbar Search-->
+      <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" method="post" action="/search/index">
+        {% csrf_token %}
+          <div class="input-group">
+              <input class="form-control" type="text" placeholder="Search Simpris..." aria-label="Search Simpris..." aria-describedby="btnNavbarSearch" />
+              <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+          </div>
+      </form>
+      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>

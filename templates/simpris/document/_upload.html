@@ -1,0 +1,14 @@
+    <form id="frmDocumentUpload" action="{{ BASE_URL_DJ }}/uploads/upload/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card card-success mb-3">
+            <div class="card-header bg-info text-white">
+                <h4>Upload a document</h4>
+            </div>
+            <div class="card-body">
+                <label>{{ upload_label }}<input type="file" name="frmUserFile" /></label>
+                <input type="submit" class="btn btn-sm btn-primary" value="Upload document"/>
+                <input type="hidden" name="hidItemID" value="{{ item_id }}"/>
+                <input type="hidden" name="hidItemType" value="{{ item_type }}"/>
+            </div>
+        </div>
+    </form>   

@@ -1,0 +1,12 @@
+        <div class="card mb-3">
+            <div class="card-header bg-info text-white">
+                <h4>Saved documents for this {{ item_label }}</h4>
+            </div>
+        {% for document in documents %}
+            <div class="card-body">
+                <a href="{{ BASE_URL_DJ }}{{ MEDIA_URL }}{% if item_type == 'tsk' %}/task/{% elif item_type == 'prj' %}/project/{% elif item_type == 'prb' %}/problem/{% endif %}{{ document.documentfilename }}" target=_blank><i class="fa fa-file icon-large"></i>&nbsp;&nbsp;&nbsp;{{ document.documenttitle }}</a>
+            </div>
+        {% empty %}
+            <div class="card-body">No documents have been uploaded for this {{ item_label }}</div>
+        {% endfor %}
+        </div>

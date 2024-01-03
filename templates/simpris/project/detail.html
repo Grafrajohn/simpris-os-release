@@ -1,0 +1,347 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+    <link rel="stylesheet" type="text/css" href="/static/css/jqueryui/jquery-ui.min.css" />
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content' %}
+	{% load static %} 
+    <div id="project_container" class="col-md-12">
+        <ul class="nav nav-tabs mb-3" role="tablist">
+          <li class="nav-item active"><a class="nav-link" href="#">Project Overview</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/project/edit/{{ id }}">Edit Project</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/project/users/{{ id }}">Project Users</a></li>
+          <li class="nav-item"><a class="nav-link" id="menu-project-ideas" href="{{ BASE_URL_DJ }}/project/ideas/{{ id }}">Project Ideas</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/project/history/{{ id }}">Project History</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/project/log/{{ id }}">Project Log</a></li>
+        </ul>
+        <div class="card">
+	    {% for proj in projects %}
+		    <div class="card-header text-white bg-primary">
+		    	<h2><span class="projectHeader">Project </span><span id="project_id_show">{{ id }}</span> : {{ proj.projectname }}</h2>
+		  	</div>
+		    <div class="card-body">
+			    <p>{{ proj.projectdescription | safe }}</p>
+			    <p>Organisation : {{ proj.organisationname }}</p>
+		    {% if not proj.shfirstname and not proj.shlastname %}
+		    	<p>Stakeholder : Not set</p>
+		    {% else %}
+		    	<p>Stakeholder : {{ proj.shfirstname }} {{ proj.shlastname }}</p>
+			{% endif %}
+            {% if not proj.pmfirstname or not proj.pmlastname %}
+                <p>Project Manager : Not set</p>
+            {% else %}
+                <p>Project Manager : {{ proj.pmfirstname }} {{ proj.pmlastname }}</p>
+            {% endif %}                
+            {% if not proj.deliverables %}
+                <p>Deliverables : Not set</p>
+            {% else %}
+                <p>Deliverables : {{ proj.deliverables | safe }}</p>
+     		{% endif %}
+            {% if not proj.budget %}
+                <p>Budget : Not set</p>
+            {% else %} 
+                <p>Budget : {{ proj.budget }}</p>
+            {% endif %}
+            {% if not proj.importancedescription %}
+                <p>Importance : Not set</p>
+            {% else %} 
+                <p>Importance : {{ proj.importancedescription }} important</p>
+            {% endif %} 
+	   	{% empty %}
+	       	<p>Project not found</p>      	 	        	          
+	    {% endfor %}
+        </div>         
+   	</div>
+        <br>
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h4>Opinions expressed about this project</h4>
+            </div>
+            <div class="card-body">
+                <p>
+                {% for row in opinion %}
+                    {{ row.username }} is {{ row.opiniondescription }}
+                {% empty %}
+                    No opinions have been expressed about this project
+                {% endfor %}
+                </p>
+            </div>
+        </div>
+        <br>
+        {% include "simpris/document/_list.html" %}
+        <br>
+        {% include "simpris/link/_links.html" %}
+        <br>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4>TaskLists and Tasks for this Project</h4>
+            </div>
+            <a name="move_card_link"></a>
+            <div id="move_task_card" class="card card-body" style="margin: 18px;display: none;">
+                <h4 style="font-weight: bold;color: #337ab7;" id="move_task_h4"></h4>
+                <p id="move_task_para">Choose a project and tasklist to move the task to:</p>
+                <form id="frmMoveTask">
+                    <select id="selTaskTarget">
+                        <option value="0">Select a tasklist</option>
+                    </select>
+                    <input type="hidden" id="source_project_id">
+                    <input type="hidden" id="source_tasklist_id">
+                    <input type="hidden" id="source_task_id">
+                    <button class="btn-xs btn-primary" onClick="simpris.project.move_task()">Move task</button>
+                    <button class="btn-xs btn-warning" onClick="simpris.project.close_move_panel()">Cancel</button>
+                </form>
+            </div>
+            <div id="projectPanel" class="card-body">
+                <button id="button-tkl" class="btn btn-success btn-sm" ><i class="fa fa-plus"></i>&nbsp;Add new TaskList for this project</button><br><br>
+                <div id="placeholder-tasklist-new"></div>
+                {% for task in tasks %}
+                {% ifchanged task.tasklistid %}
+                {% if not forloop.first %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+                <div id="tasklistpanel-{{ task.tasklistid }}" class="card card-dark">
+                    <div class="card-header">
+                        <h4 style="display:inline;color:#337ab7;"><b><u>Tasklist</u> : {{ task.tasklistid }}&nbsp;&nbsp;<span id="tkl-tasklistname-span">{{ task.tasklistname }}</span></b></h4>&nbsp;&nbsp;&nbsp;<span style="color:green;"><a id="tasklist-edit-link-{{ task.tasklistid }}" href="#" class="tasklist-edit"><i class="fa fa-edit" style="color: green;"></i>&nbsp;Edit tasklist</a>&nbsp;&nbsp;&nbsp;{% if task.taskid == None %}<a id="tasklist-delete-link-{{ task.tasklistid }}" data-project-id="{{ id }}" href="#" class="tasklist-delete"><i class="fas fa-trash" style="color: red;"></i>&nbsp;Delete tasklist</a>{% endif %}</span><br><br>
+                    </div>
+                    <div class="card-body">
+                    <span id="spn_tasklist_error_{{ task.tasklistid }}" class="spnError" style="display: none;"></span>
+                    <p id="tkl-tasklistdescription-para">{{ task.tasklistdescription }}</p>
+                    <div id="placeholder-tkl-{{ task.tasklistid }}"></div>
+                    <button id="button-tk-{{ task.tasklistid }}" class="task-add btn btn-success btn-sm" ><i class="fa fa-plus"></i>&nbsp;Add new Task to this list</button><br><br>
+                    <div id="placeholder-tk-{{ task.tasklistid }}"></div>
+                    <table id="taskTable_{{ task.tasklistid }}" class="table table-striped table-responsive">
+                        <thead><tr><th>Task ID</th><th></th><th>Task Description</th><th class="hidden-xs hidden-sm">Task Priority</th><th class="hidden-xs hidden-sm">Task Status</th></tr></thead>
+                        <tbody>
+                    {% endifchanged %}
+                    {% if task.taskid %}
+                        <tr id="tr-task-{{ task.taskid }}">
+                        <td><u>Task</u> {{ task.taskid }}</td>
+                        <td>
+                            {% if task.taskid %}
+                            <a id="link-task-edit-{{ task.taskid }}" href="#" title="Edit the task" class="task-edit">
+                                <i class="fa fa-edit" style="color: darkgreen;"></i>
+                                &nbsp;Edit
+                            </a>
+                            {% endif %}
+                            &nbsp;&nbsp;
+                            <a id="link-task-move" onClick="simpris.project.open_move_panel({{ id }},{{ task.tasklistid }},{{ task.taskid }},'{{ task.taskname }}');" href="#move_panel_link">
+                                <i class="fa fa-exchange" style="color: darkgreen;"></i>
+                                &nbsp;Move
+                            </a>&nbsp;&nbsp;
+                            {% if task.taskid and task.taskstatusid == 7 or task.taskstatusid == 8 or task.taskstatusid == 9 %}
+                            <a id="link-task-delete-{{ task.taskid }}" data-tasklist-delete="{{ task.tasklistid }}" href="#" title="Delete the task" class="task-delete">
+                                <i class="fas fa-trash" style="color: red;"></i>
+                                &nbsp;Delete
+                            </a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if task.taskid %}
+                            <a href="/task/detail/{{ task.taskid }}">{{ task.taskname }}</a>
+                            {% else %}None{% endif %}
+                        </td>
+                        <td class="hidden-xs hidden-sm">{{ task.taskpriority }}</td>
+                        <td class="hidden-xs hidden-sm">{{ task.taskstatus }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="5">No tasks for this tasklist</td></tr>
+                {% endif %}
+                {% if forloop.last %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+                {% empty %}
+                    <span>No tasklists or tasks</span>
+                {% endfor %}
+                </div>
+            </div>
+        <div id="cloneContainerTkl" class="card card-dark" style="display:none;">
+            <h4 style="display:inline;color:#337ab7;"><b><u>Tasklist</u> : <span id="tasklistspan"></span>&nbsp;&nbsp;</b></h4>
+            <div class="card-body">
+                <span style="color:green;"><a id="tasklist-edit-link-{{ task.tasklistid }}" href="#" class="tasklist-edit"><i class="fa fa-edit" style="color: green;"></i>&nbsp;Edit tasklist</a></span><br><br>
+                <p id="taskdescpara"></p>
+                <button id="button-tk-" class="task-add btn-success btn-xs" ><i class="fa fa-plus"></i>&nbsp;Add new Task to this list</button><br><br>
+                <table id="taskTable" class="table table-striped table-responsive">
+                    <thead><tr><th>Task ID</th><th></th><th>Task Description</th><th>Task Priority</th><th>Task Status</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><u>Task</u> </td>
+                            <td><a href="#" title="Edit the task"><i class="fas fa-pencil-alt"></i></a></td>
+                            <td><a href="#"></a></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% include 'simpris/tasklist/tasklist_edit.html' %}
+        {% include 'simpris/task/_task_edit_project.html' %}
+    </div>
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+    {% load static %}
+    <script src="{% static "js/jqueryui/jquery-ui.min.js" %}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.10/vue.min.js" type="text/javascript"></script>
+	<script src="{% static "js/jquery-components/jquery.nanoscroller.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery.ui.touch-punch.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/common/common.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/project/project.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+
+	<!-- theme scripts -->
+	<script src="{% static "js/jquery-components/scripts.js" %}" type="text/javascript"></script>
+{#	<script src="{% static "js/pace.min.js" %}" type="text/javascript"></script>#}
+
+	<!-- this page specific inline scripts -->
+
+	<script src="{% static "js/simpris/project/toggle-tkl.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/project/toggle-tk.js" %}" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        {#$(document).ready(function(){#}
+        {#    var projectID = {{ id }};#}
+        {#    simpris.project.get_links(projectID, 2);#}
+        {#});#}
+
+        // Store project id
+        simpris.project.project_id_stored = {{ id }};
+        // delete existing tasklist via ajax api
+        simpris.project.post_tasklist_delete = function (tasklistID,projectID) {
+            var tasklist_id = tasklistID.replace('tasklist-delete-link-','');
+            var data =
+                { csrfmiddlewaretoken: '{{ csrf_token }}',
+                    tasklist_id: tasklist_id,
+                    project_id: projectID
+                };
+
+            $.ajax({
+                url: '/api/tasklist/delete/',
+                data: data,
+                type: 'POST',
+
+            }).error(function(r){
+                //console.log("error",r)
+                $("#spn_tasklist_error_" + tasklist_id).html("There has been an error deleting tasklist: ");
+                $("#spn_tasklist_error_" + tasklist_id).show();
+            })
+            .success(function(response){
+                // delete from page
+                $('#tasklistpanel-' + tasklist_id).hide();
+            })
+        };
+
+        simpris.project.post_task_delete = function (taskID,taskListID) {
+            var task_id = taskID;
+            var data =
+                { csrfmiddlewaretoken: '{{ csrf_token }}',
+                    task_id: task_id//,
+                    //project_id: projectID
+                };
+
+            $.ajax({
+                url: '/api/task/delete_post/',
+                data: data,
+                type: 'POST',
+
+            })
+            .error(function(r){
+                //console.log("error",r)
+                $("#spn_tasklist_error_" + taskListID).html("There has been an error deleting task: ");
+                $("#spn_tasklist_error_" + taskListID).show();
+            })
+            .success(function(response){
+                // delete from page
+                $('#tr-task-' + task_id).hide();
+                $("#spn_tasklist_error_" + taskListID).hide();
+            })
+        }
+
+        simpris.project.close_move_panel = function (project_id, tasklist_id, task_id, task_name) {
+            $('#move_task_panel').hide();
+            return false;
+        }
+
+        simpris.project.open_move_panel = function (project_id, tasklist_id, task_id, task_name) {
+            $('#move_task_panel').show();
+            $('#move_task_para').show();
+            $('#frmMoveTask').show();
+            $('#move_task_h4').css('color', '#337ab7');
+            $('#move_task_h4').text("Move task : " + task_name);
+            $('#source_tasklist_id').val(tasklist_id);
+            $('#source_task_id').val(task_id);
+            $('#source_project_id').val(project_id);
+            $.ajax({
+                type: "GET",
+                url: '/api/project/search/'
+            })
+            .success(function (data) {
+                // Parse the returned json data
+                //var opts = $.parseJSON(data);
+                var opts = data;
+                // Use jQuery's each to iterate over the opts value
+                $.each(opts, function(i, d) {
+                    // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
+                    $('#selTaskTarget').append('<option value="' + d.tasklistid + '">' + d.projectname + ' : ' + d.tasklistname + '</option>');
+                });
+            })
+            .error(function (err) {
+                simpris.common.raiseError(err);
+            });
+
+            //simpris.project.scrollTo('move_panel_link');
+            //return false;
+        }
+
+        simpris.project.move_task = function () {
+            var move_task_id = $('#source_task_id').val();
+            var move_task_tasklist = $('#selTaskTarget option:selected').val();
+            var data =
+                { csrfmiddlewaretoken: '{{ csrf_token }}',
+                    hidTaskID: move_task_id,
+                    frmTaskList: move_task_tasklist
+                };
+
+            $.ajax({
+                url: '/api/task/move/',
+                data: data,
+                type: 'POST',
+            })
+            .error(function(err){
+                simpris.common.raiseError('move task', err.statusText, err.responseText.substring(0,60), '{{ csrf_token }}');
+                var task_move_status = "Move failed";
+            })
+            .success(function(response){
+                $('#move_task_para').hide();
+                $('#frmMoveTask').hide();
+
+                $('#move_task_h4').text("Task move successful");
+                $('#move_task_h4').css('color', 'green');
+                $('#tr-task-' + move_task_id).hide();
+            })
+        }
+
+        $(function() {
+            $("#input_task_move").autocomplete({
+                source: "/api/project/search/",
+                select: function( event, ui ) {
+                    $( "#input_task_move" ).val( ui.item.value );
+                    $( "#dest-tasklist-id" ).val( ui.item.tasklistid );
+                    return false;
+                }
+            });
+        })
+
+        simpris.project.scrollTo = function (hash) {
+            document.location.hash = "#" + hash;
+        }
+    </script>
+    <script type="text/javascript" src="/static/js/simpris/link/link.js"></script>
+    <script type="text/javascript" src="/static/js/editor/ckeditor/ckeditor.js"></script>
+{% endblock %}     

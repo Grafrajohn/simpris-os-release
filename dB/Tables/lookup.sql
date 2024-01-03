@@ -1,0 +1,21 @@
+CREATE TABLE `lookup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `clientID` int(11) NOT NULL DEFAULT '0',
+  `lookupTypeID` int(11) NOT NULL,
+  `lookupSubTypeID` int(11) NOT NULL,
+  `lookupOrder` int(11) NOT NULL,
+  `lookupValueNum` int(11) DEFAULT NULL,
+  `lookupValueChar` varchar(50) DEFAULT NULL,
+  `lookupDescription` varchar(200) NOT NULL,
+  `disabled` bit(1) DEFAULT NULL,
+  `createdDate` datetime NOT NULL,
+  `createdBy` int(11) NOT NULL,
+  `updatedDate` datetime DEFAULT NULL,
+  `updatedBy` int(11) DEFAULT NULL,
+  `deletedDate` datetime DEFAULT NULL,
+  `deletedBy` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ix_lookup_typeid` (`lookupTypeID`),
+  KEY `ix_lookup_subtypeid` (`lookupSubTypeID`),
+  KEY `ix_unique` (`clientID`,`lookupTypeID`,`lookupSubTypeID`)
+)

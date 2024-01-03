@@ -1,0 +1,101 @@
+CREATE VIEW `simpricity`.`activity_recent` AS
+    select
+        `account`.`accountName` AS `accountName`,
+        `client`.`clientName` AS `clientName`,
+        'user' AS `type`,
+        `auth_user`.`username` AS `entity`,
+        `auth_user`.`date_joined` AS `date`
+    from
+        (((`account`
+        join `client` ON ((`account`.`accountID` = `client`.`accountID`)))
+        join `users` ON ((`users`.`clientID` = `client`.`clientID`)))
+        join `auth_user` ON ((`auth_user`.`id` = `users`.`id`)))
+    where
+        (`account`.`accountID` > 64)
+    union select
+        `account`.`accountName` AS `accountName`,
+        `client`.`clientName` AS `clientName`,
+        'organisation' AS `type`,
+        `organisation`.`organisationName` AS `entity`,
+        `organisation`.`createdDate` AS `date`
+    from
+        (((`account`
+        join `client` ON ((`account`.`accountID` = `client`.`accountID`)))
+        join `users` ON ((`users`.`clientID` = `client`.`clientID`)))
+        join `organisation` ON ((`organisation`.`clientID` = `client`.`clientID`)))
+    where
+        (`account`.`accountID` > 64)
+    union select
+        `account`.`accountName` AS `accountName`,
+        `client`.`clientName` AS `clientName`,
+        'project' AS `type`,
+        `project`.`projectName` AS `entity`,
+        `project`.`createdDate` AS `date`
+    from
+        ((`account`
+        join `client` ON ((`account`.`accountID` = `client`.`accountID`)))
+        join `project` ON ((`project`.`clientID` = `client`.`clientID`)))
+    where
+        (`account`.`accountID` > 64)
+    union select
+        `account`.`accountName` AS `accountName`,
+        `client`.`clientName` AS `clientName`,
+        'problem' AS `type`,
+        `problem`.`problemHeader` AS `entity`,
+        `problem`.`createdDate` AS `date`
+    from
+        ((`account`
+        join `client` ON ((`account`.`accountID` = `client`.`accountID`)))
+        join `problem` ON ((`problem`.`clientID` = `client`.`clientID`)))
+    where
+        (`account`.`accountID` > 64)
+    union select
+        `account`.`accountName` AS `accountName`,
+        `client`.`clientName` AS `clientName`,
+        'tasklist' AS `type`,
+        `tasklist`.`taskListName` AS `entity`,
+        `tasklist`.`createdDate` AS `date`
+    from
+        ((`account`
+        join `client` ON ((`account`.`accountID` = `client`.`accountID`)))
+        join `tasklist` ON ((`tasklist`.`clientID` = `client`.`clientID`)))
+    where
+        (`account`.`accountID` > 64)
+    union select
+        `account`.`accountName` AS `accountName`,
+        `client`.`clientName` AS `clientName`,
+        'task' AS `type`,
+        `task`.`taskName` AS `entity`,
+        `task`.`createdDate` AS `date`
+    from
+        ((`account`
+        join `client` ON ((`account`.`accountID` = `client`.`accountID`)))
+        join `task` ON ((`task`.`clientID` = `client`.`clientID`)))
+    where
+        (`account`.`accountID` > 64)
+    union select
+        `account`.`accountName` AS `accountName`,
+        `client`.`clientName` AS `clientName`,
+        'task_archive' AS `type`,
+        `task_archive`.`taskName` AS `entity`,
+        `task_archive`.`createdDate` AS `date`
+    from
+        ((`account`
+        join `client` ON ((`account`.`accountID` = `client`.`accountID`)))
+        join `task_archive` ON ((`task_archive`.`clientID` = `client`.`clientID`)))
+    where
+        (`account`.`accountID` > 64)
+    union select
+        `account`.`accountName` AS `accountName`,
+        `client`.`clientName` AS `clientName`,
+        'board' AS `type`,
+        `users`.`username` AS `entity`,
+        NULL AS `date`
+    from
+        (((`account`
+        join `client` ON ((`account`.`accountID` = `client`.`accountID`)))
+        join `users` ON ((`users`.`clientID` = `client`.`clientID`)))
+        join `board` ON ((`board`.`userID` = `users`.`id`)))
+    where
+        (`account`.`accountID` > 64)
+    order by `accountName` , `clientName` , `date`

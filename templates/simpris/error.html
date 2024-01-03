@@ -1,0 +1,30 @@
+{% extends 'base_lean.html' %}
+            {% block 'content' %}
+            {% if error %}
+            	<p>{{ error.message }}</p>
+            	<p>{{ error.recommendations }}</p>
+            {% else %}
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div id="error-box">
+					<div class="row">
+						<div class="col-xs-12">
+							<div id="error-box-inner">
+								<img src="/static/img/error-500-v2.png" alt="Error 500"/>
+							</div>
+							<h1>ERROR 500</h1>
+							<p>
+								Something went very wrong. We are sorry for that.
+							</p>
+							<p>
+								Go back to <a href="/">homepage</a>.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+            {% endif %} 
+            {% endblock %}

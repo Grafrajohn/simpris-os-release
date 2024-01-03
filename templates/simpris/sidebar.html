@@ -1,0 +1,95 @@
+    {% load static %}
+    
+    <!-- Sidebar -->
+	<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+		<div class="sb-sidenav-menu bg-primary">
+			<div class="nav">
+				<div class="sb-sidenav-menu-heading">My Work</div>
+				<a class="nav-link" href="/task/list/">
+					<i class="fas fa-tachometer-alt"></i>
+					&nbsp;My Work
+				</a>
+				<a class="nav-link" href="/problem/list/">
+					<i class="fa fa-exclamation-triangle"></i>
+					&nbsp;My Problems
+				</a>
+
+				<div class="sb-sidenav-menu-heading">Reports</div>
+				<a class="nav-link collapsed" href="/task/list/" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+					<i class="fas fa-columns"></i>
+					&nbsp;Reports
+					<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+				</a>
+				<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+					<nav class="sb-sidenav-menu-nested nav">
+						<a class="nav-link" href="/report/list/">All reports</a>
+						<a class="nav-link" href="/report/detail/myoverproj">Overdue Projects</a>
+						<a class="nav-link" href="/report/detail/myovertask">Overdue Tasks</a>
+						<a class="nav-link" href="/report/detail/mytaskcom">Tasks Completed</a>
+						<a class="nav-link" href="/report/detail/overtaskproj">Overdue Tasks / Project</a>
+						<a class="nav-link" href="/report/metric/myprobperproj">Problems / Project</a>
+						<a class="nav-link" href="/report/metric/mybilledrev">Billed Revenue</a> 
+					</nav>
+				</div>
+				<div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+					<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+							Authentication
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="login.html">Login</a>
+								<a class="nav-link" href="register.html">Register</a>
+								<a class="nav-link" href="password.html">Forgot Password</a>
+							</nav>
+						</div>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+							Error
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="401.html">401 Page</a>
+								<a class="nav-link" href="404.html">404 Page</a>
+								<a class="nav-link" href="500.html">500 Page</a>
+							</nav>
+						</div>
+					</nav>
+				</div>
+				<div class="sb-sidenav-menu-heading">Help</div>
+				<a class="nav-link" href="/help">
+					<i class="fas fa-chart-area"></i>
+					&nbsp;Help
+				</a>
+				<div class="sb-sidenav-menu-heading">Admin</div>
+				<a class="nav-link" id="menu-drop-logout" href="/auth/logoff">
+					<i class="fa fa-power-off"></i>&nbsp;Logoff
+				</a>
+				{% if perms.simpris.change_account %}
+				<a class="nav-link" id="menu-drop-administration" href="/admin/home">
+					<i class="fa fa-tasks"></i>&nbsp;Administration
+				</a>
+				{% endif %}
+				{% if perms.simpris.add_phase %}
+				<a class="nav-link" id="menu-drop-phase-create" href="/phase/create">
+					<i class="fa fa-calendar"></i>&nbsp;Create phase
+				</a>
+				{% endif %}
+				{% if perms.simpris.add_queue %}
+				<a class="nav-link" id="menu-drop-queue-create" href="/queue/create">
+					<i class="fa fa-calendar"></i>&nbsp;Create queue
+				</a>
+				{% endif %}
+				{% if perms.simpris.change_authuser %}
+				<a class="nav-link" id="lnkAdminHome" href="/system/dashboard"><i class="fa fa-cogs"></i>&nbsp;System</a>
+				{% endif %}
+			</div>
+		</div>
+		<div class="sb-sidenav-footer bg-primary">
+			<div class="small">Logged in as:</div>
+			{{ usercontext.fullname }}
+		</div>
+
+ 	</nav>
+    <!-- End of Sidebar -->

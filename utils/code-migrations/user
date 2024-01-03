@@ -1,0 +1,25 @@
+Summary
+-------
+User convert to Django
+
+DJANGO
+------
+apps\user\views.py
+
+
+Files
+-----
+models.py
+
+dB
+--
+v_user_assigned add id
+v_user_current_projects
+v_user_detail
+
+Notes
+-----
+Dependency on django conversion of task detail. Make sure there is an index on user_payrate
+
+PHP
+---

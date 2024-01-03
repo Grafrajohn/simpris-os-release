@@ -1,0 +1,31 @@
+    <div id="task-quick-edit" class="task-quick-edit well card card-body">
+        <span class="validateTips">Update task: </span><span id="spnTaskName"></span>
+        <form id="frmTaskQuickEdit" class="form" method="post">
+            {% csrf_token %}
+            <div class="form-group row mb-3">
+                <label for="frmDatePicker">Task start date</label>
+                <input type="text" id="frmDatePicker" name="frmDatePicker">
+                <label for="frmDatePicker2">Task end date</label>
+                <input type="text" id="frmDatePicker2" name="frmDatePicker2">
+                <label for="frmPercentComplete">Task percent complete</label>
+                <input type="text" name="frmPercentComplete" id="frmPercentComplete" size="5" value="">
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmTaskStatus">Task status</label>
+                <select name="frmTaskStatus" id="frmTaskStatus">
+                    <option value="">Select</option>
+                </select>
+                <label for="frmTaskAssignee">Task assignee</label>
+                <select name="frmTaskAssignee" id="frmTaskAssignee">
+                    <option value="">Select</option>
+                </select>
+                <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                <button id="btn-task-update" class="btn btn-sm btn-success">Update</button>
+                <button id="btn-task-cancel" class="btn btn-sm btn-warning">Cancel</button>
+            </div>
+            <div id="spnQuickError" class="spnError alert alert-error"style="display: none;"></div>
+            <input type="hidden" id="hidTaskID" name="hidTaskID" value="" />
+            <input type="hidden" id="hidTaskStatus" name="hidTaskStatus" value="" />
+            <input type="hidden" id="hidTaskAssignee" name="hidTaskAssignee" value="" />
+        </form>
+    </div>

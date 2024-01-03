@@ -1,0 +1,24 @@
+        <div>
+            <span id="spnError2" class="spnError2"></span>
+            <table id="tabProjectUsers" class="table">
+                {% for first_name, last_name, id in users %}
+                    <tr><td class="tab-font-awesome-icon"><a id="btn-project-user-delete-{{ id }}" class="btn-project-user-delete tab-font-awesome-icon" href="#" title="Remove user from project"><i class="fa fa-times" style="color: #ff0000;"></i></a></td><td>{{ first_name }} {{ last_name }}</td></tr>
+                {% empty %}
+                    <tr><td></td><td>No users for this project</td></tr>
+                {% endfor %}
+            </table>
+            {% if perms.simpris.add_project %}
+            <form id="form-project-user" method="post" class="form-inline">
+                {% csrf_token %}
+                <select name="selProjectUser" required  data-validation="required" data-validation-length="1-2" data-validation-error-msg="Project user must be specified">
+                    <option selected value="">Please select</option>
+                    {% for first_name, last_name, id in potentials %}
+                        <option value="{{ id }}">{{ first_name }} {{ last_name }}</option>
+                    {% endfor %}
+                </select>
+                <input id="btn-project-user-add" type="submit" class="btn btn-sm btn-success" value="Add user for project"/>
+                <input type="hidden" name="hidUserProjectID" value="{{ id }}"/>
+                <input type="hidden" name="hidUserProjectOrganisationID" value="{{ id }}"/>
+            </form>
+            {% endif %}
+        </div>

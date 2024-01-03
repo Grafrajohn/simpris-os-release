@@ -1,0 +1,4 @@
+insert into lookup_type (id, lookuptype, createddate, createdby)
+select lookuptypeid, min(lookupdescription), now(), 0
+from lookup
+group by lookuptypeid

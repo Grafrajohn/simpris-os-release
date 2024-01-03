@@ -1,0 +1,94 @@
+Summary
+-------
+xxxxxxxxxxxx
+
+==============================================================================================
+Functionality to test
+---------------------
+
+==============================================================================================
+>>DJANGO<<
+----------
+api\schedule\views.py
+
+Files
+-----
+xxxxxxxx
+
+=============================================================================================
+>>MYSQL<<
+---------
+VIEW `v_board` AS
+    SELECT
+        `brd`.`id` AS `id`,
+        `brd`.`userID` AS `userID`,
+        `brd`.`itemID` AS `itemID`,
+        `brd`.`itemType` AS `itemType`,
+        `brd`.`columnNo` AS `columnNo`,
+        `brd`.`itemOrder` AS `itemOrder`,
+        `tsk`.`taskName` AS `description`
+    FROM
+        (`board` `brd`
+        LEFT JOIN `task` `tsk` ON ((`brd`.`itemID` = `tsk`.`taskID`)))
+    WHERE
+        (ISNULL(`tsk`.`deletedDate`)
+            AND (`tsk`.`taskStatusID` NOT IN (7 , 8, 9)))
+
+VIEW `v_board_queue` AS
+    SELECT
+        `tsk`.`taskID` AS `id`,
+        `tsk`.`taskName` AS `description`,
+        `tsk`.`assignedTo` AS `assignedTo`,
+        1 AS `type`
+    FROM
+        ((`project` `prj`
+        JOIN `tasklist` `tkl` ON ((`prj`.`projectID` = `tkl`.`taskListID`)))
+        JOIN `task` `tsk` ON ((`tkl`.`taskListID` = `tsk`.`taskListID`)))
+    WHERE
+        (ISNULL(`tsk`.`deletedDate`)
+            AND (`tsk`.`taskStatusID` NOT IN (7 , 8, 9))
+            AND (NOT (`tsk`.`taskID` IN (SELECT
+                `board`.`itemID`
+            FROM
+                `board`
+            WHERE
+                ((`board`.`itemType` = 1)
+                    AND (`board`.`columnNo` <> 1))))))
+    UNION SELECT
+        `prb`.`problemID` AS `id`,
+        `prb`.`problemHeader` AS `description`,
+        `prb`.`assignedTo` AS `assignedTo`,
+        2 AS `type`
+    FROM
+        `problem` `prb`
+    WHERE
+        (ISNULL(`prb`.`deletedDate`)
+            AND (`prb`.`problemStatusID` <> 4)
+            AND (NOT (`prb`.`problemID` IN (SELECT
+                `board`.`itemID`
+            FROM
+                `board`
+            WHERE
+                ((`board`.`itemType` = 2)
+                    AND (`board`.`columnNo` <> 1))))))
+
+=============================================================================================
+>>STATIC<<
+----------
+
+Javascript
+----------
+
+HTML
+----
+
+============================================================================================
+Notes
+-----
+xxxxxx
+
+Checklist
+---------
+1. Changes to urls.py?
+2. Changes to archive tables?
+3. Changes to models.py?

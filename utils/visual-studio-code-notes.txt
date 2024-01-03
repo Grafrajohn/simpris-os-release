@@ -1,0 +1,38 @@
+Apple Mac
+
+If venv will not work check if in the venv folder there are bin and bin folders, if not you may have 
+to use pip3 to install it: 
+* pip3 install virtualenv
+* then where you want to create the virtualenv run virtualenv venv
+* then from folder above venv, to activate the virtual environment run: source venv/bin/activate
+* at this point you should see (venv) in front of the terminal command line
+
+Then install requirments.txt: pip3 install -r requiremnts.txt
+
+Windows
+
+inside the venv run Scripts\activate
+If you get a PowerShell permissions error open PowerShell as an admin and run Set-ExecutionPolicy RemoteSigned then try activating the venv
+
+Couldn't import Django error: 
+
+Make sure virtualenv is installed: virtualenv --version
+Run pip freeze to make sure django installed: pip freeze
+If pip not installed you may have tried to upgrade pip from pip which Windows does not allow
+so: download get-pip.py and run pythin get-pip.py in the virtualenv
+
+Unable to import MySQLDb:
+Download and install Oracle MySql-connector-python
+In __init__.py in simpris main folder add:
+try:
+    import pymysql
+    pymysql.install_as_MySQLdb()
+except:
+    pass
+
+Then in dev_pc settings try:
+    DATABASES = {
+   'default': {
+       'ENGINE': 'mysql.connector.django',
+
+This works on desktop with Python 3.8

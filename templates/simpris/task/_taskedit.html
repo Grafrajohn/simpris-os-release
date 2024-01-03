@@ -1,0 +1,93 @@
+        <div class="form-group row mb-3">
+            <label for="frmTaskList" class="form-label col-sm-2">Project / Task List</label>
+            <div class="col-sm-10">
+                {{ task.projectname }} / {{ task.tasklistname }}
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label for="frmTaskName" class="form-label col-sm-2">Task Name</label>
+            <div class="col-sm-10">
+                <input type="text" id="frmTaskName" size="50" maxlength="50" name="frmTaskName" value="{{ task.taskname }}" />
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label for="frmTaskDescription" class="form-label col-sm-2">Task Description</label>
+            <div class="col-sm-10">
+                <textarea id="frmTaskDescription" cols="50" rows="10" maxlength="10000" name="frmTaskDescription">{{ task.taskdescription }}</textarea>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label for="frmTaskType" class="form-label col-sm-2">Task Type</label>
+            <div class="col-sm-10">
+                <select id="frmTaskType" name="frmTaskType">
+                    <option selected value="">Please select</option>
+                    {% for tasktype in task_types %}
+                    <option value="{{ tasktype.lookupvaluenum }}"{% if tasktype.lookupvaluenum == task.tasktypeid %} selected {% endif %}>{{ tasktype.lookupvaluechar }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label for="frmTaskPriority" class="form-label col-sm-2">Task Priority</label>
+            <div class="col-sm-10">
+                <select id="frmTaskPriority" name="frmTaskPriority">
+                    <option selected value="">Please select</option>
+                    {% for priority in task_priorities %}
+                    <option value="{{ priority.lookupvaluenum }}" {% if task.taskpriorityid == priority.lookupvaluenum %} selected {% endif %}>{{ priority.lookupvaluechar }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label for="frmTaskStatus" class="form-label col-sm-2">Task Status</label>
+            <div class="col-sm-10">
+                <select id="frmTaskStatus" name="frmTaskStatus">
+                    <option selected value="">Please select</option>
+                    {% for status in task_statuses %}
+                        <option value="{{ status.lookupvaluenum }}" {% if task.taskstatusid == status.lookupvaluenum %} selected {% endif %}>{{ status.lookupvaluechar }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label for="frmTaskAssignee" class="form-label col-sm-2">Task Assigned To</label>
+            <div class="col-sm-10">
+                <select id="frmTaskAssignee" name="frmTaskAssignee">
+                    <option value="">Please select</option>
+                    {% for assignee in task_assignees %}
+                        <option value="{{ assignee.id }}" {% if assignee.id == task.assignedto %} selected {% endif %}>{{ assignee.first_name }} {{ assignee.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label for="frmDatePicker" class="form-label col-sm-2">Task start date</label>
+            <div class="col-sm-10">
+                <input type="text" id="frmDatePicker" name="frmDatePicker" value="{% if task.taskstartdate %}{{ task.taskstartdate }}{% endif %}"/>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label for="frmEstimatedTime" class="form-label col-sm-2">Task estimated time (days)</label>
+            <div class="col-sm-10">
+                <input type="text" size="5" id="frmEstimatedTime" name="frmEstimatedTime" value="{{ task.tasktimeestimate }}"/>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label for="frmCompletionDate" class="form-label col-sm-2">Task completion date</label>
+            <div class="col-sm-10">
+                <input type="text" id="frmDatePicker2" name="frmDatePicker2" value="{% if task.completiondate %}{{ task.completiondate }}{% endif %}"/>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label for="selPhaseID" class="form-label col-sm-2">Phase</label>
+            <div class="col-sm-10">
+                <select id="selPhaseID" name="selPhaseID">
+                    <option value="">Please select</option>
+                    {% for phase in phases %}
+                        <option value="{{ phase.phaseid }}" {% if phase.phaseid == task.phaseid %} selected {% endif %}>{{ phase.phasename }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <input name="hidTaskList" type="hidden" value="{{ task.tasklistid }}" />
+        <input name="hidCkedit" type="hidden" value="" />

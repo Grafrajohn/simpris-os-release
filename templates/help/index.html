@@ -1,0 +1,219 @@
+﻿{% extends 'base.html' %}
+{% block 'meta_description' %}
+    <meta name="description" content="Simpris Online Project Management Software - Help Information">
+{% endblock %}
+{% block 'meta_keywords' %}
+    <meta name="keywords" content="project, programme, program, management, tour, gantt, time">
+{% endblock %}
+{% block 'page_title' %}
+    <title>Simpris Project and Programme Management Help</title>
+{% endblock %}
+{% block 'canonical' %}
+    <link rel="canonical" href="https://www.simpris.com/help" />
+{% endblock %}
+{% block 'content' %}
+    <!-- Page Content -->
+    <div>
+        <h1 class="page-header"><a id="concept">Guide to Simpris</a></h1>
+        <h2>Concepts</h2>
+        <p>In Simpris you start with a project, divide it into tasklists, and divide each tasklist into tasks.</p>
+        <ul>
+            <li>Project 1</li>
+            <ul>
+                <li>1st Tasklist</li>
+                <ul>
+                    <li>Task 1</li>
+                    <li>Task 2</li>
+                </ul>
+            </ul>
+            <ul>
+                <li>2nd Tasklist</li>
+                <ul>
+                    <li>Task A</li>
+                    <li>Task B</li>
+                    <li>Task C</li>
+                    <li>Task D</li>
+                </ul>
+            </ul>
+        </ul>
+        <p>You can create many projects, and each project can have many tasklists, and each tasklist can have many tasks.</p>
+        <p>Projects can also be organised into programmes:</p>
+        <ul>
+            <li>Programme 1</li>
+            <ul>
+                <li>Project 2</li>
+                <ul>
+                    <li>3rd Tasklist</li>
+                    <ul>
+                        <li>Task 3</li>
+                        <li>Task 4</li>
+                    </ul>
+                </ul>
+                <ul>
+                    <li>2nd Tasklist</li>
+                    <ul>
+                        <li>Task E</li>
+                        <li>Task F</li>
+                        <li>Task G</li>
+                        <li>Task H</li>
+                    </ul>
+                </ul>
+            </ul>
+            <ul>
+                <li>Project 3</li>
+                <ul>
+                    <li>4th Tasklist</li>
+                    <ul>
+                        <li>Task 5</li>
+                        <li>Task 6</li>
+                    </ul>
+                </ul>
+                <ul>
+                    <li>5th Tasklist</li>
+                    <ul>
+                        <li>Task I</li>
+                        <li>Task J</li>
+                        <li>Task K</li>
+                        <li>Task L</li>
+                    </ul>
+                </ul>
+            </ul>
+        </ul>
+        <h2>Finding your way around Simpris</h2>
+        <a name="menus"><h3>Menus</h3></a>
+        <img class="img-responsive" alt="Simpris menus" longdesc="Simpris navigation menus" src="/static/help/images/menus-normal.png">
+        <p>At the top of Simpris is its menu system, which allows you to navigate around by clicking on its links. The menus link to pages in Simpris which have lists of projects, tasks and other information.</p>
+        <p>In each list page the following icons appear:</p>
+        <ul>
+            <li><i class="icon-trash red"></i>&nbsp;Delete the item</li>
+            <li><i class="icon-edit scarlet"></i>&nbsp;Edit the item</li>
+            <li><i class="icon-eye-open green"></i>&nbsp;View the item</li>
+            <li><i class="icon-bar-chart brown"></i>&nbsp;Any charts or metrics pertinent</li>
+            <li><i class="icon-dashboard purple"></i>&nbsp;Further charts or metrics</li>
+        </ul>
+        <p>The Simpris list pages are as follows:</p>
+        <br>
+        <h3><a id="client">My Clients</a></h3>
+        <p>A list of your clients. Clients are organisations or people for whom you are working on your projects. A client may be your employer, your customer, a big organisation or corporation, or a small company.</p>
+        <img class="img-responsive" alt="Simpris clients" longdesc="Simpris clients" src="/static/help/images/clients.png">
+        <h3><a id="project">My Projects</a></h3>
+        <p>A list of your projects. These are the projects which you have been granted permission to see and work on.</p>
+        <br>
+        <img class="img-responsive" alt="Simpris projects"  src="/static/help/images/projects.png">
+        <h3><a id="task">My Tasks</a></h3>
+        <p>A list of your tasks. These are the tasks which you have been granted permission to see and work on.</p>
+        <br>
+        <img class="img-responsive" alt="Simpris tasks" longdesc="Simpris tasks" src="/static/help/images/tasks.png">
+        <h3><a id="problem">My Problems</a></h3>
+        <p>A list of your problems. These are the problems which you have been granted permission to see and work on.</p>
+        <br>
+        <img class="img-responsive" alt="Simpris problems" longdesc="Simpris problems" src="/static/help/images/problems.png">
+        <h3><a id="people">People</a></h3>
+        <p>A list of people from your organisation and clients.</p>
+        <br>
+        <img class="img-responsive" alt="Simpris people" longdesc="Simpris people" src="/static/help/images/people.png">
+        <h3><a id="time">My Time</a></h3>
+        <p>A list of the time you have spent on various tasks. Here you can also
+        book time to tasks.</p>
+        <br>
+        <img class="img-responsive" alt="Simpris times" longdesc="Simpris times" src="/static/help/images/times.png">
+        <h3><a id="admin">Administration</a></h3>
+        <p>Functions for system administrators. You will only be able to use these
+        if you have been made a system administrator.</p>
+        <h2>Setting up a project</h2>
+        <p>To begin using Simpris you must create your project. Hover your mouse over the 'My Projects' menu and click the 'Add Project' menu. This shows a form as follows:</p>
+        <ul>
+            <li>Project name: give it an appropriate name</li>
+            <li>Project description: give your project a full description so other users know its purpose.</li>
+            <li>Project stakeholder: generally the person for whom the project is being carried out. For example in a business reorganisation the stakeholder would be the owner or manager of the business.</li>
+            <li>Project manager: who will be responsible for the running of the project.</li>
+            <li>Deliverables: those things which the project is expected to deliver so for example a construction project would deliver a finished building or modification to an existing building. Enter the details as deliverables so everyone who works on the project knows exactly what is to be delivered.</li>
+            <li>Project budget: this will be total expected cost of the project.</li>
+            <li>Importance: the importance of the project - how critical it is.</li>
+        </ul>
+        <p>When you have completed your project details press the submit button and Simpris will create your project. You can view a list of your projects by taking the 'My problems' menu.</p>
+        <h2>Adding users for your project</h2>
+        <p>The next step is to add users for your project - these are the people who can view and work on the project. If you do not add a particular user they will not be able to see the project or work on its tasks. That way you can manage confidentiality on your projects.</p>
+        <p>To add a user hover your mouse cursor over the menu 'People' and click the
+        'Add User' menu. This will show a form to be completed as follows:</p>
+        <ul>
+            <li>First name: first name of the user</li>
+            <li>Last name: last name of the user</li>
+            <li>Email: the users email address - Simpris needs this to send emails</li>
+            <li>Password - a password which the user will use to gain access. Make this a secure password.</li>
+            <li>Organisation - the organisation for which the user works or represents</li>
+        </ul>
+        <p>Make sure that you give users permissions on projects by editing the project and adding users to the project. If users are not allocated to a project they cannot work on it.</p>
+        <h2>Adding tasklists for your project</h2>
+        <p>Tasklists are a way of organising your projects into manageable pieces. Think of each tasklist as a unit as a major part of your project. The tasklist itself will be divided into tasks.</p>
+        <p>To add a tasklist, first go to the 'My projects' page and find your project. Then click on the <i class="icon-eye-open green"></i> icon to view the project. Here in the project view page, find and click the link titled 'Add new tasklist for this project'. This takes you to a form titled 'Add tasklist' to be completed as follows:</p>
+        <ul>
+            <li>Tasklist name: a short name for your tasklist.</li>
+            <li>Tasklist decription: a full description of your tasklist.</li>
+        </ul>
+        <p>When you have completed the form press the button to add the tasklist.</p>
+        <h2>Adding tasks for your tasklists</h2>
+        <p>Once you have added your projects and tasklists you are ready to add tasks. Tasks can only belong to tasklists so you organise your tasks into these. If a particular task does not fit into your existing tasklists, add a new tasklist first.</p>
+        <p>Tasks are the basic blocks of Simpris. To add a task, navigate to the appropriate project by taking the 'My Projects' menu and clicking on the <i class="icon-eye-open green"></i> icon to view the project. Find the tasklist to which you want to add the task and click on the 'Add new task to this list' link.</p>
+        <ul>
+            <li>Task description: a description of the task</li>
+            <li>Task type: select the task type from the drop down menu</li>
+            <li>Task priority: the priority of the task</li>
+            <li>Task status: the status of the task</li>
+            <li>Task assigned to: who the task is assigned to</li>
+        </ul>
+        <p>When you have filled in the form, press the 'Add task' button to create the task</p>
+        <h2>Working with projects, tasklists and tasks</h2>
+        <p>In Simpris the secret is to organisae yoyr tasks into appropriate tasklists and organise those into appropriate projects.</p>
+        <p>As soon as a task is complete close it by setting its status to complete.</p>
+        <h2>Working with time</h2>
+        <p>Simpris can help you to track how much time you spend on your projects. Time is assigned to tasks only - you must have a task for each type of activity in a project.</p>
+        <p>To add time against a task hover your mouse cursor over the 'My Time' menu and take the 'Add Time' menu. Complete the form as follows:</p>
+        <ul>
+            <li>Date of time: the date for which you wish to record time</li>
+            <li>No of hours to record: how many hours you wish to record.</li>
+            <li>Choose task: choose a task against which to record time</li>
+            <li>Time type: choose the type of task against which to record time</li>
+            <li>Comments: comments about your time</li>
+        </ul>
+        <a name="timegrid"></a>
+        <h2>Time editor</h2>
+        <img class="img-responsive" src="/static/help/images/timegrid.png" alt="Time editor">
+        The time editor is a quick way to add times for various tasks. To use the time editor:
+        <ul>
+            <li>Choose the date for which you wish to add time</li>
+            <li>Choose the project task combination for which you wish to add time. Time is recorded against tasks</li>
+            <li>Choose the time started and duration of the time spent on the task</li>
+            <li>Press the insert button to add the time against the task</li>
+        </ul>
+        <h2><a id="invoice">Working with invoices</a></h2>
+        <p>When you have recorded enough time you may wish to generate an invoice. This feature is useful for feeelance staff working on projects. To create an invoice hover your mouse cursor over the 'My time' menu and take the 'Create invoice' menu. This displays a form to be completed as follows:</p>
+        <ul>
+            <li>Start date: the start date of the period you want the invoice to cover</li>
+            <li>End date: the end date of the period you want the invoice to cover</li>
+            <li>Description/Reference for Invoice: a reference or dexcription by which you can refer to your invoice. This might be for a related series of tasks or a reference number for a job performed.</li>
+            <li>Invoice comments: any comments pertinent to the invoice.</li>
+        </ul>
+        <p>When you have completed the invoice press the 'Create Invoice' button to take you to the next stage of invoice creation. Simpris now displays the 'Prepare Invoice' page which allows you to allocate tasks to your invoice.</p>
+        <p>In the 'Prepare Invoice' page you must un-tick any tasks which you do not want to display in your invoice. Then press the 'Add tasks to Invoice' button and your invoice will be created. Simpris then shows you your invoice and you will notice that there is a print button displayed. This will diaplay a printer-friendly version of your invoice.</p>
+        <h2><a name="problems">Working with problems</a></h2>
+        <p>Any project has its problems and Simpris allows you to track problems against your projects. To create a problem hover your mouse cursor over the 'My Problems' menu and then click the 'Add problem' menu. Simpris will display the 'Add
+        new problem' page with a form to complete as follows:</p>
+        <ul>
+            <li>Organisation: the organisation to which the problem applies</li>
+            <li>Problem type: the type of problem</li>
+            <li>Problem subtype: the subtype of problem</li>
+            <li>Problem summary: the summary description of the problem</li>
+            <li>Problem description: full dexription of the problem</li>
+            <li>No of people affected by the problem: an estimate of the number of people affected by the problem</li>
+            <li>Scope: scope of the problem - does it affect a whole organisation or just a few people?</li>
+            <li>Problem Status: status of the problem</li>
+            <li>Problem priority: priority of the problem i.e. is it more or less important</li>
+        </ul>
+        <p>When you have completed the form click the 'Add problem' button to create your problem.</p>
+        <h2><a name="linkproblems">Linking problems</a></h2>
+        <p>Once you have created your problem you can link it to either a project or another problem.</p>
+        <p>Link a problem to a project if it pertains to that project</p>
+        <p>Link a problem to another problem if it should be grouped with that problem. For example one problem - a power failure - might cause and thus be linked to other problems such as office equipment not working.</p>
+    </div>
+{% endblock %}

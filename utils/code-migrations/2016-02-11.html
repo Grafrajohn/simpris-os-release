@@ -1,0 +1,111 @@
+Summary
+-------
+Schedule
+
+==============================================================================================
+Functionality to test
+---------------------
+Kanban
+Schedule
+Move task
+
+==============================================================================================
+>>DJANGO<<
+----------
+
+Files
+-----
+templates\schedule\*.*
+templates\base.html
+template\simpris\topmenu.html
+urls.py
+templates\project\detail.html
+api\project\*.*
+static\js\simpris\common\*.*
+api\utility\*.*
+api\schedule\*.*
+models.py
+
+settings: make sure 'django.core.context_processors.request' is enabled as a context processor
+
+=============================================================================================
+>>MYSQL<<
+---------
+    V_Project_Tasks
+    SELECT DISTINCT
+        `pr`.`projectID` AS `projectID`,
+        `pr`.`projectName` AS `projectName`,
+        `pr`.`projectDescription` AS `projectDescription`,
+        `tl`.`taskListID` AS `taskListID`,
+        `tl`.`taskListName` AS `taskListName`,
+        `tl`.`taskListDescription` AS `taskListDescription`,
+        `tk`.`taskID` AS `taskID`,
+        `tk`.`name` AS `name`,
+        `tk`.`taskDescription` AS `taskDescription`,
+        CONCAT(LEFT(`tk`.`taskDescription`, 80), '...') AS `taskDescriptionShort`,
+        `tk`.`taskTypeID` AS `taskTypeID`,
+        `tk`.`taskStatusID` AS `taskStatusID`,
+        `tk`.`taskPriorityID` AS `taskPriorityID`,
+        `tk`.`assignedTo` AS `assignedTo`,
+        `lkst`.`lookupValueChar` AS `taskStatus`,
+        `lkpr`.`lookupValueChar` AS `taskPriority`,
+        `tk`.`taskID` AS `id`,
+        `pr`.`clientID` AS `clientID`,
+        `tk`.`createdBy` AS `taskCreatedBy`,
+        `tk`.`deletedBy` AS `task_deleted_by`,
+        `tl`.`deletedBy` AS `tasklist_deleted_by`
+    FROM
+        ((((`project` `pr`
+        JOIN `tasklist` `tl` ON ((`pr`.`projectID` = `tl`.`projectID`)))
+        LEFT JOIN `task` `tk` ON ((`tl`.`taskListID` = `tk`.`taskListID`)))
+        LEFT JOIN `lookup` `lkst` ON (((`tk`.`taskStatusID` = `lkst`.`lookupValueNum`)
+            AND (`lkst`.`lookupTypeID` = 21))))
+        LEFT JOIN `lookup` `lkpr` ON (((`tk`.`taskPriorityID` = `lkpr`.`lookupValueNum`)
+            AND (`lkpr`.`lookupTypeID` = 4))))
+
+VIEW `v_schedule` AS
+    SELECT
+        `phs`.`phaseID` AS `phaseID`,
+        `phs`.`phaseName` AS `phaseName`,
+        `phs`.`phaseDescription` AS `phaseDescription`,
+        phs.startdate as startdate,
+        `tsk`.`name` AS `name`,
+        `tsk`.`taskID` AS `taskID`,
+        `tsk`.`assignedTo` AS `assignedTo`,
+        `phs`.`phaseID` AS `id`
+    FROM
+        (`phase` `phs`
+        LEFT JOIN `task` `tsk` ON ((`phs`.`phaseID` = `tsk`.`phaseID`)))
+
+Query update task:
+
+SET SQL_SAFE_UPDATES = 0;
+
+update task
+set name = left(taskDescription,50);
+
+SET SQL_SAFE_UPDATES = 1;
+
+=============================================================================================
+>>STATIC<<
+----------
+
+Javascript
+----------
+js\simpris\angular\app-project.js
+js\simpris\common.js
+new jquery library
+new jqueryui library
+
+HTML
+----
+
+============================================================================================
+Notes
+-----
+xxxxxx
+
+Checklist
+---------
+1. Changes to urls.py?
+2. Changes to archive tables?

@@ -1,0 +1,12 @@
+for all create tests
+    check with db call that row created
+
+for all list tests
+    check that correct data listed
+
+for all update tests
+    check with db call that correct row amended
+
+for all delete tests
+    check with db that row deleted
+

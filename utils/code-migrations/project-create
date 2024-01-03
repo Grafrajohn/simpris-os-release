@@ -1,0 +1,52 @@
+Summary
+-------
+Project create also includes reorganised css and js
+
+DJANGO
+------
+
+Files
+-----
+templates\base.html
+apps\project\views.py
+templates\common\opstatus.html
+static\css\*.*
+static\js\*.*
+templates\project\home.html
+templates\project\projectlist.html
+templates\project\create.html
+templates\time\*.*
+templates\task\tasklist.html
+templates\problem\problemlist.html
+templates\user\userlist.html
+templates\client\clientlist.html
+urls.py
+models.py (VTasklistUsersDistinct,VUserContextFull)
+templates\project\create.html
+templates\project\_projectedit.html
+api\project\views.py
+library\user_context.py
+library\response_object.py
+api\utility\*.*
+api\tasklist\*.*
+api\document\*.*
+api\task\views.py
+apps\problem\views.py
+templates\top_menu.html
+
+dB
+--
+v_tasklist_users_distinct
+v_user_context_full
+v_importances
+userproject add id as 1st column primary key
+vw_select_project_index_sidebar add dateorder get from desktop version of table
+
+Notes
+-----
+Test all index list pages afterwards
+
+PHP
+---
+
+sub\controller\confirm.php make new Django users superusers and staff users

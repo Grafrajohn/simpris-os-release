@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content' %}
+    <div id="divOrganisationOverview" class="col-md-12">
+        <ul class="nav nav-tabs mb-3" role="tablist">
+          <li class="nav-itemactive"><a class="nav-link" href="#">Organisation Overview</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/organisation/edit/{{ id }}">Edit Organisation</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/organisation/users/{{ id }}">Organisation Users</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ BASE_URL_DJ }}/organisation/history/{{ id }}">Organisation History</a></li>
+        </ul>
+    {% if not detail %}
+    	Organisation not found
+    {% else %}
+        {% for org in detail %}
+            <h4> {{ org.organisationname }} </h4>
+		{% endfor %}
+    {% endif %}
+    </div>
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+    {% load static %}
+	<script src="{% static "js/jquery/jquery-1.12.0.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery-ui.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/bootstrap/bootstrap.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/jquery-components/jquery.nanoscroller.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery.ui.touch-punch.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/common/common.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+
+	<!-- theme scripts -->
+	<script src="{% static "js/jquery-components/scripts.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/pace.min.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific inline scripts -->
+{% endblock %}    

@@ -1,0 +1,30 @@
+        <div class="card card bg-primary text-white mb-3">
+            <div class="card-header">
+                <h4>Comments for this {{ item_label }}</h4>
+            </div>
+        {% for comment in comments %}
+            <div class="card-body">
+                <div>{{ comment.commenttext }}</div>
+                {% if comment.documenttitle != null %}
+                <div><a href="{{ BASE_URL_DJ }}{{ MEDIA_URL }}/comment/{{ comment.documentfilename }}" target=_blank><i class="fa fa-file icon-large"></i>&nbsp;&nbsp;&nbsp;{{ comment.documenttitle }}</a></div>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <em><small>{{ comment.first_name }}&nbsp;{{  comment.last_name }}&nbsp; - {{ comment.createddate }}</small></em>
+            </div>
+            {% if forloop.last %}
+            <form id="frmDocumentUpload" action="{{ BASE_URL_DJ }}/uploads/upload/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div style="padding: 5px;">
+                    <label>Upload a document for this comment<input type="file" name="frmUserFile" /></label>
+                    <input type="submit" class="btn btn-sm btn-primary" value="Upload document for comment"/>
+                    <input type="hidden" name="hidItemID" value="{{ comment.commentid }}"/>
+                    <input type="hidden" name="hidItemType" value="cmt"/>
+                    <input type="hidden" name="hidParentID" value="{{ id }}" />
+                </div>
+            </form>
+            {% endif %}
+        {% empty %}
+            <p>No comments for this {{ item_label }}</p>
+        {% endfor %}
+        </div>

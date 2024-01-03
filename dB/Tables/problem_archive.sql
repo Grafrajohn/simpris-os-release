@@ -1,0 +1,22 @@
+CREATE TABLE `problem_archive` (
+  `problemID` int(11) NOT NULL,
+  `clientID` int(11) NOT NULL,
+  `organisationID` int(11) NOT NULL,
+  `problemTypeID` int(11) NOT NULL,
+  `problemSubTypeID` int(11) DEFAULT NULL,
+  `problemHeader` varchar(50) NOT NULL,
+  `problemDescription` varchar(2000) NOT NULL,
+  `noOfPeopleAffected` int(11) NOT NULL,
+  `scope` int(11) NOT NULL,
+  `problemStatusID` int(11) DEFAULT NULL,
+  `problemPriorityID` int(11) DEFAULT NULL,
+  `queueID` int(11) DEFAULT NULL,
+  `assignedTo` int(11) DEFAULT NULL,
+  `completedDate` datetime DEFAULT NULL,
+  `createdDate` datetime NOT NULL,
+  `createdBy` int(11) NOT NULL,
+  `updatedDate` datetime DEFAULT NULL,
+  `updatedBy` int(11) DEFAULT NULL,
+  `deletedDate` datetime DEFAULT NULL,
+  `deletedBy` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

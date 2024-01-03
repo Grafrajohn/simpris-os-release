@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+{% endblock %}
+{% block 'head-js' %}
+{% endblock %}
+{% block 'content-heading' %}
+    <ul class="nav nav-tabs mb-3" role="tablist">
+        <li class="nav-item"><a class="nav-link" href="/programme/list/">My Programmes</a></li>
+        <li class="nav-item active"><a class="nav-link active" href="#">Programme Activity</a></li>
+    </ul>
+{% endblock %}
+{% block 'content' %}
+	<div class="col-md-12">
+    <a href="{{ BASE_URL_DJ }}/report/generic/prog" target=_new>Programme Charts</a><br><br>
+    {% if sidebar %}
+        {% for programme in sidebar %}
+            <div>
+            {% if programme.column2 == "" %}
+                <h4>{{ programme.programmename }}</h4>
+            {% else %}
+                <a href="{{ BASE_URL_DJ }}/programme/detail/{{ programme.id }}">{{ programme.programmename }}</a>
+                {{ programme.columnn2 }}
+            {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <span>There is no recent programme activity</span>
+    {% endif %}
+	    </aside>
+	</div>
+{% endblock %}
+{% block 'end-js' %}
+{% endblock %}

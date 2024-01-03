@@ -1,0 +1,90 @@
+{% extends 'base_lean.html' %}
+{% block 'head-css' %}
+{% endblock %}
+{% block 'head-js' %}
+    <meta name="robots" content="noindex">
+{% endblock %}
+{% block 'content' %}
+<div id="layoutAuthentication">
+	<div id="layoutAuthentication_content">
+		<main>
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-5">
+						<div class="card shadow-lg border-0 rounded-lg mt-5">
+							<div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+							<div class="card-body">
+								{% include "simpris/common/_error_bootstrap.html" %}
+
+								<form id="frmLogin" action="/auth/logon" method="post" class="form-horizontal">
+									{% csrf_token %}
+									<div>
+										<label for="username">Username:</label>
+									</div>
+									<div>
+										<input id="username" type="text" name="username" value="{% if form == None %} {{ form.data.username }} {% endif %}" autocomplete="off">
+									</div>
+									<div>
+										<label for="password">Password:</label>
+									</div>
+									<div>                
+										<input id="password" name="password" type="password" value="{% if form == None %}{{ form.data.password }} {% endif %}" autocomplete="off">
+									</div>
+									<div>
+										<label for="remember">Remember Me:</label>
+									</div>
+									<div>  
+										<input type="checkbox" id="remember" name="remember" value="false">
+									</div>
+									<div>
+										<input id="btnLogin" type="submit" class="btn btn-sm btn-primary" value="Login">
+									</div>
+								</form>
+
+								<div><a href="forgot_password">Forgot your password?</a></div>
+
+							</div>
+							<div class="card-footer text-center py-3">
+								<div class="small"><a href="/register/new">Need an account? Sign up!</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+{% comment %} 	<div id="layoutAuthentication_footer">
+		<footer class="py-4 bg-light mt-auto">
+			<div class="container-fluid px-4">
+				<div class="d-flex align-items-center justify-content-between small">
+					<div class="text-muted">Copyright &copy; Your Website 2021</div>
+					<div>
+						<a href="#">Privacy Policy</a>
+						&middot;
+						<a href="#">Terms &amp; Conditions</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div> {% endcomment %}
+</div>
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+    {% load static %}
+
+	<script src="{% static "js/jquery/jquery-1.12.0.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery-ui.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/bootstrap/bootstrap.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/jquery-components/jquery.nanoscroller.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jqueryui/jquery.ui.touch-punch.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/simpris/common/common.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific scripts -->
+
+	<!-- theme scripts -->
+	<script src="{% static "js/jquery-components/scripts.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/pace.min.js" %}" type="text/javascript"></script>
+
+	<!-- this page specific inline scripts -->
+{% endblock %}

@@ -1,0 +1,114 @@
+             	<div id="toggle-tk-" style="display: none;" class="well well-lg">
+			        <form class="form-horizontal" id="frmTaskAdd" method="post">
+			        {% csrf_token %}          
+				        <h3 id="header-task-edit">Add task</h3>
+				        <p>Task List <span id="frmTaskAdd-tasklistID"></span></p>
+                        <span id="spnError" class="spnError"></span>
+				        <input id="hidTaskList" name="hidTaskList" type="hidden" value="0" />
+				        <input id="hidTaskID" name="hidTaskID" type="hidden" value="0" />				        
+				        <input id="hidURL" name="hidURL" type="hidden" value="{{ BASE_URL_DJ }}" />
+				        <table>
+				            <tr>
+				                <td><label>Task name:</label></td>
+				                <td><input type="text" id="frmTaskName" size="50" maxlength="50" name="frmTaskName"/></td>
+				            </tr>
+				            <tr>
+				                <td><label>Task description:</label></td>
+				                <td><textarea id="frmTaskDescription" cols="50" rows="10" maxlength="10000" name="frmTaskDescription"></textarea></td>
+				            </tr> 
+				            <tr>
+				                <td><label>Task type:</label></td>
+				                <td>
+				                    <select id="frmTaskType" name="frmTaskType">
+				                        <option selected value="">Please select</option>
+				                        {% for tasktype in tasktypes %}
+	                            		<option value="{{ tasktype.lookupvaluenum }}">{{ tasktype.lookupvaluechar }}</option> 
+	                            		{% endfor %}                      
+				                    </select>
+				                </td>
+				            </tr> 
+				            <tr>
+				                <td><label>Task priority</label></td>
+				                <td>
+				                    <select id="frmTaskPriority" name="frmTaskPriority">
+				                        <option selected value="">Please select</option>
+				                        {% for taskpriority in taskpriorities %}
+	                            		<option value="{{ taskpriority.lookupvaluenum }}" >{{ taskpriority.lookupvaluechar }}</option>
+	                            		{% endfor %}                      
+				                    </select>
+				                </td>
+				            </tr> 
+				            <tr>
+				                <td><label>Task status:</label></td>
+				                <td>
+				                    <select id="frmTaskStatus" name="frmTaskStatus">
+				                        <option selected value="">Please select</option>
+				                        {% for taskstatus in taskstatuses %}
+	                            		<option value="{{ taskstatus.lookupvaluenum }}" >{{ taskstatus.lookupvaluechar }}</option>
+	                            		{% endfor %}                        
+				                    </select>
+				                </td>
+				            </tr> 
+				            <tr>
+				                <td><label>Task assigned to:</label></td>
+				                <td>
+				                    <select id="frmTaskAssignee" name="frmTaskAssignee">
+				                        <option value="">Please select</option>
+				                        {% for taskassignee in tklusers %}
+	                            		<option value="{{ taskassignee.id }}" >{{ taskassignee.first_name }} {{ taskassignee.last_name }}</option>
+	                            		{% endfor %} 			                                               
+				                    </select>
+				                </td>
+				            </tr>  
+				            <tr>
+				                <td><label>Task start date</label></td>
+				                <td><input type="text" id="frmDatePicker-" name="frmDatePicker-" class="date-task-start" /></td>
+				            </tr>  
+				            <tr>
+				                <td><label>Task estimated time (days)</label></td>
+				                <td><input type="text" size="5" id="frmEstimatedTime" name="frmEstimatedTime" value=""/></td>
+				            </tr>
+				            <tr id="tr-percentage-complete">
+				                <td><label>Task % complete</label></td>
+				                <td><input type="text" size="5" id="frmPercentageComplete" name="frmPercentageComplete" value=""/></td>
+				            </tr>
+				            <tr id="tr-completion-date">
+				                <td><label>Task completion date</label></td>
+				                <td><input type="text" id="frmDatePicker2-" name="frmDatePicker2-" value="" class="date-task-completion"/></td>
+				            </tr>
+				            <tr id="tr-phase">
+				                <td>
+                                    <label>Task phase:</label>
+                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="left" title="" data-original-title="Phase into which this task fits. Not mandatory."></i>
+                                </td>
+				                <td>
+				                    <select id="selPhaseID" name="selPhaseID">
+				                        <option value="">Please select</option>
+				                        {% for phase in phases %}
+	                            		<option value="{{ phase.phaseid }}" >{{ phase.phasename }}</option>
+	                            		{% endfor %}
+				                    </select>
+				                </td>
+				            </tr>
+				            <tr>
+				                <td><label>Preceding task (task before this one):</label></td>
+				                <td>
+				                    <select id="frmTaskDependency" name="frmTaskDependency">
+				                        <option selected value="">Please select</option>
+				                        {% for taskdep in tkdepend %}
+	                            		<option value="{{ taskdep.taskid }}" >Task No: {{ taskdep.taskid }} - {{ taskdep.taskname }}</option>
+	                            		{% endfor %}                       
+				                    </select>
+				                </td>
+				            </tr>              
+				            <tr>
+				                <td>
+                                    <input id="btn-task-add" type="submit" value="Add Task" class="btn btn-sm btn-primary" />
+                                    <input id="btn-task-update" type="submit" value="Update Task" class="btn btn-sm btn-primary" />&nbsp;
+                                    <input id="btn-task-cancel" type="submit" value="Cancel" class="btn btn-sm btn-primary" />
+                                </td>
+				                <td></td>				                
+				            </tr>
+				        </table>
+			    	</form>
+             	</div> 

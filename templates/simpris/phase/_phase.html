@@ -1,0 +1,31 @@
+            {% if mode == "edit" and not phase %}<p>Phase not found</p>{% endif %}
+            {%  if mode == "edit" %}
+            <div class="form-group row mb-3">
+                <label for="frmPhaseID" class="form-label col-sm-2">Phase ID</label>
+                <div class="col-sm-10">{{ phase.0.phaseid }}</div>
+            </div>
+            {% endif %}
+            <div class="form-group row mb-3">
+                <label for="frmPhaseName" class="form-label col-sm-2">Phase Name</label>
+                <div class="col-sm-10">
+                    <input id="frmPhaseName" type="text" size="50" maxlength="50" name="frmPhaseName" value="{{ phase.0.phasename }}"/>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmPhaseDescription" class="form-label col-sm-2">Phase Description</label>
+                <div class="col-sm-10">
+                    <textarea id="frmPhaseDescription" type="textarea" rows="10" cols="50" maxlength="500" name="frmPhaseDescription">{{ phase.0.phasedescription }}</textarea>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmDatePicker" class="form-label col-sm-2">Phase Start Date</label>
+                <div class="col-sm-10">
+                    <input type="text" id="frmDatePicker" name="frmDatePicker" value="{% if phase.0.startdate %}{{ phase.0.startdate | date:"Y/m/d" }}{% endif %}"/>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="frmDatePicker2" class="form-label col-sm-2">Phase End Date</label>
+                <div class="col-sm-10">
+                    <input type="text" id="frmDatePicker2" name="frmDatePicker2" value="{% if phase.0.enddate %}{{ phase.0.enddate | date:"Y/m/d" }}{% endif %}"/>
+                </div>
+            </div>

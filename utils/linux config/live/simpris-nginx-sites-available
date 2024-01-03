@@ -1,0 +1,76 @@
+server {
+    listen 80;
+
+    server_name simpris.com www.simpris.com www.simpris.co.uk simpris.co.uk www.simpris.net simpris.net www.simpris.info simpris.info;
+
+    return 301 https://www.simpris.com$request_uri;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static {
+	alias /home/simpris_user/simpris/simpris/simpris/static;
+    }
+
+    location / {
+        include         uwsgi_params;
+        uwsgi_pass      unix:/run/uwsgi/simpris.sock;
+    }
+}
+
+server {
+  	listen 80;
+  	listen 443 ssl;
+  	server_name simpris.com;
+  	# add ssl settings
+	ssl on;
+	ssl_certificate /etc/nginx/ssl/simpris_combined.crt;
+	ssl_certificate_key /etc/nginx/ssl/simpris.key;
+
+	ssl_session_timeout 5m;
+
+	ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+	ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
+	ssl_prefer_server_ciphers on;
+
+  	return 301 https://www.simpris.com$request_uri;
+}
+
+
+# HTTPS server
+#
+server {
+	listen 443;
+	server_name simpris.com www.simpris.com www.simpris.co.uk simpris.co.uk www.simpris.net simpris.net www.simpris.info simpris.info;
+
+	ssl on;
+	ssl_certificate /etc/nginx/ssl/simpris_combined.crt;
+	ssl_certificate_key /etc/nginx/ssl/simpris.key;
+
+	ssl_session_timeout 5m;
+
+	ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+	ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
+	ssl_prefer_server_ciphers on;
+
+    	# Your Django project's media files - amend as required
+    	location /media  {
+        	alias /home/simpris_user/simpris/simpris/simpris/uploads;
+    	}
+
+    	# your Django project's static files - amend as required
+    	location /static {
+        	alias /home/simpris_user/simpris/simpris/simpris/static; 
+    	}
+
+    	# your Django project's admin static files - amend as required
+    	location /static/admin {
+		alias /home/simpris_user/Env/simprisenv/lib/python3.5/site-packages/django/contrib/admin/static/admin;
+    	}
+
+	location / {
+		# try_files $uri $uri/ =404;
+		# uwsgi_pass simpris;
+		# include /etc/nginx/uwsgi_params;
+        	include         uwsgi_params;
+        	uwsgi_pass      unix:/run/uwsgi/simpris.sock;
+	}
+}

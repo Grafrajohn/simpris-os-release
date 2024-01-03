@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Jasmine Spec Runner v2.4.1 - Simpris</title>
+
+    <!-- Jasmine stuff -->
+    <link rel="shortcut icon" type="image/png" href="lib/jasmine-2.4.1/jasmine_favicon.png">
+    <link rel="stylesheet" href="lib/jasmine-2.4.1/jasmine.css">
+
+    <script src="lib/jasmine-2.4.1/jasmine.js"></script>
+    <script src="lib/jasmine-2.4.1/jasmine-html.js"></script>
+    <script src="lib/jasmine-2.4.1/boot.js"></script>
+
+    <!-- JQuery stuff -->
+	<script src="../../simpris/static/js/jquery/jquery-1.12.0.min.js" type="text/javascript"></script>
+
+    <!-- CKEditor -->
+    <script src="../../simpris/static/js/editor/ckeditor/ckeditor.js" type="text/javascript"></script>
+
+    <!-- include Simpris source files here... -->
+	<script src="../../simpris/static/js/jquery/jquery-1.12.0.min.js" type="text/javascript"></script>
+    <script src="../../simpris/static/js/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
+	<script src="../../simpris/static/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../../simpris/static/js/jquery-components/jquery.nanoscroller.min.js" type="text/javascript"></script>
+    <script src="../../simpris/static/js/jqueryui/jquery.ui.touch-punch.min.js" type="text/javascript"></script>
+	<script src="../../simpris/static/js/simpris/common/common.js" type="text/javascript"></script>
+	<script src="../../simpris/static/js/simpris/task/task_quick_edit.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		window.simpris = { };
+		simpris.base_url = "{{ request.META.HTTP_HOST }}";
+		simpris.project = { };
+        simpris.common = { };
+        simpris.report = { };
+        simpris.csrf_token = '{{ csrf_token }}';
+	</script>
+
+    <script src="../../simpris/static/js/simpris/common/common.js" type="text/javascript"></script>
+    <script src="../../simpris/static/js/simpris/project/project.js" type="text/javascript"></script>
+
+    <!-- include spec files here... -->
+    <!-- Project files -->
+    <script type="text/javascript">
+        CKEDITOR.replace( 'frmProjectDescription' );
+        CKEDITOR.replace( 'frmProjectDeliverables' );
+    </script>
+    <script src="spec/project_spec.js"></script>
+
+</head>
+
+<body>
+</body>
+</html>

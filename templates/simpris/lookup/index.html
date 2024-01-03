@@ -1,0 +1,347 @@
+{% extends 'base.html' %}
+{% block 'head-css' %}
+    <style>
+        [v-cloak] { display:none; }
+    </style>
+{% endblock %}
+{% block 'head-js' %}
+
+{% endblock %}
+{% block 'content' %}
+    <h3>System Menu and Drop Down Configuration</h3>
+    <div id="lookup">
+        <div v-if="help_panel_visible" v-cloak class="row" v-on:click="hideHelp">
+            <div class="card card">
+                <div class="card-header">
+                    <p>Editing Simpris Lookups</p>
+                </div>
+                <div class="card-body">
+                    <p>Help on editing lookups</p>
+                </div>
+            </div>
+        </div>
+        <div v-if="custom_panel_visible" v-cloak class="row">
+            <div class="card card bg-primary text-white">
+                <div class="card-header">
+                    <p>Add Lookup</p>
+                </div>
+                <div class="card-body">
+                    <form class="form">
+                        <div class="form-group row mb-3">
+                            <label for="selLookupType">Menu type</label>
+                            <select class="form-control" id="selLookupType" ref="selLookupType">
+                                <option value="0">Select menu type</option>
+                                <option v-for="lookup_type in lookup_type_values" v-bind:value="lookup_type.id">${ lookup_type.lookuptype }</option>
+                            </select>
+                        </div>
+                        <div class="form-group row mb-3">
+                            <label for="frmDescription">Menu description</label>
+                            <input class="form-control" id="frmDescription" ref="frmDescription" />
+                        </div>
+                        <div class="form-group row mb-3">
+                            <label for="frmLookupValueChar">Menu Value</label>
+                            <input class="form-control" id="frmLookupValueChar" ref="frmLookupValueChar" />
+                        </div>
+                        <div class="form-group row mb-3">
+                            <label for="selLookupOrder">Menu order</label>
+                            <select class="form-control" id="selLookupOrder" ref="selLookupOrder">
+                                <option>Select menu order</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                                <option>13</option>
+                                <option>14</option>
+                                <option>15</option>
+                            </select>
+                        </div>
+                        <button @click="addItem" class="btn btn-default">Add</button>
+                        <button class="btn btn-default">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <button @click="showAddLookupPanel" class="btn btn-primary"><i class="glyphicon glyphicon-plus-sign"></i> Add a lookup item</button>
+                <button @click="showHelp" class="btn btn-primary"><i class="glyphicon glyphicon-question-sign"></i> Help about Simpris Lookups</button>
+            </div>
+            <br/><br/>
+            <div>
+                <span id="spnError"></span>
+            </div>
+            <vue-bootstrap-table
+                :columns="columns"
+                :values="values"
+                :show-filter="showFilter"
+                :paginated="paginated"
+                :row-click-handler="editInlineLookup">
+            </vue-bootstrap-table>
+        </div>
+    </div>
+{% endblock %}
+{% block 'end-js' %}
+	<!-- global scripts -->
+
+	<script src="/static/js/jquery/jquery-3.1.1.min.js" type="text/javascript"></script>
+	<script src="/static/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/vue" type="text/javascript"></script>
+    <script src="/static/js/vue/vue-bootstrap-table.js" type="text/javascript"></script>
+	<script src="/static/js/simpris/common/common.js" type="text/javascript"></script>
+    <script>
+        // https://github.com/jbaysolutions/vue2-bootstrap-table
+        var toggleEnable = function (colname, entry) {
+            var returnButton;
+            if (entry.disabled == true) {
+                returnButton = '<button type="button" class="btn btn-sm btn-primary" onClick="enableLookup(colname,entry)">Enable</button>';
+            }
+            else if (entry.disabled == false || entry.disabled == null) {
+                returnButton = '<button type="button" class="btn btn-sm btn-primary" onClick="disableLookup(colname,entry)">Disable</button>';
+            }
+            return returnButton;
+        };
+        Vue.config.debug = true;
+        Vue.config.devtools = true;
+
+        new Vue({
+            el: '#lookup',
+            delimiters: ['${', '}'],
+            components: {
+                VueBootstrapTable: VueBootstrapTable
+            },
+            data: {
+                logging: [],
+                showFilter: true,
+                showPicker: false,
+                paginated: true,
+                ajax: {
+                    enabled: true,
+                    url: "/api/lookup/list/",
+                    csrfmiddlewaretoken: simpris.csrf_token,
+                    method: "GET",
+                    delegate: true,
+                },
+                columns: [
+                    {
+                        title:"id",
+                        name: "id",
+                        visible: true,
+                        editable: false,
+                    },
+                    {
+                        title:"description",
+                        name: "lookupdescription",
+                        visible: true,
+                        editable: true,
+                    },
+                    {
+                        title:"Value",
+                        name: "lookupvaluechar",
+                        visible: true,
+                        editable: true,
+                        //renderfunction: toggleEnable,
+                    },
+                    {
+                        title:"Enabled?",
+                        name: "disabled",
+                        visible: true,
+                        editable: true,
+                        renderfunction: toggleEnable,
+                    }
+                ],
+                values: [],
+                values_slice: [],
+                lookup_type_values: [],
+                custom_panel_visible: false,
+                default_panel_visible: false,
+                help_panel_visible: false,
+                selected_lookup_type: 'type',
+                selected_lookup_value: 'value',
+                selected_lookup_order: 'order',
+                id: null,
+                lookup_type_id: null,
+                lookup_subtype_id: null,
+                lookup_order: null,
+                lookup_value_num: null,
+                lookup_value_char: null,
+                lookup_description: null
+            },
+            ready: function () {
+                //this.getLookups();
+            },
+            mounted: function () {
+                this.getLookups();
+                this.getLookupTypes();
+            },
+            created: function () {
+                var self = this;
+                this.$on('cellDataModifiedEvent',
+                    function( originalValue, newValue, columnTitle, entry) {
+                        if (entry.clientid == 0) {
+                            alert("You cannot edit default values but you can disable them.");
+                        }
+                        else {
+                            this.updateLookup(entry);
+                        }
+                    }
+                );
+                this.$on('ajaxLoadedEvent',
+                    function( data ) {
+                        this.logging.push("ajaxLoadedEvent - data : " + data );
+                    }
+                );
+                this.$on('ajaxLoadingError',
+                    function( error ) {
+                        this.logging.push("ajaxLoadingError - error : " + error );
+                    }
+                );
+            },
+            methods: {
+                addItem: function() {
+                    var self = this;
+                    var data = {
+                        csrfmiddlewaretoken: simpris.csrf_token,
+                        lookupTypeID: this.$refs.selLookupType.value,
+                        //lookupSubTypeID: this.lookup_subtype_id.value,
+                        lookupOrder: this.$refs.selLookupOrder.value,
+                        //lookupValueNum: this.lookup_value_num,
+                        lookupValueChar: this.$refs.frmLookupValueChar.value,
+                        lookupDescription: this.$refs.frmDescription.value,
+                        disabled: 0
+                    };
+                    $.ajax({
+                        url: '/api/lookup/insert/',
+                        type: 'POST',
+                        data: data,
+                        //csrfmiddlewaretoken: simpris.csrf_token,
+                        error: (function (err) {
+                          $('#spnError').text("There has been an error: " + err.statusText);
+                        }),
+                        success: (function (status) {
+                            this.values.push(item);
+                        })
+                    });
+                },
+                toggleFilter: function() {
+                    this.showFilter = !this.showFilter;
+                },
+                togglePicker: function() {
+                    this.showPicker = !this.showPicker;
+                },
+                togglePagination: function () {
+                    this.paginated = !this.paginated;
+                },
+                getLookups() {
+                    var self = this;
+                    $.ajax({
+                        url: '/api/lookup/list/',
+                        type: 'GET',
+                        csrfmiddlewaretoken: simpris.csrf_token,
+                        error: (function (err) {
+                          $('#spnError').text("There has been an error: " + err.statusText);
+                        }),
+                        success: (function (indata) {
+                            for(var i = 0; i < indata.length; ++i) {
+                                self.values.push(indata[i]);
+                            }
+                      })
+                    });
+                },
+                getLookupTypes() {
+                    var self = this;
+                    $.ajax({
+                        url: '/api/lookup/lookuptypes/',
+                        type: 'GET',
+                        csrfmiddlewaretoken: simpris.csrf_token,
+                        error: (function (err) {
+                          $('#spnError').text("There has been an error: " + err.statusText);
+                        }),
+                        success: (function (ltdata) {
+                            for(var i = 0; i < ltdata.length; ++i) {
+                                self.lookup_type_values.push(ltdata[i]);
+                            }
+                      })
+                    });
+                },
+                editLookup(event, row) {
+                    this.selected_lookup_type = row.lookupdescription;
+                    this.selected_lookup_value = row.lookupvaluechar;
+                    this.selected_lookup_order = row.lookuporder;
+
+                    if (row.clientid == 0) {
+                        this.default_panel_visible = true;
+                        this.toggle_enable_disable = "Disable";
+                    }
+                    else {
+                        this.custom_panel_visible = true;
+                        this.toggle_enable_disable = "Enable";
+                    }
+                },
+                editInlineLookup(event, row) {
+                },
+                showAddLookupPanel() {
+                    var self = this;
+                    this.custom_panel_visible = true;
+                },
+                updateLookup(entry) {
+                    var data = {
+                        csrfmiddlewaretoken: simpris.csrf_token,
+                        id: entry.id,
+                        lookupTypeID: entry.lookuptypeid,
+                        lookupSubTypeID: entry.lookupsubtypeid,
+                        lookupOrder: entry.lookuporder,
+                        lookupValueNum: entry.lookupvaluenum,
+                        lookupValueChar: entry.lookupvaluechar,
+                        lookupDescription: entry.lookupdescription
+                    };
+                    $.ajax({
+                        url: '/api/lookup/update/',
+                        type: 'POST',
+                        csrfmiddlewaretoken: simpris.csrf_token,
+                        data: data,
+                        error: (function (err) {
+                          $('#spnError').text("There has been an error: " + err.statusText);
+                        }),
+                        success: (function (indata) {
+                          $('#spnError').text("Lookup has been updated");
+                      })
+                    });
+                },
+                cancelDefaultEdit(event) {
+                    this.default_panel_visible = false;
+                    event.preventDefault();
+                    return false;
+                },
+                cancelCustomEdit(event) {
+                    this.custom_panel_visible = false;
+                    event.preventDefault();
+                    return false;
+                },
+                showHelp(event) {
+                    this.help_panel_visible = true;
+                    //event.preventDefault();
+                    return false;
+                },
+                hideHelp(event) {
+                    this.help_panel_visible = false;
+                    //event.preventDefault();
+                    return false;
+                },
+            },
+            events: {
+            },
+        });
+
+    </script>
+
+	<!-- this page specific scripts -->
+
+{% endblock %}

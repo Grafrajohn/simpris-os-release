@@ -1,0 +1,31 @@
+// 
+// Variables
+// 
+
+// Import Bootstrap variables for use within theme
+@import "bootstrap/scss/functions.scss";
+@import "bootstrap/scss/variables.scss";
+
+// Import spacing variables
+@import "./variables/spacing.scss";
+
+// Import navigation variables
+@import "./variables/navigation.scss";
+
+// GFJ added colours
+$primary: #337ab7;
+$danger: #d9534f;
+$success: #5cb85c;
+$info: #5bc0de;
+$warning: #f0ad4e;
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+);
