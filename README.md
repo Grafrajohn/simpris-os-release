@@ -8,7 +8,7 @@ Simpris is a general purpose project management system which is designed to be u
 
 ## How to set up Simpris
 
-This readme assumes you have advanced Django knowledge, an understanding of MySQL databases and knowledge of a Python/Django operating system. If you don't you will find it ectremely difficult to deploy and run Django.
+This readme assumes you have advanced Django knowledge, an understanding of MySQL databases and knowledge of a Python/Django and some knowledge of operating systems. If you don't you will find it ectremely difficult to deploy and run Django.
 
 GoodlyCode can set up Django for you but this would be a busniess proposition.
 
